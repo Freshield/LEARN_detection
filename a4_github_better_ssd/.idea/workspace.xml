@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b13_train_512.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b13_train_512.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/a4_github_better_ssd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/a4_github_better_ssd.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b13_train_512.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="258" column="21" selection-start-line="258" selection-start-column="21" selection-end-line="258" selection-end-column="21" />
+            <state relative-caret-position="262">
+              <caret line="203" column="70" lean-forward="true" selection-start-line="203" selection-start-column="70" selection-end-line="203" selection-end-column="70" />
               <folding>
                 <element signature="e#505#511#0" expanded="true" />
               </folding>
@@ -78,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5165">
-              <caret line="265" column="32" lean-forward="true" selection-start-line="265" selection-start-column="32" selection-end-line="265" selection-end-column="32" />
+              <caret line="265" column="32" selection-start-line="265" selection-start-column="32" selection-end-line="265" selection-end-column="32" />
               <folding>
                 <element signature="e#507#525#0" expanded="true" />
               </folding>
@@ -102,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="73" column="29" lean-forward="true" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+              <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
               <folding>
                 <element signature="e#500#509#0" expanded="true" />
               </folding>
@@ -214,7 +215,7 @@
             <path>
               <item name="a4_github_better_ssd" type="b2602c69:ProjectViewProjectNode" />
               <item name="a4_github_better_ssd" type="462c0819:PsiDirectoryNode" />
-              <item name="a2_analyze_model" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -423,18 +424,17 @@
       <workItem from="1585148677584" duration="2561000" />
       <workItem from="1585187747820" duration="52000" />
       <workItem from="1585204110942" duration="4524000" />
-      <workItem from="1576656712432" duration="4955000" />
+      <workItem from="1576656712432" duration="5883000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122067000" />
+    <option name="totallyTimeSpent" value="122995000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16380742" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16380742" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -448,7 +448,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22384937" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22384937" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32928178" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -838,7 +838,7 @@
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5165">
-          <caret line="265" column="32" lean-forward="true" selection-start-line="265" selection-start-column="32" selection-end-line="265" selection-end-column="32" />
+          <caret line="265" column="32" selection-start-line="265" selection-start-column="32" selection-end-line="265" selection-end-column="32" />
           <folding>
             <element signature="e#507#525#0" expanded="true" />
           </folding>
@@ -848,7 +848,7 @@
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="73" column="29" lean-forward="true" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+          <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
           <folding>
             <element signature="e#500#509#0" expanded="true" />
           </folding>
@@ -867,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b13_train_512.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="258" column="21" selection-start-line="258" selection-start-column="21" selection-end-line="258" selection-end-column="21" />
+        <state relative-caret-position="262">
+          <caret line="203" column="70" lean-forward="true" selection-start-line="203" selection-start-column="70" selection-end-line="203" selection-end-column="70" />
           <folding>
             <element signature="e#505#511#0" expanded="true" />
           </folding>
