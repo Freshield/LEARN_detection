@@ -30,8 +30,8 @@ import h5py
 import json
 from bs4 import BeautifulSoup
 import pickle
-from ssd_encoder_decoder.ssd_input_encoder import SSDInputEncoder
-from data_generator.object_detection_2d_image_boxes_validation_utils import BoxFilter
+from b6_m4_input_encoder import SSDInputEncoder
+from b6_m2_box_filter import BoxFilter
 
 # 生成器类
 class DataGenerator:
@@ -104,7 +104,7 @@ class DataGenerator:
             image_ids (string or list, optional): `None` or either a Python list/tuple or a string representing
                 the path to a pickled file containing a list/tuple. The list/tuple must contain the image
                 IDs of the images in the dataset.
-            # TODO
+            # 表示难例的列表
             eval_neutral (string or list, optional): `None` or either a Python list/tuple or a string representing
                 the path to a pickled file containing a list/tuple. The list/tuple must contain for each image
                 a list that indicates for each ground truth object in the image whether that object is supposed
@@ -680,7 +680,7 @@ class DataGenerator:
                 in the given order. Each transformation is a callable that takes as input an image (as a Numpy array)
                 and optionally labels (also as a Numpy array) and returns an image and optionally labels in the same
                 format.
-            # TODO
+            # 对图像进行编码的函数
             label_encoder (callable, optional): Only relevant if labels are given. A callable that takes as input the
                 labels of a batch (as a list of Numpy arrays) and returns some structure that represents those labels.
                 The general use case for this is to convert labels from their input format to a format that a given object
@@ -792,7 +792,7 @@ class DataGenerator:
         #############################################################################################
 
         current = 0
-
+        # 生成batch
         while True:
 
             batch_X, batch_y = [], []
@@ -803,7 +803,7 @@ class DataGenerator:
             #########################################################################################
             # Maybe shuffle the dataset if a full pass over the dataset has finished.
             #########################################################################################
-
+                # 如果需要shuffle
                 if shuffle:
                     objects_to_shuffle = [self.dataset_indices]
                     if not (self.filenames is None):
@@ -821,13 +821,16 @@ class DataGenerator:
             #########################################################################################
             # Get the images, (maybe) image IDs, (maybe) labels, etc. for this batch.
             #########################################################################################
-
+            # 得到这个batch的image, id, label
             # We prioritize our options in the following order:
             # 1) If we have the images already loaded in memory, get them from there.
+            # 使用hdf5
             # 2) Else, if we have an HDF5 dataset, get the images from there.
             # 3) Else, if we have neither of the above, we'll have to load the individual image
             #    files from disk.
+            # 得到这个batch的索引
             batch_indices = self.dataset_indices[current:current+batch_size]
+            # 得到图像
             if not (self.images is None):
                 for i in batch_indices:
                     batch_X.append(self.images[i])
@@ -849,16 +852,19 @@ class DataGenerator:
                         batch_X.append(np.array(image, dtype=np.uint8))
 
             # Get the labels for this batch (if there are any).
+            # 得到label
             if not (self.labels is None):
                 batch_y = deepcopy(self.labels[current:current+batch_size])
             else:
                 batch_y = None
 
+            # 得到难例
             if not (self.eval_neutral is None):
                 batch_eval_neutral = self.eval_neutral[current:current+batch_size]
             else:
                 batch_eval_neutral = None
 
+            # 得到id
             # Get the image IDs for this batch (if there are any).
             if not (self.image_ids is None):
                 batch_image_ids = self.image_ids[current:current+batch_size]
@@ -869,7 +875,7 @@ class DataGenerator:
                 batch_original_images = deepcopy(batch_X) # The original, unaltered images
             if 'original_labels' in returns:
                 batch_original_labels = deepcopy(batch_y) # The original, unaltered labels
-
+            # 更新当前的索引
             current += batch_size
 
             #########################################################################################
@@ -879,11 +885,14 @@ class DataGenerator:
             batch_items_to_remove = [] # In case we need to remove any images from the batch, store their indices in this list.
             batch_inverse_transforms = []
 
+            # batch_y的元素类似[[  3, 170, 110, 465, 294]]，为原始的图像位置
+
             for i in range(len(batch_X)):
 
                 if not (self.labels is None):
                     # Convert the labels for this image to an array (in case they aren't already).
                     batch_y[i] = np.array(batch_y[i])
+                    # 如果没有label则去除
                     # If this image has no ground truth boxes, maybe we don't want to keep it in the batch.
                     if (batch_y[i].size == 0) and not keep_images_without_gt:
                         batch_items_to_remove.append(i)
@@ -891,6 +900,7 @@ class DataGenerator:
                         continue
 
                 # Apply any image transformations we may have received.
+                # 使用数据增强
                 if transformations:
 
                     inverse_transforms = []
@@ -915,12 +925,14 @@ class DataGenerator:
                                 inverse_transforms.append(inverse_transform)
                             else:
                                 batch_X[i] = transform(batch_X[i])
-
+                    # [[]]
                     batch_inverse_transforms.append(inverse_transforms[::-1])
 
                 #########################################################################################
                 # Check for degenerate boxes in this batch item.
                 #########################################################################################
+
+                # batch_y,[[  4, 284,  99, 357, 130]],仍为原始样式，图像变为300,300
 
                 if not (self.labels is None):
 
@@ -928,7 +940,7 @@ class DataGenerator:
                     ymin = self.labels_format['ymin']
                     xmax = self.labels_format['xmax']
                     ymax = self.labels_format['ymax']
-
+                    # 如果label的坐标有问题则去除
                     if np.any(batch_y[i][:,xmax] - batch_y[i][:,xmin] <= 0) or np.any(batch_y[i][:,ymax] - batch_y[i][:,ymin] <= 0):
                         if degenerate_box_handling == 'warn':
                             warnings.warn("Detected degenerate ground truth bounding boxes for batch item {} with bounding boxes {}, ".format(i, batch_y[i]) +
@@ -944,7 +956,7 @@ class DataGenerator:
             #########################################################################################
             # Remove any items we might not want to keep from the batch.
             #########################################################################################
-
+            # 如果有要去除的则去除
             if batch_items_to_remove:
                 for j in sorted(batch_items_to_remove, reverse=True):
                     # This isn't efficient, but it hopefully shouldn't need to be done often anyway.
@@ -962,6 +974,7 @@ class DataGenerator:
             # CAUTION: Converting `batch_X` into an array will result in an empty batch if the images have varying sizes
             #          or varying numbers of channels. At this point, all images must have the same size and the same
             #          number of channels.
+            # 转换为numpy
             batch_X = np.array(batch_X)
             if (batch_X.size == 0):
                 raise ValueError("You produced an empty batch. This might be because the images in the batch vary " +
@@ -972,7 +985,7 @@ class DataGenerator:
             #########################################################################################
             # If we have a label encoder, encode our labels.
             #########################################################################################
-
+            # 对label进行编码
             if not (label_encoder is None or self.labels is None):
 
                 if ('matched_anchors' in returns) and isinstance(label_encoder, SSDInputEncoder):
@@ -984,6 +997,11 @@ class DataGenerator:
             else:
                 batch_y_encoded = None
                 batch_matched_anchors = None
+
+            print(batch_y_encoded[0])
+            print(len(batch_y_encoded))
+            print(len(batch_y_encoded[0]))
+            exit()
 
             #########################################################################################
             # Compose the output.
