@@ -465,8 +465,6 @@ class SSDInputEncoder:
         # 当反过来解码时，w(gt)=exp(lw*variance2)*w(anchor)，这样lw也就是预测值
         # 无论等于多少都是非负的
         # lh=(log(h(gt)/h(anchor))/variance3)
-        print(y_encoded.shape)
-        exit()
         if self.coords == 'centroids':
             y_encoded[:,:,[-12,-11]] -= y_encoded[:,:,[-8,-7]] # cx(gt) - cx(anchor), cy(gt) - cy(anchor)
             y_encoded[:,:,[-12,-11]] /= y_encoded[:,:,[-6,-5]] * y_encoded[:,:,[-4,-3]] # (cx(gt) - cx(anchor)) / w(anchor) / cx_variance, (cy(gt) - cy(anchor)) / h(anchor) / cy_variance

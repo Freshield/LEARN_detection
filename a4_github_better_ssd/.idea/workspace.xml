@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="1046" column="18" selection-start-line="1046" selection-start-column="18" selection-end-line="1046" selection-end-column="18" />
+            <state relative-caret-position="22990">
+              <caret line="1062" column="18" selection-start-line="1062" selection-start-column="18" selection-end-line="1062" selection-end-column="18" />
               <folding>
                 <element signature="e#509#527#0" expanded="true" />
               </folding>
@@ -65,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-414">
+            <state relative-caret-position="1452">
               <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
               <folding>
                 <element signature="e#500#509#0" expanded="true" />
@@ -77,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="412" column="41" selection-start-line="412" selection-start-column="41" selection-end-line="412" selection-end-column="41" />
+            <state relative-caret-position="10164">
+              <caret line="466" column="45" selection-start-line="466" selection-start-column="45" selection-end-line="466" selection-end-column="45" />
               <folding>
                 <element signature="e#511#529#0" expanded="true" />
               </folding>
@@ -87,22 +86,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b7_SSDLoss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1983">
-              <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
-              <folding>
-                <element signature="e#501#519#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="359">
+              <caret line="249" column="18" selection-start-line="249" selection-start-column="18" selection-end-line="249" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -173,8 +160,8 @@
         <option value="$PROJECT_DIR$/a2_analyze_model/b10_apply_inverse_transforms.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b_predict.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py" />
-        <option value="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" />
       </list>
     </option>
   </component>
@@ -192,7 +179,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,6 +195,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -406,23 +393,24 @@
       <workItem from="1584956823240" duration="1745000" />
       <workItem from="1584870919472" duration="1780000" />
       <workItem from="1585099493680" duration="813000" />
-      <workItem from="1585125278694" duration="6444000" />
+      <workItem from="1585125278694" duration="6616000" />
+      <workItem from="1585148677584" duration="2561000" />
+      <workItem from="1585187747820" duration="52000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109803000" />
+    <option name="totallyTimeSpent" value="112588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19977863" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.160487" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32845187" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35564855" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.35564855" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.30543932" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -431,7 +419,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.2248954" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22384937" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32928178" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -443,32 +431,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1095</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1121</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1130</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1131</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py" />
@@ -675,13 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b7_SSDLoss.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1344">
-          <caret line="262" column="43" selection-start-line="262" selection-start-column="43" selection-end-line="262" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b9_decoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2486">
@@ -804,16 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
-          <folding>
-            <element signature="e#500#509#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_data_augment.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1474">
@@ -831,19 +776,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="1046" column="18" selection-start-line="1046" selection-start-column="18" selection-end-line="1046" selection-end-column="18" />
-          <folding>
-            <element signature="e#509#527#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1983">
+        <state relative-caret-position="2670">
           <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
           <folding>
             <element signature="e#501#519#0" expanded="true" />
@@ -851,20 +786,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-594">
+          <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22990">
+          <caret line="1062" column="18" selection-start-line="1062" selection-start-column="18" selection-end-line="1062" selection-end-column="18" />
+          <folding>
+            <element signature="e#509#527#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1452">
+          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
+          <folding>
+            <element signature="e#500#509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="412" column="41" selection-start-line="412" selection-start-column="41" selection-end-line="412" selection-end-column="41" />
+        <state relative-caret-position="10164">
+          <caret line="466" column="45" selection-start-line="466" selection-start-column="45" selection-end-line="466" selection-end-column="45" />
           <folding>
             <element signature="e#511#529#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py">
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b7_SSDLoss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        <state relative-caret-position="359">
+          <caret line="249" column="18" selection-start-line="249" selection-start-column="18" selection-end-line="249" selection-end-column="18" />
         </state>
       </provider>
     </entry>
