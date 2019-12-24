@@ -14,6 +14,7 @@
 @                                    Freshield @
 @==============================================@
 """
+import os
 from keras.optimizers import Adam
 from b12_ssd512 import ssd_512
 from math import ceil
@@ -29,8 +30,8 @@ from b6_m4_input_encoder import SSDInputEncoder
 
 import tensorflow as tf
 
-train_hdf5_path = 'data/image_data/dataset_pascal_voc_07+12_trainval.h5'
-val_hdf5_path = 'data/image_data/dataset_pascal_voc_07_test.h5'
+train_hdf5_path = '../data/image_data/dataset_pascal_voc_07+12_trainval.h5'
+val_hdf5_path = '../data/image_data/dataset_pascal_voc_07_test.h5'
 img_height = 512 # Height of the model input images
 img_width = 512 # Width of the model input images
 img_channels = 3 # Number of color channels of the model input images
@@ -84,7 +85,7 @@ model = ssd_512(image_size=(img_height, img_width, 3),
 # 2: Load some weights into the model.
 
 # TODO: Set the path to the weights you want to load.
-weights_path = 'data/weights/VGG_ILSVRC_16_layers_fc_reduced.h5'
+weights_path = '../data/weights/VGG_ILSVRC_16_layers_fc_reduced.h5'
 
 model.load_weights(weights_path, by_name=True)
 
@@ -253,9 +254,9 @@ print("Number of images in the validation dataset:\t{:>6}".format(val_dataset_si
 
 def lr_schedule(epoch):
     if epoch <=1:
-        return 0.001
+        return 0.0001
     elif epoch < 80:
-        return 0.001
+        return 0.0005
     elif epoch < 100:
         return 0.0001
     else:
@@ -265,7 +266,7 @@ def lr_schedule(epoch):
 # Define model callbacks.
 
 # TODO: Set the filepath under which you want to save the model.
-model_checkpoint = ModelCheckpoint(filepath='data/weights/example_trained/ssd512_pascal_07+12_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
+model_checkpoint = ModelCheckpoint(filepath='../data/weights/example_trained/ssd512_pascal_07+12_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
                                    monitor='val_loss',
                                    verbose=1,
                                    save_best_only=True,
@@ -274,7 +275,7 @@ model_checkpoint = ModelCheckpoint(filepath='data/weights/example_trained/ssd512
                                    period=1)
 #model_checkpoint.best =
 
-csv_logger = CSVLogger(filename='data/ssd512_pascal_07+12_training_log.csv',
+csv_logger = CSVLogger(filename='../data/ssd512_pascal_07+12_training_log.csv',
                        separator=',',
                        append=True)
 
@@ -291,7 +292,7 @@ callbacks = [model_checkpoint,
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
 initial_epoch   = 0
 final_epoch     = 120
-steps_per_epoch = 4000
+steps_per_epoch = 1000
 
 
 history = model.fit_generator(generator=train_generator,

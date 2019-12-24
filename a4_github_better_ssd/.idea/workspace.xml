@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b12_ssd512.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b12_ssd512.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b13_train_512.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b13_train_512.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,10 +53,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b13_train_512.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4246">
-              <caret line="29" column="23" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+            <state relative-caret-position="330">
+              <caret line="258" column="21" selection-start-line="258" selection-start-column="21" selection-end-line="258" selection-end-column="21" />
               <folding>
-                <element signature="e#505#543#0" expanded="true" />
+                <element signature="e#505#511#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,9 +127,11 @@
       <find>convert_to_3_channels</find>
       <find>print</find>
       <find>ssd300</find>
+      <find>data/</find>
     </findStrings>
     <replaceStrings>
       <replace>先验</replace>
+      <replace>../data/</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -183,8 +185,8 @@
         <option value="$PROJECT_DIR$/data/a2_try_512.py" />
         <option value="$PROJECT_DIR$/a2_try_512.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b12_ssd500.py" />
-        <option value="$PROJECT_DIR$/a2_analyze_model/b13_train_512.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b12_ssd512.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b13_train_512.py" />
       </list>
     </option>
   </component>
@@ -421,23 +423,23 @@
       <workItem from="1585148677584" duration="2561000" />
       <workItem from="1585187747820" duration="52000" />
       <workItem from="1585204110942" duration="4524000" />
-      <workItem from="1576656712432" duration="4400000" />
+      <workItem from="1576656712432" duration="4955000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121512000" />
+    <option name="totallyTimeSpent" value="122067000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16380742" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16380742" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32845187" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4738494" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4738494" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.30543932" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -446,7 +448,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.22384937" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22384937" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32928178" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -865,10 +867,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b13_train_512.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4246">
-          <caret line="29" column="23" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+        <state relative-caret-position="330">
+          <caret line="258" column="21" selection-start-line="258" selection-start-column="21" selection-end-line="258" selection-end-column="21" />
           <folding>
-            <element signature="e#505#543#0" expanded="true" />
+            <element signature="e#505#511#0" expanded="true" />
           </folding>
         </state>
       </provider>
