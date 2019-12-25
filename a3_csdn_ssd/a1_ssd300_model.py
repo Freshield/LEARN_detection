@@ -21,7 +21,7 @@ from keras.layers import Input, Convolution2D, MaxPooling2D, AtrousConvolution2D
 
 def SSD300Backbone(input_shape):
     """
-    input shape 输入的形状味 300,300,3
+    input shape 输入的形状为 300,300,3
     num_classes 是要检测的类别
     """
     net = {}
@@ -33,6 +33,7 @@ def SSD300Backbone(input_shape):
     net['conv1_1'] = Convolution2D(64, 3, 3, activation='relu', border_mode='same', name='conv1_1')(net['input'])
     net['conv1_2'] = Convolution2D(64, 3, 3, activation='relu', border_mode='same', name='conv1_2')(net['conv1_1'])
     net['pool1'] = MaxPooling2D((2, 2), strides=(2, 2), border_mode='same', name='pool1')(net['conv1_2'])
+    # 150,150,64
     print('block1 shape:', net['pool1'].shape)
 
     # Block 2
@@ -46,6 +47,7 @@ def SSD300Backbone(input_shape):
                                    name='conv2_2')(net['conv2_1'])
     net['pool2'] = MaxPooling2D((2, 2), strides=(2, 2), border_mode='same',
                                 name='pool2')(net['conv2_2'])
+    # 75,75,128
     print('block2 shape:', net['pool2'].shape)
 
     # Block 3
@@ -63,6 +65,7 @@ def SSD300Backbone(input_shape):
                                    name='conv3_3')(net['conv3_2'])
     net['pool3'] = MaxPooling2D((2, 2), strides=(2, 2), border_mode='same',
                                 name='pool3')(net['conv3_3'])
+    # 38,38,256
     print('block3 shape:', net['pool3'].shape)
 
     # Block 4
@@ -78,8 +81,10 @@ def SSD300Backbone(input_shape):
                                    activation='relu',
                                    border_mode='same',
                                    name='conv4_3')(net['conv4_2'])
+    print('conv4_3 shape:', net['conv4_3'].shape)
     net['pool4'] = MaxPooling2D((2, 2), strides=(2, 2), border_mode='same',
                                 name='pool4')(net['conv4_3'])
+    # 19,19,512
     print('block4 shape:', net['pool4'].shape)
 
     # Block 5
@@ -104,6 +109,7 @@ def SSD300Backbone(input_shape):
     # FC7
     net['fc7'] = Convolution2D(1024, 1, 1, activation='relu',
                                border_mode='same', name='fc7')(net['fc6'])
+    # 19,19,1024
     print('block5 shape:', net['fc7'].shape)
 
     # Block 6
@@ -113,6 +119,7 @@ def SSD300Backbone(input_shape):
     net['conv6_2'] = Convolution2D(512, 3, 3, subsample=(2, 2),
                                    activation='relu', border_mode='same',
                                    name='conv6_2')(net['conv6_1'])
+    # 10,10,512
     print('block6 shape:', net['conv6_2'].shape)
 
     # Block 7
@@ -123,6 +130,7 @@ def SSD300Backbone(input_shape):
     net['conv7_2'] = Convolution2D(256, 3, 3, subsample=(2, 2),
                                    activation='relu', border_mode='valid',
                                    name='conv7_2')(net['conv7_2'])
+    # 5,5,256
     print('block7 shape:', net['conv7_2'].shape)
 
     # Block 8
@@ -132,15 +140,15 @@ def SSD300Backbone(input_shape):
     net['conv8_2'] = Convolution2D(256, 3, 3, subsample=(2, 2),
                                    activation='relu', border_mode='same',
                                    name='conv8_2')(net['conv8_1'])
+    # 3,3,256
     print('block8 shape:', net['conv8_2'].shape)
 
     # Last Pool
     net['pool6'] = GlobalAveragePooling2D(name='pool6')(net['conv8_2'])
+    # 256
     print('last pool shape:', net['pool6'].shape)
 
     return net
-
-
 
 
 if __name__ == '__main__':

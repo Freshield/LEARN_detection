@@ -24,7 +24,7 @@ from keras.layers import Layer
 
 class PriorBox(Layer):
     """
-    用来生成先验框到类
+    用来生成先验框的类
 
     # 参数
     img_size: 输入图像的大小(w, h)对应着(x, y)
@@ -43,8 +43,9 @@ class PriorBox(Layer):
     """
     def __init__(self, img_size, min_size, max_size=None, aspect_ratios=None,
                  flip=True, variances=[0.1], clip=True, **kwargs):
-        self.waxis=1
-        self.haxis=2
+        # 指出w,h是第几维的值
+        self.waxis = 1
+        self.haxis = 2
         self.img_size = img_size
         self.min_size = min_size
         self.max_size = max_size
@@ -104,7 +105,7 @@ class PriorBox(Layer):
         box_widths = np.array(box_widths)
         box_heights = np.array(box_heights)
 
-        # 定义先验框的中心点
+        # 定义先验框的中心点,得到x的坐标列表,y的坐标列表
         # 举例说明 img_width:300, layer_width:38
         step_x = img_width / layer_width
         step_y = img_height / layer_height
@@ -121,16 +122,18 @@ class PriorBox(Layer):
 
         # 设置检测框到xmin,ymin,xmax,ymax
         num_priors = len(self.aspect_ratios)
-        # 生成把x,y放到一起的tuple数据, (centerx, centery)
+        # 生成把x,y放到一起的tuple数据, (centerx, centery)得到所有中心坐标的坐标
         # 举例说明: 一共38*38个，[3.94,3.94]...[296, 296], (1444, 2)
         prior_boxes = np.concatenate((centers_x, centers_y), axis=1)
         # 把每个坐标点重复,(centerx, centery, centerx, centery...)
-        # 这里一共12个的原因是一共3个检验框，每个检验框需要xmin,ymin,xmax,ymax四个值
-        # 举例说明: 一共38*38个, [3.94,3.94....3.94], num_prios=3, (1444, 12)
+        # 这里一共16个的原因是一共4个检验框，每个检验框需要xmin,ymin,xmax,ymax四个值
+        # 举例说明: 一共38*38个, [3.94,3.94....3.94], num_priors=4, (1444, 16)
+        # 把prior_boxes第一维不动,第二维堆叠2*num_priors次,达到结果为4*priors个值
+        # 1444,16
         prior_boxes = np.tile(prior_boxes, (1, 2 * num_priors))
         # 这里开始计算xmin,ymin,xmax,ymax
         # 每隔4个值分别减去检测框的宽度的一半得到xmin
-        # 也就是说中心点的值都减去各个检验框的宽度
+        # 也就是说中心点的值都减去各个检验框的宽度来得到xmin,ymin,xmax,ymax
         prior_boxes[:, ::4] -= 0.5 * box_widths
         # 得到ymin
         prior_boxes[:, 1::4] -= 0.5 * box_heights
@@ -141,6 +144,9 @@ class PriorBox(Layer):
         # 进行归一化
         prior_boxes[:, ::2] /= img_width
         prior_boxes[:, 1::2] /= img_height
+        # 这里后边维度的4应该代表的是xmin,ymin,xmax,ymax
+        # 也就是说所有先验框的大小位置
+        # 1444*4, 4
         prior_boxes = prior_boxes.reshape(-1, 4)
         # 把越界的值拉回边缘
         if self.clip:
@@ -148,15 +154,15 @@ class PriorBox(Layer):
 
         # 设置variances
         num_boxes = len(prior_boxes)
-        # 给每个xmin,ymin,xmax,ymax都设置好偏差, (1444*3, 4)
+        # 给每个xmin,ymin,xmax,ymax都设置好偏差, (1444*4, 4)
         if len(self.variances) == 1:
             variances = np.ones((num_boxes, 4)) * self.variances
         elif len(self.variances) == 4:
             variances = np.tile(self.variances, (num_boxes, 1))
-        # 把variances放到相应检验框列表中一起输出, (1444*3, 4+4)
+        # 把variances放到相应检验框列表中一起输出, (1444*4, 4+4)
         prior_boxes = np.concatenate((prior_boxes, variances), axis=1)
 
-        # 转换为和输入相同大小的输出
+        # 转换为和输入相同大小的输出 (batch,1444*4, 8)
         prior_boxes_tensor = K.expand_dims(K.variable(prior_boxes), 0)
         pattern = [tf.shape(x)[0], 1, 1]
         prior_boxes_tensor = tf.tile(prior_boxes_tensor, pattern)

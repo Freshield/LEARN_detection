@@ -68,3 +68,12 @@ class BBoxUtility(object):
         self.nms = tf.image.non_max_suppression(self.boxes, self.scores,
                                                 self._top_k,
                                                 iou_threshold=self._nms_thresh)
+
+    def iou(self, box):
+        """
+        计算检测框的iou指标
+        :param box: Box, shape(4, )
+        :return: iou, Intersection over union, shape(num_priors)
+        """
+        # 计算iou
+        inter_upleft = np.maximum(self.priors[:, :2], box[:2])
