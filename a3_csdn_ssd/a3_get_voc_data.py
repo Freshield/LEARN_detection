@@ -3,9 +3,9 @@
 @Author: Freshield
 @License: (C) Copyright 2018, BEIJING LINKING MEDICAL TECHNOLOGY CO., LTD.
 @Contact: yangyufresh@163.com
-@File: get_data_from_XML.py
-@Time: 2019-11-01 16:29
-@Last_update: 2019-11-01 16:29
+@File: a3_get_voc_data.py
+@Time: 2019-12-26 11:19
+@Last_update: 2019-12-26 11:19
 @Desc: None
 @==============================================@
 @      _____             _   _     _   _       @
@@ -108,7 +108,11 @@ class XML_preprocessor(object):
 
 if __name__ == '__main__':
     # example on how to use it
+    import json
     import pickle
 
     data = XML_preprocessor('/media/freshield/SSD_1T/Data/a13_detection/pascal-voc-2012/voctrainval_06-nov-2007/VOCdevkit/VOC2007/Annotations').data
+    json_data = {key: list(value[0]) for key, value in data.items()}
     pickle.dump(data, open('data/VOC2007.p', 'wb'))
+    with open('data/VOC2007.json', 'w') as f:
+        f.write(json.dumps(json_data, indent=4))

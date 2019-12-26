@@ -81,6 +81,7 @@ def SSD300Backbone(input_shape):
                                    activation='relu',
                                    border_mode='same',
                                    name='conv4_3')(net['conv4_2'])
+    # 38,38,512
     print('conv4_3 shape:', net['conv4_3'].shape)
     net['pool4'] = MaxPooling2D((2, 2), strides=(2, 2), border_mode='same',
                                 name='pool4')(net['conv4_3'])

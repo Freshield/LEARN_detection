@@ -141,7 +141,7 @@ class PriorBox(Layer):
         prior_boxes[:, 2::4] += 0.5 * box_widths
         # 得到ymax
         prior_boxes[:, 3::4] += 0.5 * box_heights
-        # 进行归一化
+        # 进行归一化, 在这里变成了0-1之间的数值
         prior_boxes[:, ::2] /= img_width
         prior_boxes[:, 1::2] /= img_height
         # 这里后边维度的4应该代表的是xmin,ymin,xmax,ymax

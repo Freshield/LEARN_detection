@@ -18,11 +18,14 @@
 import os
 import numpy as np
 from random import shuffle
-from scipy.misc import imread, imresize
+# from scipy.misc import imread, imresize
+from imageio import imread
+from skimage.transform import resize as imresize
 from keras.applications.imagenet_utils import preprocess_input
 
 
 class Generator(object):
+    """生成器类"""
     def __init__(self, gt, bbox_util,
                  batch_size, path_prefix,
                  train_keys, val_keys, image_size,
@@ -195,3 +198,24 @@ class Generator(object):
                     inputs = []
                     targets = []
                     yield preprocess_input(tmp_inp), tmp_targets
+
+
+if __name__ == '__main__':
+    import pickle
+    gt = pickle.load(open('data/VOC2007.p', 'rb'))
+    keys = sorted(gt.keys())
+    num_train = int(round(0.8 * len(keys)))
+    train_keys = keys[:num_train]
+    val_keys = keys[num_train:]
+    num_val = len(val_keys)
+    print(len(gt))
+    for key, value in gt.items():
+        print(key)
+        print(value)
+        print(value.shape)
+        exit()
+    exit()
+    path_prefix = '../../frames/'
+    gen = Generator(gt, bbox_util, 16, '../../frames/',
+                    train_keys, val_keys,
+                    (input_shape[0], input_shape[1]), do_crop=False)
