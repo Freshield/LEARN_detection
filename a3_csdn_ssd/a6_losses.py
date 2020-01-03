@@ -125,6 +125,7 @@ class MultiboxLoss(object):
         # 计算负样本的loss，只计算了confidence loss
         # 这里看下负例按照比率乘以正例的数据后的值和总提负例比起来哪个小，哪个小就使用哪个值，主要是防止溢出
         # (batch,)
+        num_pos = tf.cast(num_pos, tf.double)
         num_neg = tf.minimum(self.neg_pos_ratio * num_pos, num_boxes - num_pos)
         # 找到所有负例数量大于0的位置，(batch,), bool
         pos_num_neg_mask = tf.greater(num_neg, 0)
