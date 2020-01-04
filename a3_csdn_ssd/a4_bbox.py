@@ -3,7 +3,7 @@
 @Author: Freshield
 @License: (C) Copyright 2018, BEIJING LINKING MEDICAL TECHNOLOGY CO., LTD.
 @Contact: yangyufresh@163.com
-@File: bbox.py
+@File: a4_bbox.py
 @Time: 2019-12-26 11:50
 @Last_update: 2019-12-26 11:50
 @Desc: None
@@ -172,14 +172,21 @@ class BBoxUtility(object):
         return encoded_box.ravel()
 
     def assign_boxes(self, boxes):
+        """
+        把原始的label转换为训练时使用的label
+        也就是把原始的图像数据位置和分类信息转换为
+        找到所有匹配到的先验框，且已经完成编码
+        """
         # 变量：
         #   boxes: label框,这里的num_boxes为做完数据增广之后的数量,也可以粗略的理解为batch_size
         #   (num_boxes, 4 + num_classes),其中num_classes没有包括背景
         # 返回值：
-        #   assignment：分配后的预测框(num_boxes, 4 + num_classes + 8),
+        #   assignment：分配后的预测框(8732, 4 + num_classes + 8),
         # 第二维上的8其实很多都是0，只有在assignment[:, -8]存在1，代表给default box分配了哪个groud truth
-        # (8732, 4+21+8)
+
+        # 最终返回的数组(8732, 4+21+8)
         assignment = np.zeros((self.num_priors, 4 + self.num_classes + 8))
+        # 把最后4位的variance设为1
         assignment[:, 4] = 1.0
         # 如果预测框数量为0,则直接返回
         if len(boxes) == 0:
@@ -188,22 +195,47 @@ class BBoxUtility(object):
         encoded_boxes = np.apply_along_axis(self.encode_box, 1, boxes[:, :4])
         # reshape后, encoded_boxes (num_boxes, 8732, 5)
         encoded_boxes = encoded_boxes.reshape(-1, self.num_priors, 5)
-        # 找出
+
         # 找出一张图中的所有的object与所有的prior box的最大IOU，即每个prior box对应一个object
+        # encoded_boxes[:, :, -1]为(num_boxes, 8732)，它表示了每个label和所有先验框的关系
+        # 每行代表一个label和所有先验框的IOU数值
+        # 每列代表一个先验框和所有label的IOU数值
+
+        # 这里对第一维取max，得到8732个值，表示每个先验框的最大的IOU数值为多少
+        # (8732,)
         best_iou = encoded_boxes[:, :, -1].max(axis=0)
+
         ##找出每个prior box对应的那个object的索引。len(best_iou_idx)=num_priors
+        # 这里对第一维取argmax，得到8732个索引值，表示每个先验框的最大IOU是和那个label计算得到的
+        # 也就是说这个先验框属于哪个label
+        # (8732,)
         best_iou_idx = encoded_boxes[:, :, -1].argmax(axis=0)
-        ##找出与groud truth 存在IOU的prior box
+
+        # 忽略IOU小于阈值的项，只选取IOU大于阈值的先验框，dtype为bool
+        # (8732,)
         best_iou_mask = best_iou > 0
+        # 得到所有IOU大于阈值的先验框的索引值
+        # (x,) x为大于阈值的先验框数量
         best_iou_idx = best_iou_idx[best_iou_mask]
+        # assign_num为大于阈值的先验框数量
         assign_num = len(best_iou_idx)
-        ##筛选出与groud truth 有IOU的prior box
+        # endocded_boxes(num_boxes,8732,5)
+        # 这里选出所有IOU大于阈值的项
+        # (num_boxes, x, 5)
         encoded_boxes = encoded_boxes[:, best_iou_mask, :]
-        # 确定给assignment分配中的prior box分配 具体哪一个groud truth。best_iou_idx中元素的范围为：range(num_object)。
+
+        # 分配先验框相应的数值
+        # assignment(8732,4+21+8)
+        # 这里把分配框的所有IOU大于阈值的项找出，赋值为他们相应的最高IOU的编码后的label的坐标值
         assignment[:, :4][best_iou_mask] = encoded_boxes[best_iou_idx, np.arange(assign_num), :4]
+        # 第4个值设为0,这个为背景的类别
         assignment[:, 4][best_iou_mask] = 0
+        # 同样，把分配框的所有IOU大于阈值的项找出，赋值为他们相应的最高IOU的label的分类值
         assignment[:, 5:-8][best_iou_mask] = boxes[best_iou_idx, 4:]
+        # 把第-8项设为1
+        # 在这里-8位置相当于一个开关位，表示这个先验框是否存在值
         assignment[:, -8][best_iou_mask] = 1
+
         return assignment
 
     def decode_boxes(self, mbox_loc, mbox_priorbox, variances):
@@ -295,5 +327,10 @@ if __name__ == '__main__':
     import pickle
     priors = pickle.load(open('data/prior_boxes_ssd300.pkl', 'rb'))
     bbox_util = BBoxUtility(21, priors)
-    test_box = np.array([0.2,0.2,0.5,0.5])
-    bbox_util.encode_box(test_box)
+    class_list = [0] * 20
+    class_list[5] = 1
+    a = [0.2,0.2,0.5,0.5] + class_list
+    b = [0.1,0.1,0.3,0.3] + class_list
+    test_boxes = np.array([a, b])
+    print(test_boxes)
+    bbox_util.assign_boxes(test_boxes)

@@ -3,7 +3,7 @@
 @Author: Freshield
 @License: (C) Copyright 2018, BEIJING LINKING MEDICAL TECHNOLOGY CO., LTD.
 @Contact: yangyufresh@163.com
-@File: a4_losses.py
+@File: a6_losses.py
 @Time: 2019-12-26 11:39
 @Last_update: 2019-12-26 11:39
 @Desc: None
@@ -87,7 +87,8 @@ class MultiboxLoss(object):
         return softmax_loss
 
     def compute_loss(self, y_true, y_pred):
-        """计算总体损失
+        """
+        计算总体损失
 
         # Arguments
             y_true: label的结果,
