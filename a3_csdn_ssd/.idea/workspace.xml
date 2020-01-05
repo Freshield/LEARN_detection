@@ -15,11 +15,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/a3_csdn_ssd$bbox.coverage" NAME="bbox Coverage Results" MODIFIED="1577360995033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/a3_csdn_ssd$bbox.coverage" NAME="bbox Coverage Results" MODIFIED="1578299702578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/a3_csdn_ssd$t3_check_gt_pascal.coverage" NAME="t3_check_gt_pascal Coverage Results" MODIFIED="1577362983236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/a3_csdn_ssd$a3_get_voc_data.coverage" NAME="a3_get_voc_data Coverage Results" MODIFIED="1577330716844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/a3_csdn_ssd$a1_ssd300_model.coverage" NAME="a1_ssd300_model Coverage Results" MODIFIED="1577326837489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/a3_csdn_ssd$a2_get_loc_conf.coverage" NAME="a2_get_loc_conf Coverage Results" MODIFIED="1579068771992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/a3_csdn_ssd$a2_get_loc_conf.coverage" NAME="a2_get_loc_conf Coverage Results" MODIFIED="1578295438775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/a3_csdn_ssd$generator.coverage" NAME="generator Coverage Results" MODIFIED="1577363904779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/a3_csdn_ssd$t1_test_l2norm.coverage" NAME="t1_test_l2norm Coverage Results" MODIFIED="1572513019032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/a3_csdn_ssd$get_data_from_XML.coverage" NAME="get_data_from_XML Coverage Results" MODIFIED="1572597940138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -194,7 +194,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.a2_get_loc_conf">
+  <component name="RunManager" selected="Python.bbox">
     <configuration name="a2_get_loc_conf" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="a3_csdn_ssd" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -307,10 +307,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.bbox" />
         <item itemvalue="Python.a2_get_loc_conf" />
         <item itemvalue="Python.generator" />
         <item itemvalue="Python.t3_check_gt_pascal" />
-        <item itemvalue="Python.bbox" />
         <item itemvalue="Python.a3_get_voc_data" />
       </list>
     </recent_temporary>

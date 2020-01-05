@@ -38,7 +38,7 @@ class BBoxUtility(object):
                  nms_thresh=0.45, top_k=400):
         # 类别数 21
         self.num_classes = num_classes
-        # 先验框 (8732, 4+21+4+4)
+        # 先验框 (8732, 4+4)
         self.priors = priors
         # 先验框个数 8732
         self.num_priors = 0 if priors is None else len(priors)
@@ -68,6 +68,7 @@ class BBoxUtility(object):
         self.nms = tf.image.non_max_suppression(self.boxes, self.scores,
                                                 self._top_k,
                                                 iou_threshold=self._nms_thresh)
+    # top_k的setter和getter
     @property
     def top_k(self):
         return self._top_k
@@ -79,8 +80,8 @@ class BBoxUtility(object):
                                                 iou_threshold=self._nms_thresh)
 
     def iou(self, box):
-        """计算所有先验框的iou
-
+        """
+        把给出的box的位置和所有的先验框来计算IOU
         # 参数
             box: 预测框 (4,).
 
@@ -88,18 +89,19 @@ class BBoxUtility(object):
             iou: iou数值,
                 numpy tensor of shape (num_priors), (8732).
         """
-        # priors (8732, 4+21+4+4)
+        # priors (8732, 4+4)
         # box (xmin,ymin,xmax,ymax)
         # 计算所有先验框和特定box的相交部分
         # 这里得到xmin, ymin的最大值
-        inter_upleft = np.maximum(self.priors[:, :2], box[:2])
+        inter_botleft = np.maximum(self.priors[:, :2], box[:2])
         # 这里得到xmax, ymax的最小值
-        inter_botright = np.minimum(self.priors[:, 2:4], box[2:])
+        inter_upright = np.minimum(self.priors[:, 2:4], box[2:])
         # 得到(xmax-xmin, ymax-ymin),这里得到相交的面积
         # 相当于把面积问题变成了线段问题
-        inter_wh = inter_botright - inter_upleft
+        inter_wh = inter_upright - inter_botleft
         inter_wh = np.maximum(inter_wh, 0)
         inter = inter_wh[:, 0] * inter_wh[:, 1]
+
         # 计算相应先验框和特定box的总体面积部分
         # 计算box的面积
         area_pred = (box[2] - box[0]) * (box[3] - box[1])
@@ -114,8 +116,9 @@ class BBoxUtility(object):
         return iou
 
     def encode_box(self, box, return_iou=True):
-        """为了训练来编码先验框,这里把小于IOU阈值的都置为0,并编码先验框和label框
-
+        """
+        这里把先验框和目标box比较后IOU大于阈值的进行编码，
+        返回虽然是所有8732，但是除了IOU大于阈值的其他均为0
         # 参数
             box: label框 (4,).
             return_iou: 是否把IOU和编码值一同返回.
@@ -138,17 +141,17 @@ class BBoxUtility(object):
         if return_iou:
             # 把IOU大于阈值的最后一项设为IOU的值
             encoded_box[:, -1][assign_mask] = iou[assign_mask]
-        # 只把IOU大于阈值的先验框选出来,这里设为x个, assigned_priors (x, 33)
+        # 只把IOU大于阈值的先验框选出来,这里设为x个, assigned_priors (x, 8)
         assigned_priors = self.priors[assign_mask]
         # box (xmin,ymin,xmax,ymax)
         # 得到label框的中心,box_center (x_center, y_center)
         box_center = 0.5 * (box[:2] + box[2:])
         # 得到label框的长宽,box_wh (w, h)
         box_wh = box[2:] - box[:2]
-        # 这里得到所有先验框的中心, prior_center (x, 2)
+        # 这里得到所有IOU大于阈值的先验框的中心, prior_center (x, 2)
         assigned_priors_center = 0.5 * (assigned_priors[:, :2] +
                                         assigned_priors[:, 2:4])
-        # 这里得到所有先验框的长宽, prior_wh (x, 2)
+        # 这里得到所有IOU大于阈值的先验框的长宽, prior_wh (x, 2)
         assigned_priors_wh = (assigned_priors[:, 2:4] -
                               assigned_priors[:, :2])
 
@@ -165,6 +168,7 @@ class BBoxUtility(object):
                                                   assigned_priors_wh)
         encoded_box[:, 2:4][assign_mask] /= assigned_priors[:, -2:]
         # 最终这里ravel为把数值全部拉平, (8732*4 or 5)
+        # 这里的最终结果虽然为8732,但是只有IOU大于阈值的才有值，其他的均为0
         return encoded_box.ravel()
 
     def assign_boxes(self, boxes):

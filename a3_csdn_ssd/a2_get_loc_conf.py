@@ -18,10 +18,10 @@
 import numpy as np
 import tensorflow as tf
 from a1_ssd300_model import SSD300Backbone
-from normalize import Normalize
+from a2_m1_normalize import Normalize
 from keras.layers import Convolution2D, Flatten, Dense, Reshape, Concatenate, Activation
 from keras.models import Model
-from priorbox import PriorBox
+from a2_m2_priorbox import PriorBox
 
 
 def GetLocConf(net, img_size, num_classes=21):
