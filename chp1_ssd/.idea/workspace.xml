@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1da6c66-de5d-48f6-850f-c5ec93de9ce8" name="Default Changelist" comment="" />
+    <list default="true" id="f1da6c66-de5d-48f6-850f-c5ec93de9ce8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +18,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/a1_make_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
+            <state relative-caret-position="22">
               <caret line="139" column="10" selection-start-line="139" selection-start-column="10" selection-end-line="139" selection-end-column="10" />
               <folding>
                 <element signature="e#582#606#0" expanded="true" />
@@ -47,10 +49,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="734" />
-    <option name="height" value="772" />
+    <option name="x" value="64" />
+    <option name="y" value="395" />
+    <option name="width" value="1857" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -79,6 +81,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../a3_csdn_ssd" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
   </component>
   <component name="RunDashboard">
@@ -135,16 +138,17 @@
       <workItem from="1572180843051" duration="20000" />
       <workItem from="1572180879423" duration="2394000" />
       <workItem from="1573564280416" duration="103000" />
+      <workItem from="1579056960822" duration="10000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2517000" />
+    <option name="totallyTimeSpent" value="2527000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1305" height="780" extended-state="6" />
+    <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21513945" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21748754" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -184,7 +188,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a1_make_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
+        <state relative-caret-position="22">
           <caret line="139" column="10" selection-start-line="139" selection-start-column="10" selection-end-line="139" selection-end-column="10" />
           <folding>
             <element signature="e#582#606#0" expanded="true" />
