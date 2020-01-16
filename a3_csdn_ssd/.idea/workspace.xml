@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54b914a4-6fc7-491b-a680-c09b0d2cab92" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/a3_csdn_ssd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/a3_csdn_ssd.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a6_losses.py" beforeDir="false" afterPath="$PROJECT_DIR$/a6_losses.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/example/ssd_keras/SSD_training.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/example/ssd_keras/SSD_training.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chp1_ssd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chp1_ssd/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,55 +40,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/example/ssd_keras/SSD_training.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/example/ssd_keras/ssd.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="229" column="53" lean-forward="true" selection-start-line="229" selection-start-column="53" selection-end-line="229" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a1_ssd300_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-793">
-              <caret line="84" column="14" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
-              <folding>
-                <element signature="e#582#594#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/a6_losses.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="118" column="8" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_get_loc_conf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5094">
-              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="236">
+              <caret line="301" column="18" selection-start-line="301" selection-start-column="17" selection-end-line="301" selection-end-column="18" />
               <folding>
                 <element signature="e#578#596#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/priorbox.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
-              <folding>
-                <element signature="e#575#593#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -134,9 +99,14 @@
         <option value="$PROJECT_DIR$/ssd_utils.py" />
         <option value="$PROJECT_DIR$/test/t3_check_gt_pascal.py" />
         <option value="$PROJECT_DIR$/generator.py" />
-        <option value="$PROJECT_DIR$/bbox.py" />
-        <option value="$PROJECT_DIR$/a2_get_loc_conf.py" />
         <option value="$PROJECT_DIR$/priorbox.py" />
+        <option value="$PROJECT_DIR$/a2_get_loc_conf.py" />
+        <option value="$PROJECT_DIR$/a2_m2_priorbox.py" />
+        <option value="$PROJECT_DIR$/test/t4_try_numpy_max.py" />
+        <option value="$PROJECT_DIR$/bbox.py" />
+        <option value="$PROJECT_DIR$/a4_bbox.py" />
+        <option value="$PROJECT_DIR$/a5_generator.py" />
+        <option value="$PROJECT_DIR$/a6_losses.py" />
       </list>
     </option>
   </component>
@@ -154,6 +124,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -169,21 +140,12 @@
             <path>
               <item name="a3_csdn_ssd" type="b2602c69:ProjectViewProjectNode" />
               <item name="a3_csdn_ssd" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="a3_csdn_ssd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="a3_csdn_ssd" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="ssd_keras" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -351,23 +313,24 @@
       <workItem from="1577257461534" duration="9054000" />
       <workItem from="1577325198619" duration="8876000" />
       <workItem from="1577357193874" duration="6643000" />
-      <workItem from="1579056972162" duration="5021000" />
+      <workItem from="1579056972162" duration="16316000" />
+      <workItem from="1579141282753" duration="1518000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60926000" />
+    <option name="totallyTimeSpent" value="73739000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
+    <frame x="65" y="402" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27891532" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16934144" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32008368" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3294979" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31171548" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -376,13 +339,13 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.19246861" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19246861" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32982844" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,13 +405,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/keras/applications/imagenet_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/keras/layers/core.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10296">
@@ -464,16 +420,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/get_data_from_XML.py" />
-    <entry file="file://$PROJECT_DIR$/normalize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="32" column="31" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="31" />
-          <folding>
-            <element signature="e#579#591#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/skimage/transform/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -506,22 +452,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a4_losses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2992">
-          <caret line="136" column="40" selection-start-line="136" selection-start-column="34" selection-end-line="136" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/example/ssd_keras/SSD.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/VOC2007.json">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/model.png">
       <provider selected="true" editor-type-id="images" />
@@ -543,19 +479,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bbox.py">
+    <entry file="file://$PROJECT_DIR$/data/example/ssd_keras/ssd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4114">
-          <caret line="188" column="54" selection-start-line="188" selection-start-column="54" selection-end-line="188" selection-end-column="54" />
-          <folding>
-            <element signature="e#571#589#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="441">
+          <caret line="229" column="53" lean-forward="true" selection-start-line="229" selection-start-column="53" selection-end-line="229" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/a3_get_voc_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2530">
+        <state relative-caret-position="637">
           <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
           <folding>
             <element signature="e#582#600#0" expanded="true" />
@@ -563,19 +496,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generator.py">
+    <entry file="file://$PROJECT_DIR$/a2_m1_normalize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4225">
-          <caret line="205" column="28" lean-forward="true" selection-start-line="205" selection-start-column="28" selection-end-line="205" selection-end-column="28" />
+        <state relative-caret-position="440">
+          <caret line="32" column="31" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="31" />
           <folding>
-            <element signature="e#576#585#0" expanded="true" />
+            <element signature="e#579#591#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_m2_priorbox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1936">
+          <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
+          <folding>
+            <element signature="e#575#593#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a4_bbox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7194">
+          <caret line="328" column="39" selection-start-line="327" selection-start-column="4" selection-end-line="328" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/t4_try_numpy_max.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a5_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5698">
+          <caret line="265" column="18" selection-start-line="265" selection-start-column="18" selection-end-line="265" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/VOC2007.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/keras/applications/imagenet_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/a1_ssd300_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-793">
+        <state relative-caret-position="1826">
           <caret line="84" column="14" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
           <folding>
             <element signature="e#582#594#0" expanded="true" />
@@ -590,30 +564,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/example/ssd_keras/ssd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="229" column="53" lean-forward="true" selection-start-line="229" selection-start-column="53" selection-end-line="229" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/priorbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
-          <folding>
-            <element signature="e#575#593#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_get_loc_conf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5094">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="236">
+          <caret line="301" column="18" selection-start-line="301" selection-start-column="17" selection-end-line="301" selection-end-column="18" />
           <folding>
             <element signature="e#578#596#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a6_losses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="118" column="8" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="8" />
         </state>
       </provider>
     </entry>
