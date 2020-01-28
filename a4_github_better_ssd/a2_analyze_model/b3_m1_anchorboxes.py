@@ -19,7 +19,7 @@ import keras.backend as K
 from keras.engine.topology import InputSpec
 from keras.engine.topology import Layer
 
-from bounding_box_utils.bounding_box_utils import convert_coordinates
+from b3_m2_conver_coor import convert_coordinates
 
 class AnchorBoxes(Layer):
     '''
@@ -260,7 +260,7 @@ class AnchorBoxes(Layer):
         # where the last dimension will contain `(cx, cy, w, h)`
         boxes_tensor = np.zeros((feature_map_height, feature_map_width, self.n_boxes, 4))
 
-        # 先把cx,cy复制4此，然后存到相应的位置
+        # 先把cx,cy复制4次，然后存到相应的位置
         boxes_tensor[:, :, :, 0] = np.tile(cx_grid, (1, 1, self.n_boxes)) # Set cx
         boxes_tensor[:, :, :, 1] = np.tile(cy_grid, (1, 1, self.n_boxes)) # Set cy
         # 把w,h存到相应的位置，这里wh_list只有4个值，会自动拓展为38,38,4
@@ -271,6 +271,7 @@ class AnchorBoxes(Layer):
         # Convert `(cx, cy, w, h)` to `(xmin, xmax, ymin, ymax)`
         boxes_tensor = convert_coordinates(boxes_tensor, start_index=0, conversion='centroids2corners')
 
+        # 如果要裁剪边缘则把越界的都设为边缘值
         # If `clip_boxes` is enabled, clip the coordinates to lie within the image boundaries
         if self.clip_boxes:
             x_coords = boxes_tensor[:,:,:,[0, 2]]
@@ -282,12 +283,14 @@ class AnchorBoxes(Layer):
             y_coords[y_coords < 0] = 0
             boxes_tensor[:,:,:,[1, 3]] = y_coords
 
+        # 如果要归一化坐标，则用相应的坐标除以原图的大小
         # If `normalize_coords` is enabled, normalize the coordinates to be within [0,1]
         if self.normalize_coords:
             boxes_tensor[:, :, :, [0, 2]] /= self.img_width
             boxes_tensor[:, :, :, [1, 3]] /= self.img_height
 
         # TODO: Implement box limiting directly for `(cx, cy, w, h)` so that we don't have to unnecessarily convert back and forth.
+        # 如果重要需要的是中心坐标则把左上右下的坐标转换回来
         if self.coords == 'centroids':
             # Convert `(xmin, ymin, xmax, ymax)` back to `(cx, cy, w, h)`.
             boxes_tensor = convert_coordinates(boxes_tensor, start_index=0, conversion='corners2centroids', border_pixels='half')
@@ -295,20 +298,29 @@ class AnchorBoxes(Layer):
             # Convert `(xmin, ymin, xmax, ymax)` to `(xmin, xmax, ymin, ymax).
             boxes_tensor = convert_coordinates(boxes_tensor, start_index=0, conversion='corners2minmax', border_pixels='half')
 
+        # 添加坐标的偏差值
         # Create a tensor to contain the variances and append it to `boxes_tensor`. This tensor has the same shape
         # as `boxes_tensor` and simply contains the same 4 variance values for every position in the last axis.
+        # 创建零矩阵38,38,4,4
         variances_tensor = np.zeros_like(boxes_tensor) # Has shape `(feature_map_height, feature_map_width, n_boxes, 4)`
+        # 加上偏差值，等于赋值
         variances_tensor += self.variances # Long live broadcasting
+        # 把坐标值和偏差值垒起来
         # Now `boxes_tensor` becomes a tensor of shape `(feature_map_height, feature_map_width, n_boxes, 8)`
+        # (38,38,4,8)
         boxes_tensor = np.concatenate((boxes_tensor, variances_tensor), axis=-1)
 
+        # 把先验框的坐标numpy矩阵转换为keras的tensor
         # Now prepend one dimension to `boxes_tensor` to account for the batch size and tile it along
         # The result will be a 5D tensor of shape `(batch_size, feature_map_height, feature_map_width, n_boxes, 8)`
+        # 先拓展第零维，然后进行层叠，这样恢复batch的大小
+        # (batch, 38, 38, 4, 8)
         boxes_tensor = np.expand_dims(boxes_tensor, axis=0)
         boxes_tensor = K.tile(K.constant(boxes_tensor, dtype='float32'), (K.shape(x)[0], 1, 1, 1, 1))
 
         return boxes_tensor
 
+    # 计算输出的大小
     def compute_output_shape(self, input_shape):
         if K.image_dim_ordering() == 'tf':
             batch_size, feature_map_height, feature_map_width, feature_map_channels = input_shape

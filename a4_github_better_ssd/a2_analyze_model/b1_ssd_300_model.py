@@ -21,6 +21,7 @@ import keras.backend as K
 
 from b1_ssd300_backbone import ssd300_backbone
 from b2_ssd300_loc_conf import ssd300_loc_conf
+from b3_ssd300_priorbox import ssd300_priorbox
 from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 
@@ -116,7 +117,7 @@ def ssd_300(image_size,
             If `True`, two anchor boxes will be generated for aspect ratio 1. The first will be generated
             using the scaling factor for the respective layer, the second one will be generated using
             geometric mean of said scaling factor and next bigger scaling factor.
-        # TODO
+        # 表示每个先验框的中心点中间的距离
         steps (list, optional): `None` or a list with as many elements as there are predictor layers. The elements can be
             either ints/floats or tuples of two ints/floats. These numbers represent for each predictor layer how many
             pixels apart the anchor box center points should be vertically and horizontally along the spatial grid over
@@ -124,7 +125,7 @@ def ssd_300(image_size,
             If the list contains tuples of two ints/floats, then they represent `(step_height, step_width)`.
             If no steps are provided, then they will be computed such that the anchor box center points will form an
             equidistant grid within the image dimensions.
-        # TODO
+        # 表示第一个先验框的中心点的偏差值，会用中心点乘以这个float数来作为第一个先验框的中心点
         offsets (list, optional): `None` or a list with as many elements as there are predictor layers. The elements can be
             either floats or tuples of two floats. These numbers represent for each predictor layer how many
             pixels from the top and left boarders of the image the top-most and left-most anchor box center points should be
@@ -250,7 +251,7 @@ def ssd_300(image_size,
         else:
             n_boxes = len(aspect_ratios_global)
         n_boxes = [n_boxes] * n_predictor_layers
-    # 先验框代表的原图大小和偏移
+    # 先验框代表的中心点距离和第一个先验框的中心点偏移值
     if steps is None:
         steps = [None] * n_predictor_layers
     if offsets is None:
@@ -269,70 +270,12 @@ def ssd_300(image_size,
     # ===========================================================
     conf_tuple, loc_tuple = ssd300_loc_conf(layer_tuple, n_boxes, n_classes, l2_reg)
 
-    print(scales)
-    print(aspect_ratios)
-    print(two_boxes_for_ar1)
-    print(steps)
-    print(offsets)
-    print(clip_boxes)
-    print(variances)
-    print(coords)
-    print(normalize_coords)
-    exit()
-    # TODO 计算先验框
-    ### Reshape
-
-    # Reshape the class predictions, yielding 3D tensors of shape `(batch, height * width * n_boxes, n_classes)`
-    # We want the classes isolated in the last axis to perform softmax on them
-    conv4_3_norm_mbox_conf_reshape = Reshape((-1, n_classes), name='conv4_3_norm_mbox_conf_reshape')(conv4_3_norm_mbox_conf)
-    fc7_mbox_conf_reshape = Reshape((-1, n_classes), name='fc7_mbox_conf_reshape')(fc7_mbox_conf)
-    conv6_2_mbox_conf_reshape = Reshape((-1, n_classes), name='conv6_2_mbox_conf_reshape')(conv6_2_mbox_conf)
-    conv7_2_mbox_conf_reshape = Reshape((-1, n_classes), name='conv7_2_mbox_conf_reshape')(conv7_2_mbox_conf)
-    conv8_2_mbox_conf_reshape = Reshape((-1, n_classes), name='conv8_2_mbox_conf_reshape')(conv8_2_mbox_conf)
-    conv9_2_mbox_conf_reshape = Reshape((-1, n_classes), name='conv9_2_mbox_conf_reshape')(conv9_2_mbox_conf)
-    # Reshape the box predictions, yielding 3D tensors of shape `(batch, height * width * n_boxes, 4)`
-    # We want the four box coordinates isolated in the last axis to compute the smooth L1 loss
-    conv4_3_norm_mbox_loc_reshape = Reshape((-1, 4), name='conv4_3_norm_mbox_loc_reshape')(conv4_3_norm_mbox_loc)
-    fc7_mbox_loc_reshape = Reshape((-1, 4), name='fc7_mbox_loc_reshape')(fc7_mbox_loc)
-    conv6_2_mbox_loc_reshape = Reshape((-1, 4), name='conv6_2_mbox_loc_reshape')(conv6_2_mbox_loc)
-    conv7_2_mbox_loc_reshape = Reshape((-1, 4), name='conv7_2_mbox_loc_reshape')(conv7_2_mbox_loc)
-    conv8_2_mbox_loc_reshape = Reshape((-1, 4), name='conv8_2_mbox_loc_reshape')(conv8_2_mbox_loc)
-    conv9_2_mbox_loc_reshape = Reshape((-1, 4), name='conv9_2_mbox_loc_reshape')(conv9_2_mbox_loc)
-    # Reshape the anchor box tensors, yielding 3D tensors of shape `(batch, height * width * n_boxes, 8)`
-    conv4_3_norm_mbox_priorbox_reshape = Reshape((-1, 8), name='conv4_3_norm_mbox_priorbox_reshape')(conv4_3_norm_mbox_priorbox)
-    fc7_mbox_priorbox_reshape = Reshape((-1, 8), name='fc7_mbox_priorbox_reshape')(fc7_mbox_priorbox)
-    conv6_2_mbox_priorbox_reshape = Reshape((-1, 8), name='conv6_2_mbox_priorbox_reshape')(conv6_2_mbox_priorbox)
-    conv7_2_mbox_priorbox_reshape = Reshape((-1, 8), name='conv7_2_mbox_priorbox_reshape')(conv7_2_mbox_priorbox)
-    conv8_2_mbox_priorbox_reshape = Reshape((-1, 8), name='conv8_2_mbox_priorbox_reshape')(conv8_2_mbox_priorbox)
-    conv9_2_mbox_priorbox_reshape = Reshape((-1, 8), name='conv9_2_mbox_priorbox_reshape')(conv9_2_mbox_priorbox)
-
-    ### Concatenate the predictions from the different layers
-
-    # Axis 0 (batch) and axis 2 (n_classes or 4, respectively) are identical for all layer predictions,
-    # so we want to concatenate along axis 1, the number of boxes per layer
-    # Output shape of `mbox_conf`: (batch, n_boxes_total, n_classes)
-    mbox_conf = Concatenate(axis=1, name='mbox_conf')([conv4_3_norm_mbox_conf_reshape,
-                                                       fc7_mbox_conf_reshape,
-                                                       conv6_2_mbox_conf_reshape,
-                                                       conv7_2_mbox_conf_reshape,
-                                                       conv8_2_mbox_conf_reshape,
-                                                       conv9_2_mbox_conf_reshape])
-
-    # Output shape of `mbox_loc`: (batch, n_boxes_total, 4)
-    mbox_loc = Concatenate(axis=1, name='mbox_loc')([conv4_3_norm_mbox_loc_reshape,
-                                                     fc7_mbox_loc_reshape,
-                                                     conv6_2_mbox_loc_reshape,
-                                                     conv7_2_mbox_loc_reshape,
-                                                     conv8_2_mbox_loc_reshape,
-                                                     conv9_2_mbox_loc_reshape])
-
-    # Output shape of `mbox_priorbox`: (batch, n_boxes_total, 8)
-    mbox_priorbox = Concatenate(axis=1, name='mbox_priorbox')([conv4_3_norm_mbox_priorbox_reshape,
-                                                               fc7_mbox_priorbox_reshape,
-                                                               conv6_2_mbox_priorbox_reshape,
-                                                               conv7_2_mbox_priorbox_reshape,
-                                                               conv8_2_mbox_priorbox_reshape,
-                                                               conv9_2_mbox_priorbox_reshape])
+    # ===========================================================
+    # 计算先验框
+    # ===========================================================
+    priorbox_tuple = ssd300_priorbox(loc_tuple, image_size, scales, aspect_ratios,
+                                     steps, offsets, variances, two_boxes_for_ar1,
+                                     clip_boxes, coords, normalize_coords)
 
     # The box coordinate predictions will go into the loss function just the way they are,
     # but for the class predictions, we'll apply a softmax activation layer first
