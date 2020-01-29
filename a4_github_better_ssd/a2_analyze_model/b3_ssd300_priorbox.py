@@ -15,7 +15,7 @@
 @==============================================@
 """
 import numpy as np
-from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
+from b3_m1_anchorboxes import AnchorBoxes
 
 
 def ssd300_priorbox(loc_tuple, image_size,
@@ -72,4 +72,4 @@ if __name__ == '__main__':
 
     conf_tuple, loc_tuple = ssd300_loc_conf(layer_tuple)
 
-    ssd300_priorbox(loc_tuple)
+    ssd300_priorbox(loc_tuple, (300, 300, 3))
