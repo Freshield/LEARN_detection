@@ -30,7 +30,8 @@ def ssd300_loc_conf(layer_tuple, n_boxes=[4, 6, 6, 6, 4, 4], n_classes=21, l2_re
     ### Build the convolutional predictor layers on top of the base network
 
     # We precidt `n_classes` confidence values for each box, hence the confidence predictors have depth `n_boxes * n_classes`
-    # Output shape of the confidence layers: `(batch, height, width, n_boxes * n_classes)`
+    # Output shape of the confidence layers:
+    # `(batch, height, width, n_boxes * n_classes)`
     # 38,38,4*21
     conv4_3_norm_mbox_conf = Conv2D(n_boxes[0] * n_classes, (3, 3), padding='same', kernel_initializer='he_normal',
                                     kernel_regularizer=l2(l2_reg), name='conv4_3_norm_mbox_conf')(conv4_3_norm)
@@ -51,7 +52,8 @@ def ssd300_loc_conf(layer_tuple, n_boxes=[4, 6, 6, 6, 4, 4], n_classes=21, l2_re
                                kernel_regularizer=l2(l2_reg), name='conv9_2_mbox_conf')(conv9_2)
 
     # We predict 4 box coordinates for each box, hence the localization predictors have depth `n_boxes * 4`
-    # Output shape of the localization layers: `(batch, height, width, n_boxes * 4)`
+    # Output shape of the localization layers:
+    # `(batch, height, width, n_boxes * 4)`
     # 38,38,4*4
     conv4_3_norm_mbox_loc = Conv2D(n_boxes[0] * 4, (3, 3), padding='same', kernel_initializer='he_normal',
                                    kernel_regularizer=l2(l2_reg), name='conv4_3_norm_mbox_loc')(conv4_3_norm)
@@ -75,8 +77,6 @@ def ssd300_loc_conf(layer_tuple, n_boxes=[4, 6, 6, 6, 4, 4], n_classes=21, l2_re
             conv8_2_mbox_conf, conv9_2_mbox_conf), \
            (conv4_3_norm_mbox_loc, conv6_2_mbox_loc, conv7_2_mbox_loc,
             conv8_2_mbox_loc, conv9_2_mbox_loc)
-
-
 
 
 if __name__ == '__main__':

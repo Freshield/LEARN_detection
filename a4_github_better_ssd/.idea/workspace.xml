@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b1_m1_ssd300_backbone.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b1_m1_ssd300_backbone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/a2_analyze_model/b1_m2_ssd300_loc_conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b1_m2_ssd300_loc_conf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b1_ssd_300_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b1_ssd_300_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b1_ssd_300_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="237" column="34" selection-start-line="237" selection-start-column="34" selection-end-line="237" selection-end-column="34" />
+            <state relative-caret-position="412">
+              <caret line="245" column="40" lean-forward="true" selection-start-line="245" selection-start-column="40" selection-end-line="245" selection-end-column="40" />
               <folding>
                 <element signature="e#508#526#0" expanded="true" />
               </folding>
@@ -68,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b1_m2_ssd300_loc_conf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1981">
-              <caret line="84" column="7" selection-start-line="84" selection-start-column="7" selection-end-line="84" selection-end-column="7" />
+            <state relative-caret-position="234">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
               <folding>
                 <element signature="e#513#622#0" expanded="true" />
               </folding>
@@ -357,23 +354,22 @@
       <updated>1579413416248</updated>
       <workItem from="1579413417321" duration="6423000" />
       <workItem from="1579508597029" duration="1511000" />
-      <workItem from="1580889180704" duration="7926000" />
+      <workItem from="1580889180704" duration="8011000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15860000" />
+    <option name="totallyTimeSpent" value="15945000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="88" y="-2" width="1833" height="1083" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17693612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42320442" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.42320442" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -382,7 +378,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.23425414" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.23425414" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -500,22 +496,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b1_m2_ssd300_loc_conf.py">
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b1_ssd_300_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1981">
-          <caret line="84" column="7" selection-start-line="84" selection-start-column="7" selection-end-line="84" selection-end-column="7" />
+        <state relative-caret-position="412">
+          <caret line="245" column="40" lean-forward="true" selection-start-line="245" selection-start-column="40" selection-end-line="245" selection-end-column="40" />
           <folding>
-            <element signature="e#513#622#0" expanded="true" />
+            <element signature="e#508#526#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b1_ssd_300_model.py">
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b1_m2_ssd300_loc_conf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="237" column="34" selection-start-line="237" selection-start-column="34" selection-end-line="237" selection-end-column="34" />
+        <state relative-caret-position="234">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
           <folding>
-            <element signature="e#508#526#0" expanded="true" />
+            <element signature="e#513#622#0" expanded="true" />
           </folding>
         </state>
       </provider>
