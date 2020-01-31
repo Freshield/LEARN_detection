@@ -20,6 +20,7 @@ from keras.layers import Input, Lambda, Activation, Conv2D, MaxPooling2D, ZeroPa
 import keras.backend as K
 
 from b1_m1_ssd300_backbone import ssd300_backbone
+from b1_m2_ssd300_loc_conf import ssd300_loc_conf
 from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
 from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
@@ -234,11 +235,17 @@ def ssd_300(image_size,
     # ===========================================================
     # 主干网络
     # ===========================================================
-    x, conv4_3, fc7, conv6_2, conv7_2, conv8_2, conv9_2 = ssd300_backbone(
+    x, layer_tuple = ssd300_backbone(
         image_size, l2_reg,
         subtract_mean, divide_by_stddev, swap_channels)
 
 
+    # ===========================================================
+    # conf置信预测和loc框位置预测（预测框）
+    # ===========================================================
+    conf_tuple, loc_tuple = ssd300_loc_conf(layer_tuple, n_boxes, n_classes, l2_reg)
+
+    # TODO 计算先验框
     ### Generate the anchor boxes (called "priors" in the original Caffe/C++ implementation, so I'll keep their layer names)
 
     # Output shape of anchors: `(batch, height, width, n_boxes, 8)`

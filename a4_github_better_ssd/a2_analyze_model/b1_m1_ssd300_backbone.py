@@ -20,7 +20,7 @@ from keras.regularizers import l2
 import keras.backend as K
 
 
-def ssd300_backbone(image_size, l2_reg,
+def ssd300_backbone(image_size, l2_reg=0.0005,
             subtract_mean=[123, 117, 104], divide_by_stddev=None, swap_channels=[2, 1, 0],):
     """ssd 300的主干网络"""
     ############################################################################
@@ -151,9 +151,9 @@ def ssd300_backbone(image_size, l2_reg,
     # conv4_3-38,38,512, fc7-19,19,1024, conv6_2-10,10,512,
     # conv7_2-5,5,256, conv8_2-3,3,256, conv9_2-1,1,256
 
-    return x, conv4_3, fc7, conv6_2, conv7_2, conv8_2, conv9_2
+    return x, (conv4_3, fc7, conv6_2, conv7_2, conv8_2, conv9_2)
 
 
 if __name__ == '__main__':
-    x, conv4_3, fc7, conv6_2, conv7_2, conv8_2, conv9_2 = ssd300_backbone(
+    x, (conv4_3, fc7, conv6_2, conv7_2, conv8_2, conv9_2) = ssd300_backbone(
         (300,300,3), 0.05)
