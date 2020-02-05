@@ -4,14 +4,7 @@
     <list default="true" id="9a86f6b9-4c29-42f5-be64-4453af9564e0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/data/ssd_keras/SSD.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/ssd_keras/SSD.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/ssd_keras/SSD_training.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/ssd_keras/SSD_training.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/a3_csdn_ssd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/a3_csdn_ssd.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/a1_ssd300_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/a1_ssd300_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/a2_get_loc_conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/a2_get_loc_conf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../a3_csdn_ssd/ssd_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../a3_csdn_ssd/ssd_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chp1_ssd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chp1_ssd/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/ssd_keras/SSD_training.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
@@ -111,17 +104,17 @@
       <updated>1572504077743</updated>
       <workItem from="1572504078898" duration="83000" />
       <workItem from="1577258495789" duration="17000" />
+      <workItem from="1579412589033" duration="692000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100000" />
+    <option name="totallyTimeSpent" value="792000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="337" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
+    <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25235197" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2556724" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
