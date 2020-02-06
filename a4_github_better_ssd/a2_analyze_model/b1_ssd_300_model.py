@@ -21,7 +21,6 @@ import keras.backend as K
 
 from b1_m1_ssd300_backbone import ssd300_backbone
 from b1_m2_ssd300_loc_conf import ssd300_loc_conf
-from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
 from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 
@@ -74,39 +73,50 @@ def ssd_300(image_size,
     TensorFlow backend (v1.0 or later).
 
     Arguments:
+        # 图像的大小
         image_size (tuple): The input image size in the format `(height, width, channels)`.
+        # 有多少个类别，不加上背景层
         n_classes (int): The number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO.
+        # 是训练还是预测
         mode (str, optional): One of 'training', 'inference' and 'inference_fast'. In 'training' mode,
             the model outputs the raw prediction tensor, while in 'inference' and 'inference_fast' modes,
             the raw predictions are decoded into absolute coordinates and filtered via confidence thresholding,
             non-maximum suppression, and top-k filtering. The difference between latter two modes is that
             'inference' follows the exact procedure of the original Caffe implementation, while
             'inference_fast' uses a faster prediction decoding procedure.
+        # l2正则化系数
         l2_regularization (float, optional): The L2-regularization rate. Applies to all convolutional layers.
             Set to zero to deactivate L2-regularization.
+        # 最小的锚点比率
         min_scale (float, optional): The smallest scaling factor for the size of the anchor boxes as a fraction
             of the shorter side of the input images.
+        # 最大的锚点比率
         max_scale (float, optional): The largest scaling factor for the size of the anchor boxes as a fraction
             of the shorter side of the input images. All scaling factors between the smallest and the
             largest will be linearly interpolated. Note that the second to last of the linearly interpolated
             scaling factors will actually be the scaling factor for the last predictor layer, while the last
             scaling factor is used for the second box for aspect ratio 1 in the last predictor layer
             if `two_boxes_for_ar1` is `True`.
+        # 锚点比率列表
         scales (list, optional): A list of floats containing scaling factors per convolutional predictor layer.
             This list must be one element longer than the number of predictor layers. The first `k` elements are the
             scaling factors for the `k` predictor layers, while the last element is used for the second box
             for aspect ratio 1 in the last predictor layer if `two_boxes_for_ar1` is `True`. This additional
             last scaling factor must be passed either way, even if it is not being used. If a list is passed,
             this argument overrides `min_scale` and `max_scale`. All scaling factors must be greater than zero.
+        # 预测框的长宽比，如果全局一致下的值
         aspect_ratios_global (list, optional): The list of aspect ratios for which anchor boxes are to be
             generated. This list is valid for all prediction layers.
+        # 预测框的长宽比列表
         aspect_ratios_per_layer (list, optional): A list containing one aspect ratio list for each prediction layer.
             This allows you to set the aspect ratios for each predictor layer individually, which is the case for the
             original SSD300 implementation. If a list is passed, it overrides `aspect_ratios_global`.
+        # 是否在第一个长宽比中加入论文的特殊长宽比框
         two_boxes_for_ar1 (bool, optional): Only relevant for aspect ratio lists that contain 1. Will be ignored otherwise.
             If `True`, two anchor boxes will be generated for aspect ratio 1. The first will be generated
             using the scaling factor for the respective layer, the second one will be generated using
             geometric mean of said scaling factor and next bigger scaling factor.
+        # TODO
         steps (list, optional): `None` or a list with as many elements as there are predictor layers. The elements can be
             either ints/floats or tuples of two ints/floats. These numbers represent for each predictor layer how many
             pixels apart the anchor box center points should be vertically and horizontally along the spatial grid over
@@ -114,6 +124,7 @@ def ssd_300(image_size,
             If the list contains tuples of two ints/floats, then they represent `(step_height, step_width)`.
             If no steps are provided, then they will be computed such that the anchor box center points will form an
             equidistant grid within the image dimensions.
+        # TODO
         offsets (list, optional): `None` or a list with as many elements as there are predictor layers. The elements can be
             either floats or tuples of two floats. These numbers represent for each predictor layer how many
             pixels from the top and left boarders of the image the top-most and left-most anchor box center points should be
@@ -121,35 +132,47 @@ def ssd_300(image_size,
             of the step size specified in the `steps` argument. If the list contains floats, then that value will
             be used for both spatial dimensions. If the list contains tuples of two floats, then they represent
             `(vertical_offset, horizontal_offset)`. If no offsets are provided, then they will default to 0.5 of the step size.
+        # 是否对于超过边界的框进行裁剪
         clip_boxes (bool, optional): If `True`, clips the anchor box coordinates to stay within image boundaries.
+        # 预测框的偏差值
         variances (list, optional): A list of 4 floats >0. The anchor box offset for each coordinate will be divided by
             its respective variance value.
+        # 预测框的坐标排列方法，是中心坐标还是四角坐标
         coords (str, optional): The box coordinate format to be used internally by the model (i.e. this is not the input format
             of the ground truth labels). Can be either 'centroids' for the format `(cx, cy, w, h)` (box center coordinates, width,
             and height), 'minmax' for the format `(xmin, xmax, ymin, ymax)`, or 'corners' for the format `(xmin, ymin, xmax, ymax)`.
+        # 是否对坐标值进行正则化
         normalize_coords (bool, optional): Set to `True` if the model is supposed to use relative instead of absolute coordinates,
             i.e. if the model predicts box coordinates within [0,1] instead of absolute coordinates.
+        # 是否对原图进行平均值归一化
         subtract_mean (array-like, optional): `None` or an array-like object of integers or floating point values
             of any shape that is broadcast-compatible with the image shape. The elements of this array will be
             subtracted from the image pixel intensity values. For example, pass a list of three integers
             to perform per-channel mean normalization for color images.
+        # 是否对原图进行标准差归一化
         divide_by_stddev (array-like, optional): `None` or an array-like object of non-zero integers or
             floating point values of any shape that is broadcast-compatible with the image shape. The image pixel
             intensity values will be divided by the elements of this array. For example, pass a list
             of three integers to perform per-channel standard deviation normalization for color images.
+        # 是否对原图进行信道调换
         swap_channels (list, optional): Either `False` or a list of integers representing the desired order in which the input
             image channels should be swapped.
+        # TODO
         confidence_thresh (float, optional): A float in [0,1), the minimum classification confidence in a specific
             positive class in order to be considered for the non-maximum suppression stage for the respective class.
             A lower value will result in a larger part of the selection process being done by the non-maximum suppression
             stage, while a larger value will result in a larger part of the selection process happening in the confidence
             thresholding stage.
+        # TODO
         iou_threshold (float, optional): A float in [0,1]. All boxes that have a Jaccard similarity of greater than `iou_threshold`
             with a locally maximal box will be removed from the set of predictions for a given class, where 'maximal' refers
             to the box's confidence score.
+        # TODO
         top_k (int, optional): The number of highest scoring predictions to be kept for each batch item after the
             non-maximum suppression stage.
+        # TODO
         nms_max_output_size (int, optional): The maximal number of predictions that will be left over after the NMS stage.
+        # TODO
         return_predictor_sizes (bool, optional): If `True`, this function not only returns the model, but also
             a list containing the spatial dimensions of the predictor layers. This isn't strictly necessary since
             you can always get their sizes easily via the Keras API, but it's convenient and less error-prone
@@ -171,14 +194,6 @@ def ssd_300(image_size,
     # The number of predictor conv layers in the network is 6 for the original SSD300.
     # 多少个预测的层
     n_predictor_layers = 6
-    # Account for the background class.
-    # 总分类数加上背景类
-    n_classes += 1
-    # Make the internal name shorter.
-    # l2正则化系数
-    l2_reg = l2_regularization
-    # 长宽通道
-    img_height, img_width, img_channels = image_size[0], image_size[1], image_size[2]
 
     # 断言保证
     if aspect_ratios_global is None and aspect_ratios_per_layer is None:
@@ -191,8 +206,6 @@ def ssd_300(image_size,
     if scales:
         if len(scales) != n_predictor_layers+1:
             raise ValueError("It must be either scales is None or len(scales) == {}, but len(scales) == {}.".format(n_predictor_layers+1, len(scales)))
-    else: # If no explicit list of scaling factors was passed, compute the list of scaling factors from `min_scale` and `max_scale`
-        scales = np.linspace(min_scale, max_scale, n_predictor_layers+1)
     if len(variances) != 4:
         raise ValueError("4 variance values must be pased, but {} values were received.".format(len(variances)))
     variances = np.array(variances)
@@ -203,6 +216,17 @@ def ssd_300(image_size,
     if (not (offsets is None)) and (len(offsets) != n_predictor_layers):
         raise ValueError("You must provide at least one offset value per predictor layer.")
 
+    # Account for the background class.
+    # 总分类数加上背景类
+    n_classes += 1
+    # Make the internal name shorter.
+    # l2正则化系数
+    l2_reg = l2_regularization
+    # 长宽通道
+    img_height, img_width, img_channels = image_size[0], image_size[1], image_size[2]
+    # 如果没有设定scales则通过min_scales和max_scale生成
+    if not scales: # If no explicit list of scaling factors was passed, compute the list of scaling factors from `min_scale` and `max_scale`
+        scales = np.linspace(min_scale, max_scale, n_predictor_layers+1)
     # 计算长宽比列表
     # Set the aspect ratios for each predictor layer. These are only needed for the anchor box layers.
     if aspect_ratios_per_layer:
@@ -245,29 +269,17 @@ def ssd_300(image_size,
     # ===========================================================
     conf_tuple, loc_tuple = ssd300_loc_conf(layer_tuple, n_boxes, n_classes, l2_reg)
 
+    print(scales)
+    print(aspect_ratios)
+    print(two_boxes_for_ar1)
+    print(steps)
+    print(offsets)
+    print(clip_boxes)
+    print(variances)
+    print(coords)
+    print(normalize_coords)
+    exit()
     # TODO 计算先验框
-    ### Generate the anchor boxes (called "priors" in the original Caffe/C++ implementation, so I'll keep their layer names)
-
-    # Output shape of anchors: `(batch, height, width, n_boxes, 8)`
-    conv4_3_norm_mbox_priorbox = AnchorBoxes(img_height, img_width, this_scale=scales[0], next_scale=scales[1], aspect_ratios=aspect_ratios[0],
-                                             two_boxes_for_ar1=two_boxes_for_ar1, this_steps=steps[0], this_offsets=offsets[0], clip_boxes=clip_boxes,
-                                             variances=variances, coords=coords, normalize_coords=normalize_coords, name='conv4_3_norm_mbox_priorbox')(conv4_3_norm_mbox_loc)
-    fc7_mbox_priorbox = AnchorBoxes(img_height, img_width, this_scale=scales[1], next_scale=scales[2], aspect_ratios=aspect_ratios[1],
-                                    two_boxes_for_ar1=two_boxes_for_ar1, this_steps=steps[1], this_offsets=offsets[1], clip_boxes=clip_boxes,
-                                    variances=variances, coords=coords, normalize_coords=normalize_coords, name='fc7_mbox_priorbox')(fc7_mbox_loc)
-    conv6_2_mbox_priorbox = AnchorBoxes(img_height, img_width, this_scale=scales[2], next_scale=scales[3], aspect_ratios=aspect_ratios[2],
-                                        two_boxes_for_ar1=two_boxes_for_ar1, this_steps=steps[2], this_offsets=offsets[2], clip_boxes=clip_boxes,
-                                        variances=variances, coords=coords, normalize_coords=normalize_coords, name='conv6_2_mbox_priorbox')(conv6_2_mbox_loc)
-    conv7_2_mbox_priorbox = AnchorBoxes(img_height, img_width, this_scale=scales[3], next_scale=scales[4], aspect_ratios=aspect_ratios[3],
-                                        two_boxes_for_ar1=two_boxes_for_ar1, this_steps=steps[3], this_offsets=offsets[3], clip_boxes=clip_boxes,
-                                        variances=variances, coords=coords, normalize_coords=normalize_coords, name='conv7_2_mbox_priorbox')(conv7_2_mbox_loc)
-    conv8_2_mbox_priorbox = AnchorBoxes(img_height, img_width, this_scale=scales[4], next_scale=scales[5], aspect_ratios=aspect_ratios[4],
-                                        two_boxes_for_ar1=two_boxes_for_ar1, this_steps=steps[4], this_offsets=offsets[4], clip_boxes=clip_boxes,
-                                        variances=variances, coords=coords, normalize_coords=normalize_coords, name='conv8_2_mbox_priorbox')(conv8_2_mbox_loc)
-    conv9_2_mbox_priorbox = AnchorBoxes(img_height, img_width, this_scale=scales[5], next_scale=scales[6], aspect_ratios=aspect_ratios[5],
-                                        two_boxes_for_ar1=two_boxes_for_ar1, this_steps=steps[5], this_offsets=offsets[5], clip_boxes=clip_boxes,
-                                        variances=variances, coords=coords, normalize_coords=normalize_coords, name='conv9_2_mbox_priorbox')(conv9_2_mbox_loc)
-
     ### Reshape
 
     # Reshape the class predictions, yielding 3D tensors of shape `(batch, height * width * n_boxes, n_classes)`

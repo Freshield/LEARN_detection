@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54b914a4-6fc7-491b-a680-c09b0d2cab92" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/a3_csdn_ssd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/a3_csdn_ssd.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/example/ssd_keras/SSD_training.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/example/ssd_keras/SSD_training.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a4_github_better_ssd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../a4_github_better_ssd/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +48,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a7_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1210">
+            <state relative-caret-position="1650">
               <caret line="62" column="32" selection-start-line="58" selection-end-line="62" selection-end-column="32" />
               <folding>
                 <element signature="e#500#512#0" expanded="true" />
@@ -54,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a8_predict.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="291">
-              <caret line="38" column="44" lean-forward="true" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+              <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
               <folding>
                 <element signature="e#502#515#0" expanded="true" />
               </folding>
@@ -66,10 +69,31 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/a2_get_loc_conf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-600">
+              <caret line="26" column="28" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="28" />
+              <folding>
+                <element signature="e#578#596#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/a2_m2_priorbox.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2460">
+              <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a3_get_voc_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2530">
+            <state relative-caret-position="3450">
               <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
               <folding>
                 <element signature="e#582#600#0" expanded="true" />
@@ -81,7 +105,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a4_bbox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6666">
+            <state relative-caret-position="9090">
               <caret line="304" column="49" selection-start-line="304" selection-start-column="49" selection-end-line="304" selection-end-column="49" />
             </state>
           </provider>
@@ -90,7 +114,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a5_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
+            <state relative-caret-position="660">
               <caret line="22" column="48" selection-start-line="20" selection-start-column="41" selection-end-line="22" selection-end-column="48" />
             </state>
           </provider>
@@ -350,17 +374,18 @@
       <workItem from="1579227071958" duration="1045000" />
       <workItem from="1579399658797" duration="1815000" />
       <workItem from="1579485171113" duration="320000" />
+      <workItem from="1580966811466" duration="486000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87472000" />
+    <option name="totallyTimeSpent" value="87958000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
+    <frame x="88" y="-2" width="1833" height="1083" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1759823" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17863199" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -550,23 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_m2_priorbox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1047">
-          <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_get_loc_conf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="26" column="28" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="28" />
-          <folding>
-            <element signature="e#578#596#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a1_ssd300_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
@@ -600,7 +608,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a7_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1210">
+        <state relative-caret-position="1650">
           <caret line="62" column="32" selection-start-line="58" selection-end-line="62" selection-end-column="32" />
           <folding>
             <element signature="e#500#512#0" expanded="true" />
@@ -610,7 +618,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a3_get_voc_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2530">
+        <state relative-caret-position="3450">
           <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
           <folding>
             <element signature="e#582#600#0" expanded="true" />
@@ -620,14 +628,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a4_bbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6666">
+        <state relative-caret-position="9090">
           <caret line="304" column="49" selection-start-line="304" selection-start-column="49" selection-end-line="304" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/a5_generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
+        <state relative-caret-position="660">
           <caret line="22" column="48" selection-start-line="20" selection-start-column="41" selection-end-line="22" selection-end-column="48" />
         </state>
       </provider>
@@ -635,9 +643,26 @@
     <entry file="file://$PROJECT_DIR$/a8_predict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
-          <caret line="38" column="44" lean-forward="true" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
           <folding>
             <element signature="e#502#515#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_m2_priorbox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2460">
+          <caret line="105" column="43" selection-start-line="105" selection-start-column="43" selection-end-line="105" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_get_loc_conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-600">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="28" />
+          <folding>
+            <element signature="e#578#596#0" expanded="true" />
           </folding>
         </state>
       </provider>

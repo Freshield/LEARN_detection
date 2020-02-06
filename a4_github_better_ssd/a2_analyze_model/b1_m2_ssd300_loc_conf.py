@@ -73,10 +73,10 @@ def ssd300_loc_conf(layer_tuple, n_boxes=[4, 6, 6, 6, 4, 4], n_classes=21, l2_re
     conv9_2_mbox_loc = Conv2D(n_boxes[5] * 4, (3, 3), padding='same', kernel_initializer='he_normal',
                               kernel_regularizer=l2(l2_reg), name='conv9_2_mbox_loc')(conv9_2)
 
-    return (conv4_3_norm_mbox_conf, conv6_2_mbox_conf, conv7_2_mbox_conf,
-            conv8_2_mbox_conf, conv9_2_mbox_conf), \
-           (conv4_3_norm_mbox_loc, conv6_2_mbox_loc, conv7_2_mbox_loc,
-            conv8_2_mbox_loc, conv9_2_mbox_loc)
+    return (conv4_3_norm_mbox_conf, fc7_mbox_conf, conv6_2_mbox_conf,
+            conv7_2_mbox_conf,conv8_2_mbox_conf, conv9_2_mbox_conf), \
+           (conv4_3_norm_mbox_loc, fc7_mbox_loc, conv6_2_mbox_loc,
+            conv7_2_mbox_loc,conv8_2_mbox_loc, conv9_2_mbox_loc)
 
 
 if __name__ == '__main__':
