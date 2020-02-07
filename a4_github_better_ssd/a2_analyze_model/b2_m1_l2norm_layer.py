@@ -2,7 +2,7 @@
 """
 @Author: Freshield
 @Contact: yangyufresh@163.com
-@File: b1_m3_l2norm_layer.py
+@File: b2_m1_l2norm_layer.py
 @Time: 2020-02-05 17:19
 @Last_update: 2020-02-05 17:19
 @Desc: None

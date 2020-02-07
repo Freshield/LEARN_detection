@@ -2,7 +2,7 @@
 """
 @Author: Freshield
 @Contact: yangyufresh@163.com
-@File: b1_m2_ssd300_loc_conf.py
+@File: b2_ssd300_loc_conf.py
 @Time: 2020-02-05 17:06
 @Last_update: 2020-02-05 17:06
 @Desc: None
@@ -15,7 +15,7 @@
 @==============================================@
 """
 from keras.layers import Input, Lambda, Activation, Conv2D, MaxPooling2D, ZeroPadding2D, Reshape, Concatenate
-from b1_m3_l2norm_layer import L2Normalization
+from b2_m1_l2norm_layer import L2Normalization
 from keras.regularizers import l2
 
 
@@ -80,7 +80,7 @@ def ssd300_loc_conf(layer_tuple, n_boxes=[4, 6, 6, 6, 4, 4], n_classes=21, l2_re
 
 
 if __name__ == '__main__':
-    from b1_m1_ssd300_backbone import ssd300_backbone
+    from b1_ssd300_backbone import ssd300_backbone
 
     x, layer_tuple = ssd300_backbone(
         (300, 300, 3))

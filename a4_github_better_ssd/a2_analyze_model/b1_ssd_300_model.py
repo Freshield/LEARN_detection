@@ -19,8 +19,8 @@ from keras.models import Model
 from keras.layers import Input, Lambda, Activation, Conv2D, MaxPooling2D, ZeroPadding2D, Reshape, Concatenate
 import keras.backend as K
 
-from b1_m1_ssd300_backbone import ssd300_backbone
-from b1_m2_ssd300_loc_conf import ssd300_loc_conf
+from b1_ssd300_backbone import ssd300_backbone
+from b2_ssd300_loc_conf import ssd300_loc_conf
 from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 
