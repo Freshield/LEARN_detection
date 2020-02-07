@@ -2,7 +2,7 @@
 """
 @Author: Freshield
 @Contact: yangyufresh@163.com
-@File: b1_ssd_300_model.py
+@File: b5_ssd300_model.py
 @Time: 2020-02-05 15:57
 @Last_update: 2020-02-05 15:57
 @Desc: None
@@ -22,11 +22,14 @@ import keras.backend as K
 from b1_ssd300_backbone import ssd300_backbone
 from b2_ssd300_loc_conf import ssd300_loc_conf
 from b3_ssd300_priorbox import ssd300_priorbox
+from b4_ssd300_reshaper import ssd300_reshaper
+from b5_m1_get_predictor_size import get_predictor_size
 from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 
+
 # ssd 模型
-def ssd_300(image_size,
+def ssd300(image_size,
             n_classes,
             mode='training',
             l2_regularization=0.0005,
@@ -277,15 +280,25 @@ def ssd_300(image_size,
                                      steps, offsets, variances, two_boxes_for_ar1,
                                      clip_boxes, coords, normalize_coords)
 
+    # ===========================================================
+    # 对所有的结果reshape
+    # ===========================================================
+    mbox_conf, mbox_loc, mbox_priorbox = ssd300_reshaper(conf_tuple, loc_tuple, priorbox_tuple, n_classes)
+
+    # 对分类部分进行softmax
     # The box coordinate predictions will go into the loss function just the way they are,
     # but for the class predictions, we'll apply a softmax activation layer first
+    # (batch, 8732, 21)
     mbox_conf_softmax = Activation('softmax', name='mbox_conf_softmax')(mbox_conf)
 
+    # 把所有的都concat到一起
     # Concatenate the class and box predictions and the anchors to one large predictions vector
     # Output shape of `predictions`: (batch, n_boxes_total, n_classes + 4 + 8)
+    # (batch, 8732, 21+4+8)
     predictions = Concatenate(axis=2, name='predictions')([mbox_conf_softmax, mbox_loc, mbox_priorbox])
 
     if mode == 'training':
+        # 生成model
         model = Model(inputs=x, outputs=predictions)
     elif mode == 'inference':
         decoded_predictions = DecodeDetections(confidence_thresh=confidence_thresh,
@@ -313,14 +326,10 @@ def ssd_300(image_size,
         raise ValueError("`mode` must be one of 'training', 'inference' or 'inference_fast', but received '{}'.".format(mode))
 
     if return_predictor_sizes:
-        predictor_sizes = np.array([conv4_3_norm_mbox_conf._keras_shape[1:3],
-                                     fc7_mbox_conf._keras_shape[1:3],
-                                     conv6_2_mbox_conf._keras_shape[1:3],
-                                     conv7_2_mbox_conf._keras_shape[1:3],
-                                     conv8_2_mbox_conf._keras_shape[1:3],
-                                     conv9_2_mbox_conf._keras_shape[1:3]])
+        predictor_sizes = get_predictor_size(conf_tuple)
         return model, predictor_sizes
     else:
+        # 返回模型
         return model
 
 
@@ -364,7 +373,7 @@ if __name__ == '__main__':
     config.gpu_options.allow_growth = True
     sess = tf.Session(config=config)
 
-    model = ssd_300(image_size=(img_height, img_width, img_channels),
+    model = ssd300(image_size=(img_height, img_width, img_channels),
                     n_classes=n_classes,
                     mode='training',
                     l2_regularization=0.0005,
@@ -378,3 +387,5 @@ if __name__ == '__main__':
                     normalize_coords=normalize_coords,
                     subtract_mean=mean_color,
                     swap_channels=swap_channels)
+
+    model.summary()
