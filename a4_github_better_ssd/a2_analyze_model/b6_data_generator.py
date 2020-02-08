@@ -75,7 +75,7 @@ class DataGenerator:
                 format that the `create_hdf5_dataset()` method produces. If you load such an HDF5 dataset, you
                 don't need to use any of the parser methods anymore, the HDF5 dataset already contains all relevant
                 data.
-            # TODO
+            # 使用的图像列表，可以是None或者Python的列表
             filenames (string or list, optional): `None` or either a Python list/tuple or a string representing
                 a filepath. If a list/tuple is passed, it must contain the file names (full paths) of the
                 images to be used. Note that the list/tuple must contain the paths to the images,
@@ -87,40 +87,49 @@ class DataGenerator:
                 not the full directory path) to one image and nothing else. In this case the `filenames_type`
                 argument must be set to `text` and you must pass the path to the directory that contains the
                 images in `images_dir`.
+            # 文件列表的数据类型，是pickle还是字符串
             filenames_type (string, optional): In case a string is passed for `filenames`, this indicates what
                 type of file `filenames` is. It can be either 'pickle' for a pickled file or 'text' for a
                 plain text file.
+            # 图像的数据根目录
             images_dir (string, optional): In case a text file is passed for `filenames`, the full paths to
                 the images will be composed from `images_dir` and the names in the text file, i.e. this
                 should be the directory that contains the images to which the text file refers.
                 If `filenames_type` is not 'text', then this argument is irrelevant.
+            # label的数据路径，可以是None或者是Python列表表示pickle的文件路径
             labels (string or list, optional): `None` or either a Python list/tuple or a string representing
                 the path to a pickled file containing a list/tuple. The list/tuple must contain Numpy arrays
                 that represent the labels of the dataset.
+            # 表示图像的pickle化的图像索引
             image_ids (string or list, optional): `None` or either a Python list/tuple or a string representing
                 the path to a pickled file containing a list/tuple. The list/tuple must contain the image
                 IDs of the images in the dataset.
+            # TODO
             eval_neutral (string or list, optional): `None` or either a Python list/tuple or a string representing
                 the path to a pickled file containing a list/tuple. The list/tuple must contain for each image
                 a list that indicates for each ground truth object in the image whether that object is supposed
                 to be treated as neutral during an evaluation.
+            # label输出的格式
             labels_output_format (list, optional): A list of five strings representing the desired order of the five
                 items class ID, xmin, ymin, xmax, ymax in the generated ground truth data (if any). The expected
                 strings are 'xmin', 'ymin', 'xmax', 'ymax', 'class_id'.
+            # 是否显示运行的过程
             verbose (bool, optional): If `True`, prints out the progress for some constructor operations that may
                 take a bit longer.
         '''
         self.labels_output_format = labels_output_format
+        # 得到输出格式的列表
         self.labels_format={'class_id': labels_output_format.index('class_id'),
                             'xmin': labels_output_format.index('xmin'),
                             'ymin': labels_output_format.index('ymin'),
                             'xmax': labels_output_format.index('xmax'),
                             'ymax': labels_output_format.index('ymax')} # This dictionary is for internal use.
-
+        # 数据集的大小
         self.dataset_size = 0 # As long as we haven't loaded anything yet, the dataset size is zero.
         self.load_images_into_memory = load_images_into_memory
         self.images = None # The only way that this list will not stay `None` is if `load_images_into_memory == True`.
 
+        # TODO
         # `self.filenames` is a list containing all file names of the image samples (full paths).
         # Note that it does not contain the actual image files themselves. This list is one of the outputs of the parser methods.
         # In case you are loading an HDF5 dataset, this list will be `None`.
