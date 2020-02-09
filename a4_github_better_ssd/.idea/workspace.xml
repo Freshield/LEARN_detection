@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,10 +16,12 @@
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b2_m1_ssd_300_backbone.coverage" NAME="b2_m1_ssd_300_backbone Coverage Results" MODIFIED="1580891763814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b1_m3_l2norm_layer.coverage" NAME="b1_m3_l2norm_layer Coverage Results" MODIFIED="1580895682618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b1_ssd_300_model.coverage" NAME="b1_ssd_300_model Coverage Results" MODIFIED="1580209203107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
+    <SUITE FILE_PATH="coverage/a4_github_better_ssd$b6_data_generator.coverage" NAME="b6_data_generator Coverage Results" MODIFIED="1581251030256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$keras_ssd_loss.coverage" NAME="keras_ssd_loss Coverage Results" MODIFIED="1581128722268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/example/keras_loss_function" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b3_ssd300_priorbox.coverage" NAME="b3_ssd300_priorbox Coverage Results" MODIFIED="1580288432552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$a4_github_better_ssd.coverage" NAME="a4_github_better_ssd Coverage Results" MODIFIED="1579505639121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b4_ssd300_reshaper.coverage" NAME="b4_ssd300_reshaper Coverage Results" MODIFIED="1580208841542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
+    <SUITE FILE_PATH="coverage/a4_github_better_ssd$t1_try_tqdm.coverage" NAME="t1_try_tqdm Coverage Results" MODIFIED="1581251384694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model/test" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -36,21 +37,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12467">
-              <caret line="277" column="21" selection-start-line="277" selection-start-column="21" selection-end-line="277" selection-end-column="21" />
+            <state relative-caret-position="134">
+              <caret line="353" column="45" selection-start-line="353" selection-start-column="45" selection-end-line="353" selection-end-column="45" />
               <folding>
                 <element signature="e#509#527#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -145,8 +141,9 @@
         <option value="$PROJECT_DIR$/a2_analyze_model/b5_m1_get_predictor_size.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b5_ssd_300_model.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py" />
-        <option value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/test/t1_try_tqdm.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
       </list>
     </option>
   </component>
@@ -211,7 +208,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.keras_ssd_loss">
+  <component name="RunManager" selected="Python.t1_try_tqdm">
     <configuration name="a4_github_better_ssd" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="a4_github_better_ssd" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -230,28 +227,6 @@
       <option name="ipnbPort" value="8888" />
       <method v="2" />
     </configuration>
-    <configuration name="b1_m2_ssd300_loc_conf" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="a4_github_better_ssd" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/b2_ssd300_loc_conf.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="b1_ssd_300_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="a4_github_better_ssd" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -266,28 +241,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="b3_ssd300_priorbox" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="a4_github_better_ssd" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/b3_ssd300_priorbox.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -318,6 +271,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="b6_data_generator" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="a4_github_better_ssd" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="keras_ssd_loss" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="a4_github_better_ssd" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -340,13 +315,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="t1_try_tqdm" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="a4_github_better_ssd" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/test/t1_try_tqdm.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.t1_try_tqdm" />
+        <item itemvalue="Python.b6_data_generator" />
         <item itemvalue="Python.keras_ssd_loss" />
         <item itemvalue="Python.b1_ssd_300_model" />
         <item itemvalue="Python.b4_ssd300_reshaper" />
-        <item itemvalue="Python.b3_ssd300_priorbox" />
-        <item itemvalue="Python.b1_m2_ssd300_loc_conf" />
       </list>
     </recent_temporary>
   </component>
@@ -367,22 +364,23 @@
       <workItem from="1581058634800" duration="9450000" />
       <workItem from="1581128348927" duration="2576000" />
       <workItem from="1609322698405" duration="2875000" />
-      <workItem from="1581243163472" duration="545000" />
+      <workItem from="1581243163472" duration="3748000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37299000" />
+    <option name="totallyTimeSpent" value="40502000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="88" y="-2" width="1833" height="1083" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18202375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32928178" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3513812" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3513812" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -391,7 +389,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.22099447" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.22099447" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32928178" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -619,18 +617,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/test/t1_try_tqdm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="e#504#525#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12467">
-          <caret line="277" column="21" selection-start-line="277" selection-start-column="21" selection-end-line="277" selection-end-column="21" />
+        <state relative-caret-position="134">
+          <caret line="353" column="45" selection-start-line="353" selection-start-column="45" selection-end-line="353" selection-end-column="45" />
           <folding>
             <element signature="e#509#527#0" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

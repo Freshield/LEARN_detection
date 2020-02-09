@@ -275,33 +275,42 @@ class DataGenerator:
         the code, but in its current form it expects the data format and XML tags of the Pascal VOC datasets.
 
         Arguments:
-            # 图像的目录列表
+            # 图像的目录列表，为了把多个图像目录一起使用比如voc2007和voc2012
             images_dirs (list): A list of strings, where each string is the path of a directory that
                 contains images that are to be part of the dataset. This allows you to aggregate multiple datasets
                 into one (e.g. one directory that contains the images for Pascal VOC 2007, another that contains
                 the images for Pascal VOC 2012, etc.).
+            # 图像集的文件路径列表，文件中是数据集的文件名字
             image_set_filenames (list): A list of strings, where each string is the path of the text file with the image
                 set to be loaded. Must be one file per image directory given. These text files define what images in the
                 respective image directories are to be part of the dataset and simply contains one image ID per line
                 and nothing else.
+            # 注释文件夹列表，所谓的注释文件夹就是label的文件夹
             annotations_dirs (list, optional): A list of strings, where each string is the path of a directory that
                 contains the annotations (XML files) that belong to the images in the respective image directories given.
                 The directories must contain one XML file per image and the name of an XML file must be the image ID
                 of the image it belongs to. The content of the XML files must be in the Pascal VOC format.
+            # 类别列表
             classes (list, optional): A list containing the names of the object classes as found in the
                 `name` XML tags. Must include the class `background` as the first list item. The order of this list
                 defines the class IDs.
+            # 包含的类别
             include_classes (list, optional): Either 'all' or a list of integers containing the class IDs that
                 are to be included in the dataset. If 'all', all ground truth boxes will be included in the dataset.
+            # TODO
             exclude_truncated (bool, optional): If `True`, excludes boxes that are labeled as 'truncated'.
+            # TODO
             exclude_difficult (bool, optional): If `True`, excludes boxes that are labeled as 'difficult'.
+            # 是否返回解析后的输出
             ret (bool, optional): Whether or not to return the outputs of the parser.
+            # 是否显示解析的过程
             verbose (bool, optional): If `True`, prints out the progress for operations that may take a bit longer.
 
         Returns:
             None by default, optionally lists for whichever are available of images, image filenames, labels, image IDs,
             and a list indicating which boxes are annotated with the label "difficult".
         '''
+        # 设置类成员
         # Set class members.
         self.images_dirs = images_dirs
         self.annotations_dirs = annotations_dirs
@@ -309,6 +318,7 @@ class DataGenerator:
         self.classes = classes
         self.include_classes = include_classes
 
+        # 所有相关的列表归零
         # Erase data that might have been parsed before.
         self.filenames = []
         self.image_ids = []
@@ -319,31 +329,40 @@ class DataGenerator:
             self.eval_neutral = None
             annotations_dirs = [None] * len(images_dirs)
 
+        # 遍历图像文件夹，图像集路径文件，label文件夹
+        # voc2007/jepgimages, voc2007/.../trainval.txt, voc2007/annotations
         for images_dir, image_set_filename, annotations_dir in zip(images_dirs, image_set_filenames, annotations_dirs):
+            # 读取图像集的索引名称
             # Read the image set file that so that we know all the IDs of all the images to be included in the dataset.
             with open(image_set_filename) as f:
                 image_ids = [line.strip() for line in f] # Note: These are strings, not integers.
                 self.image_ids += image_ids
 
+            # tqdm是进度条的库
             if verbose: it = tqdm(image_ids, desc="Processing image set '{}'".format(os.path.basename(image_set_filename)), file=sys.stdout)
             else: it = image_ids
 
+            # 迭代每个图像的索引
             # Loop over all images in this dataset.
             for image_id in it:
-
+                # 生成图像的文件名
                 filename = '{}'.format(image_id) + '.jpg'
+                # 把绝对路径放到filenames中
                 self.filenames.append(os.path.join(images_dir, filename))
-
+                # 如果label文件夹非空
                 if not annotations_dir is None:
+                    # 使用beautifulsoup来解析xml文件
                     # Parse the XML file for this image.
                     with open(os.path.join(annotations_dir, image_id + '.xml')) as f:
                         soup = BeautifulSoup(f, 'xml')
-
+                    # 得到folder
                     folder = soup.folder.text # In case we want to return the folder in addition to the image file name. Relevant for determining which dataset an image belongs to.
                     #filename = soup.filename.text
 
+                    # 存储举行框的列表
                     boxes = [] # We'll store all boxes for this image here.
                     eval_neutr = [] # We'll store whether a box is annotated as "difficult" here.
+                    # 得到所有的object
                     objects = soup.find_all('object') # Get a list of all objects in this image.
 
                     # Parse the data for each object.
