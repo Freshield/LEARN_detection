@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,7 +27,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a1_try_example.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-930">
+            <state relative-caret-position="30">
               <caret line="199" column="37" selection-start-line="199" selection-start-column="37" selection-end-line="199" selection-end-column="37" />
               <folding>
                 <element signature="e#506#515#0" expanded="true" />
@@ -35,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+            <state relative-caret-position="-12467">
+              <caret line="277" column="21" selection-start-line="277" selection-start-column="21" selection-end-line="277" selection-end-column="21" />
               <folding>
                 <element signature="e#509#527#0" expanded="true" />
               </folding>
@@ -47,10 +48,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/example/keras_loss_function/keras_ssd_loss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6000">
+            <state relative-caret-position="5970">
               <caret line="200" selection-start-line="200" selection-end-line="200" />
               <folding>
                 <element signature="e#661#692#0" expanded="true" />
@@ -80,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_ssd300_priorbox.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2430">
+            <state relative-caret-position="2400">
               <caret line="81" column="45" selection-start-line="73" selection-start-column="4" selection-end-line="81" selection-end-column="45" />
               <folding>
                 <element signature="e#510#528#0" expanded="true" />
@@ -140,6 +146,7 @@
         <option value="$PROJECT_DIR$/a2_analyze_model/b5_ssd_300_model.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py" />
       </list>
     </option>
   </component>
@@ -359,17 +366,18 @@
       <workItem from="1580966783411" duration="5908000" />
       <workItem from="1581058634800" duration="9450000" />
       <workItem from="1581128348927" duration="2576000" />
-      <workItem from="1609322698405" duration="454000" />
+      <workItem from="1609322698405" duration="2875000" />
+      <workItem from="1581243163472" duration="545000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34333000" />
+    <option name="totallyTimeSpent" value="37299000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="88" y="-2" width="1833" height="1083" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13453929" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18202375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -550,9 +558,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/example/data_generator/object_detection_2d_data_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="1162" column="33" selection-end-line="1220" />
+          <folding>
+            <element signature="e#613#644#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/example/keras_loss_function/keras_ssd_loss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6000">
+        <state relative-caret-position="5970">
           <caret line="200" selection-start-line="200" selection-end-line="200" />
           <folding>
             <element signature="e#661#692#0" expanded="true" />
@@ -576,7 +594,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_ssd300_priorbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
+        <state relative-caret-position="2400">
           <caret line="81" column="45" selection-start-line="73" selection-start-column="4" selection-end-line="81" selection-end-column="45" />
           <folding>
             <element signature="e#510#528#0" expanded="true" />
@@ -591,19 +609,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/example/data_generator/object_detection_2d_data_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="1162" column="33" selection-end-line="1220" />
-          <folding>
-            <element signature="e#613#644#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a1_try_example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-930">
+        <state relative-caret-position="30">
           <caret line="199" column="37" selection-start-line="199" selection-start-column="37" selection-end-line="199" selection-end-column="37" />
           <folding>
             <element signature="e#506#515#0" expanded="true" />
@@ -613,13 +621,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+        <state relative-caret-position="-12467">
+          <caret line="277" column="21" selection-start-line="277" selection-start-column="21" selection-end-line="277" selection-end-column="21" />
           <folding>
             <element signature="e#509#527#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

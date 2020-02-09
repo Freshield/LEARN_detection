@@ -129,7 +129,7 @@ class DataGenerator:
         self.load_images_into_memory = load_images_into_memory
         self.images = None # The only way that this list will not stay `None` is if `load_images_into_memory == True`.
 
-        # TODO
+        #  ！未用到，全部数据的路径列表
         # `self.filenames` is a list containing all file names of the image samples (full paths).
         # Note that it does not contain the actual image files themselves. This list is one of the outputs of the parser methods.
         # In case you are loading an HDF5 dataset, this list will be `None`.
@@ -158,6 +158,7 @@ class DataGenerator:
         else:
             self.filenames = None
 
+        #  ！未用到，读取label
         # In case ground truth is available, `self.labels` is a list containing for each image a list (or NumPy array)
         # of ground truth bounding boxes for that image.
         if not labels is None:
@@ -171,6 +172,7 @@ class DataGenerator:
         else:
             self.labels = None
 
+        # ！未用到，读取图像的索引列表
         if not image_ids is None:
             if isinstance(image_ids, str):
                 with open(image_ids, 'rb') as f:
@@ -182,6 +184,7 @@ class DataGenerator:
         else:
             self.image_ids = None
 
+        #  ！未用到，TODO
         if not eval_neutral is None:
             if isinstance(eval_neutral, str):
                 with open(eval_neutral, 'rb') as f:
@@ -193,6 +196,7 @@ class DataGenerator:
         else:
             self.eval_neutral = None
 
+        # 读取hdf5的数据路径，在生成hdf5文件后可以使用
         if not hdf5_dataset_path is None:
             self.hdf5_dataset_path = hdf5_dataset_path
             self.load_hdf5_dataset(verbose=verbose)
@@ -201,6 +205,7 @@ class DataGenerator:
 
     def load_hdf5_dataset(self, verbose=True):
         '''
+        # 读取hdf5文件，TODO
         Loads an HDF5 dataset that is in the format that the `create_hdf5_dataset()` method
         produces.
 
@@ -265,10 +270,12 @@ class DataGenerator:
                   ret=False,
                   verbose=True):
         '''
+        # 解析xml文件
         This is an XML parser for the Pascal VOC datasets. It might be applicable to other datasets with minor changes to
         the code, but in its current form it expects the data format and XML tags of the Pascal VOC datasets.
 
         Arguments:
+            # 图像的目录列表
             images_dirs (list): A list of strings, where each string is the path of a directory that
                 contains images that are to be part of the dataset. This allows you to aggregate multiple datasets
                 into one (e.g. one directory that contains the images for Pascal VOC 2007, another that contains
