@@ -297,9 +297,9 @@ class DataGenerator:
             # 包含的类别
             include_classes (list, optional): Either 'all' or a list of integers containing the class IDs that
                 are to be included in the dataset. If 'all', all ground truth boxes will be included in the dataset.
-            # TODO
+            # 是否排除truncated标识
             exclude_truncated (bool, optional): If `True`, excludes boxes that are labeled as 'truncated'.
-            # TODO
+            # 是否排除difficult表示
             exclude_difficult (bool, optional): If `True`, excludes boxes that are labeled as 'difficult'.
             # 是否返回解析后的输出
             ret (bool, optional): Whether or not to return the outputs of the parser.
@@ -331,6 +331,10 @@ class DataGenerator:
 
         # 遍历图像文件夹，图像集路径文件，label文件夹
         # voc2007/jepgimages, voc2007/.../trainval.txt, voc2007/annotations
+        # 这个迭代主要是为了生成三个列表
+        # filenames: 图像路径的列表
+        # labels: 所有先验框的列表
+        # eval_neutral: 所有难例的列表
         for images_dir, image_set_filename, annotations_dir in zip(images_dirs, image_set_filenames, annotations_dirs):
             # 读取图像集的索引名称
             # Read the image set file that so that we know all the IDs of all the images to be included in the dataset.
@@ -343,6 +347,11 @@ class DataGenerator:
             else: it = image_ids
 
             # 迭代每个图像的索引
+            # 这个迭代主要是为了生成三个列表
+            # filenames: 图像路径的列表
+            # labels: 所有先验框的列表
+            # eval_neutral: 所有难例的列表
+
             # Loop over all images in this dataset.
             for image_id in it:
                 # 生成图像的文件名
@@ -365,23 +374,31 @@ class DataGenerator:
                     # 得到所有的object
                     objects = soup.find_all('object') # Get a list of all objects in this image.
 
+                    # 便利所有的object
                     # Parse the data for each object.
                     for obj in objects:
+                        # 得到类的名称和索引
                         class_name = obj.find('name', recursive=False).text
                         class_id = self.classes.index(class_name)
+                        # 检查部分
                         # Check whether this class is supposed to be included in the dataset.
                         if (not self.include_classes == 'all') and (not class_id in self.include_classes): continue
+
+                        # 得到pose,truncated,difficult并根据参数选择是否跳过
                         pose = obj.find('pose', recursive=False).text
                         truncated = int(obj.find('truncated', recursive=False).text)
                         if exclude_truncated and (truncated == 1): continue
                         difficult = int(obj.find('difficult', recursive=False).text)
                         if exclude_difficult and (difficult == 1): continue
+
+                        # 得到检测框
                         # Get the bounding box coordinates.
                         bndbox = obj.find('bndbox', recursive=False)
                         xmin = int(bndbox.xmin.text)
                         ymin = int(bndbox.ymin.text)
                         xmax = int(bndbox.xmax.text)
                         ymax = int(bndbox.ymax.text)
+                        # 生成此例的字典
                         item_dict = {'folder': folder,
                                      'image_name': filename,
                                      'image_id': image_id,
@@ -394,18 +411,26 @@ class DataGenerator:
                                      'ymin': ymin,
                                      'xmax': xmax,
                                      'ymax': ymax}
+
+                        # 按照label输出的格式生成box并放到boxes列表中
                         box = []
                         for item in self.labels_output_format:
                             box.append(item_dict[item])
                         boxes.append(box)
+
+                        # 如果是难例则设为True
                         if difficult: eval_neutr.append(True)
                         else: eval_neutr.append(False)
 
+                    # 把检验框加到labels中
                     self.labels.append(boxes)
                     self.eval_neutral.append(eval_neutr)
 
+        # 保存数据集大小和索引
         self.dataset_size = len(self.filenames)
         self.dataset_indices = np.arange(self.dataset_size, dtype=np.int32)
+
+        # ！未用到，读取所有图像到内存中
         if self.load_images_into_memory:
             self.images = []
             if verbose: it = tqdm(self.filenames, desc='Loading images into memory', file=sys.stdout)
@@ -414,6 +439,7 @@ class DataGenerator:
                 with Image.open(filename) as image:
                     self.images.append(np.array(image, dtype=np.uint8))
 
+        # 如果需要返回相应生成的，则直接返回
         if ret:
             return self.images, self.filenames, self.labels, self.image_ids, self.eval_neutral
 
