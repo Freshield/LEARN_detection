@@ -388,4 +388,11 @@ if __name__ == '__main__':
                     subtract_mean=mean_color,
                     swap_channels=swap_channels)
 
-    model.summary()
+    predictor_sizes = [model.get_layer('conv4_3_norm_mbox_conf').output_shape[1:3],
+                       model.get_layer('fc7_mbox_conf').output_shape[1:3],
+                       model.get_layer('conv6_2_mbox_conf').output_shape[1:3],
+                       model.get_layer('conv7_2_mbox_conf').output_shape[1:3],
+                       model.get_layer('conv8_2_mbox_conf').output_shape[1:3],
+                       model.get_layer('conv9_2_mbox_conf').output_shape[1:3]]
+
+    print(predictor_sizes)
