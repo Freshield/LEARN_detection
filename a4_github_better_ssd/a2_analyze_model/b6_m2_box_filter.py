@@ -224,3 +224,93 @@ class BoxFilter:
                 requirements_met *= (cy >= 0.0) * (cy <= image_height-1) * (cx >= 0.0) * (cx <= image_width-1)
 
         return labels[requirements_met]
+
+class ImageValidator:
+    '''
+    Returns `True` if a given minimum number of bounding boxes meets given overlap
+    requirements with an image of a given height and width.
+    '''
+
+    def __init__(self,
+                 overlap_criterion='center_point',
+                 bounds=(0.3, 1.0),
+                 n_boxes_min=1,
+                 labels_format={'class_id': 0, 'xmin': 1, 'ymin': 2, 'xmax': 3, 'ymax': 4},
+                 border_pixels='half'):
+        '''
+        Arguments:
+            overlap_criterion (str, optional): Can be either of 'center_point', 'iou', or 'area'. Determines
+                which boxes are considered valid with respect to a given image. If set to 'center_point',
+                a given bounding box is considered valid if its center point lies within the image.
+                If set to 'area', a given bounding box is considered valid if the quotient of its intersection
+                area with the image and its own area is within `lower` and `upper`. If set to 'iou', a given
+                bounding box is considered valid if its IoU with the image is within `lower` and `upper`.
+            bounds (list or BoundGenerator, optional): Only relevant if `overlap_criterion` is 'area' or 'iou'.
+                Determines the lower and upper bounds for `overlap_criterion`. Can be either a 2-tuple of scalars
+                representing a lower bound and an upper bound, or a `BoundGenerator` object, which provides
+                the possibility to generate bounds randomly.
+            n_boxes_min (int or str, optional): Either a non-negative integer or the string 'all'.
+                Determines the minimum number of boxes that must meet the `overlap_criterion` with respect to
+                an image of the given height and width in order for the image to be a valid image.
+                If set to 'all', an image is considered valid if all given boxes meet the `overlap_criterion`.
+            labels_format (dict, optional): A dictionary that defines which index in the last axis of the labels
+                of an image contains which bounding box coordinate. The dictionary maps at least the keywords
+                'xmin', 'ymin', 'xmax', and 'ymax' to their respective indices within last axis of the labels array.
+            border_pixels (str, optional): How to treat the border pixels of the bounding boxes.
+                Can be 'include', 'exclude', or 'half'. If 'include', the border pixels belong
+                to the boxes. If 'exclude', the border pixels do not belong to the boxes.
+                If 'half', then one of each of the two horizontal and vertical borders belong
+                to the boxex, but not the other.
+        '''
+        if not ((isinstance(n_boxes_min, int) and n_boxes_min > 0) or n_boxes_min == 'all'):
+            raise ValueError("`n_boxes_min` must be a positive integer or 'all'.")
+        self.overlap_criterion = overlap_criterion
+        self.bounds = bounds
+        self.n_boxes_min = n_boxes_min
+        self.labels_format = labels_format
+        self.border_pixels = border_pixels
+        self.box_filter = BoxFilter(check_overlap=True,
+                                    check_min_area=False,
+                                    check_degenerate=False,
+                                    overlap_criterion=self.overlap_criterion,
+                                    overlap_bounds=self.bounds,
+                                    labels_format=self.labels_format,
+                                    border_pixels=self.border_pixels)
+
+    def __call__(self,
+                 labels,
+                 image_height,
+                 image_width):
+        '''
+        Arguments:
+            labels (array): The labels to be tested. The box coordinates are expected
+                to be in the image's coordinate system.
+            image_height (int): The height of the image to compare the box coordinates to.
+            image_width (int): The width of the image to compare the box coordinates to.
+
+        Returns:
+            A boolean indicating whether an imgae of the given height and width is
+            valid with respect to the given bounding boxes.
+        '''
+
+        self.box_filter.overlap_bounds = self.bounds
+        self.box_filter.labels_format = self.labels_format
+
+        # Get all boxes that meet the overlap requirements.
+        valid_labels = self.box_filter(labels=labels,
+                                       image_height=image_height,
+                                       image_width=image_width)
+
+        # Check whether enough boxes meet the requirements.
+        if isinstance(self.n_boxes_min, int):
+            # The image is valid if at least `self.n_boxes_min` ground truth boxes meet the requirements.
+            if len(valid_labels) >= self.n_boxes_min:
+                return True
+            else:
+                return False
+        elif self.n_boxes_min == 'all':
+            # The image is valid if all ground truth boxes meet the requirements.
+            if len(valid_labels) == len(labels):
+                return True
+            else:
+                return False

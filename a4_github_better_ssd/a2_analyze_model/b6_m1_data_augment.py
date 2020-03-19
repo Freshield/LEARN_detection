@@ -18,10 +18,10 @@ import numpy as np
 import cv2
 import inspect
 
-from data_generator.object_detection_2d_photometric_ops import ConvertColor, ConvertDataType, ConvertTo3Channels, RandomBrightness, RandomContrast, RandomHue, RandomSaturation, RandomChannelSwap
-from data_generator.object_detection_2d_patch_sampling_ops import PatchCoordinateGenerator, RandomPatch, RandomPatchInf
-from data_generator.object_detection_2d_geometric_ops import ResizeRandomInterp, RandomFlip
-from data_generator.object_detection_2d_image_boxes_validation_utils import BoundGenerator, BoxFilter, ImageValidator
+from object_detection_2d_photometric_ops import ConvertColor, ConvertDataType, ConvertTo3Channels, RandomBrightness, RandomContrast, RandomHue, RandomSaturation, RandomChannelSwap
+from object_detection_2d_patch_sampling_ops import PatchCoordinateGenerator, RandomPatch, RandomPatchInf
+from object_detection_2d_geometric_ops import ResizeRandomInterp, RandomFlip
+from b6_m2_box_filter import BoundGenerator, BoxFilter, ImageValidator
 
 class SSDRandomCrop:
     '''

@@ -24,8 +24,8 @@ from b2_ssd300_loc_conf import ssd300_loc_conf
 from b3_ssd300_priorbox import ssd300_priorbox
 from b4_ssd300_reshaper import ssd300_reshaper
 from b5_m1_get_predictor_size import get_predictor_size
-from keras_layers.keras_layer_DecodeDetections import DecodeDetections
-from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
+# from keras_layers.keras_layer_DecodeDetections import DecodeDetections
+# from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 
 
 # ssd 模型
@@ -300,28 +300,28 @@ def ssd300(image_size,
     if mode == 'training':
         # 生成model
         model = Model(inputs=x, outputs=predictions)
-    elif mode == 'inference':
-        decoded_predictions = DecodeDetections(confidence_thresh=confidence_thresh,
-                                               iou_threshold=iou_threshold,
-                                               top_k=top_k,
-                                               nms_max_output_size=nms_max_output_size,
-                                               coords=coords,
-                                               normalize_coords=normalize_coords,
-                                               img_height=img_height,
-                                               img_width=img_width,
-                                               name='decoded_predictions')(predictions)
-        model = Model(inputs=x, outputs=decoded_predictions)
-    elif mode == 'inference_fast':
-        decoded_predictions = DecodeDetectionsFast(confidence_thresh=confidence_thresh,
-                                                   iou_threshold=iou_threshold,
-                                                   top_k=top_k,
-                                                   nms_max_output_size=nms_max_output_size,
-                                                   coords=coords,
-                                                   normalize_coords=normalize_coords,
-                                                   img_height=img_height,
-                                                   img_width=img_width,
-                                                   name='decoded_predictions')(predictions)
-        model = Model(inputs=x, outputs=decoded_predictions)
+    # elif mode == 'inference':
+    #     decoded_predictions = DecodeDetections(confidence_thresh=confidence_thresh,
+    #                                            iou_threshold=iou_threshold,
+    #                                            top_k=top_k,
+    #                                            nms_max_output_size=nms_max_output_size,
+    #                                            coords=coords,
+    #                                            normalize_coords=normalize_coords,
+    #                                            img_height=img_height,
+    #                                            img_width=img_width,
+    #                                            name='decoded_predictions')(predictions)
+    #     model = Model(inputs=x, outputs=decoded_predictions)
+    # elif mode == 'inference_fast':
+    #     decoded_predictions = DecodeDetectionsFast(confidence_thresh=confidence_thresh,
+    #                                                iou_threshold=iou_threshold,
+    #                                                top_k=top_k,
+    #                                                nms_max_output_size=nms_max_output_size,
+    #                                                coords=coords,
+    #                                                normalize_coords=normalize_coords,
+    #                                                img_height=img_height,
+    #                                                img_width=img_width,
+    #                                                name='decoded_predictions')(predictions)
+    #     model = Model(inputs=x, outputs=decoded_predictions)
     else:
         raise ValueError("`mode` must be one of 'training', 'inference' or 'inference_fast', but received '{}'.".format(mode))
 

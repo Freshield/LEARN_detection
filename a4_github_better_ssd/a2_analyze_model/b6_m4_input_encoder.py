@@ -18,7 +18,7 @@ import numpy as np
 
 from b6_m3_iou import iou
 from b3_m2_conver_coor import convert_coordinates
-from ssd_encoder_decoder.matching_utils import match_bipartite_greedy, match_multi
+from b6_m5_matching_utils import match_bipartite_greedy, match_multi
 
 class SSDInputEncoder:
     '''
@@ -122,19 +122,19 @@ class SSDInputEncoder:
             偏差，[0.1, 0.1, 0.2, 0.2]
             variances (list, optional): A list of 4 floats >0. The anchor box offset for each coordinate will be divided by
                 its respective variance value.
-            TODO
+            匹配的模式，multi的话就是匹配完最佳的iou后继续匹配剩下的先验框
             matching_type (str, optional): Can be either 'multi' or 'bipartite'. In 'bipartite' mode, each ground truth box will
                 be matched only to the one anchor box with the highest IoU overlap. In 'multi' mode, in addition to the aforementioned
                 bipartite matching, all anchor boxes with an IoU overlap greater than or equal to the `pos_iou_threshold` will be
                 matched to a given ground truth box.
-            TODO
+            iou的匹配阈值
             pos_iou_threshold (float, optional): The intersection-over-union similarity threshold that must be
                 met in order to match a given ground truth box to a given anchor box.
             TODO
             neg_iou_limit (float, optional): The maximum allowed intersection-over-union similarity of an
                 anchor box with any ground truth box to be labeled a negative (i.e. background) box. If an
                 anchor box is neither a positive, nor a negative box, it will be ignored during training.
-            TODO
+            边界像素的模式
             border_pixels (str, optional): How to treat the border pixels of the bounding boxes.
                 Can be 'include', 'exclude', or 'half'. If 'include', the border pixels belong
                 to the boxes. If 'exclude', the border pixels do not belong to the boxes.
@@ -345,9 +345,9 @@ class SSDInputEncoder:
         ##################################################################################
         # Generate the template for y_encoded.
         ##################################################################################
-        # 生成先验框，和predict一致的样子，注意这里的预测坐标位置和先验框坐标位置是一样的(8, 8732, 21+4+8)
+        # 生成先验框，和predict一致的样子，注意这里的预测坐标位置和先验框坐标位置是一样的
+        # (8, 8732, 21+4+8)
         y_encoded = self.generate_encoding_template(batch_size=batch_size, diagnostics=False)
-        exit()
         ##################################################################################
         # Match ground truth boxes to anchor boxes.
         ##################################################################################
@@ -356,79 +356,103 @@ class SSDInputEncoder:
         # a ground truth match and for which the maximal IoU overlap with any ground truth box is less
         # than or equal to `neg_iou_limit` will be a negative (background) box.
 
+        # 首先设置所有背景类为1，默认类别都为0
+        # (8, 8732, 21 + 4 + 8)
         y_encoded[:, :, self.background_id] = 1 # All boxes are background boxes by default.
+        # box的总数，这里为8732
         n_boxes = y_encoded.shape[1] # The total number of boxes that the model predicts per batch item
+        # 得到类别数的标准矩阵, (21, 21)
         class_vectors = np.eye(self.n_classes) # An identity matrix that we'll use as one-hot class vectors
 
+        # 遍历batch
         for i in range(batch_size): # For each batch item...
-
+            # label为标注数据，(batch, n_objects, 5)，5分别是id,xmin,ymin,xmax,ymax
+            # 如果label为空则跳过
             if ground_truth_labels[i].size == 0: continue # If there is no ground truth for this batch item, there is nothing to match.
+            # 得到本batch的label
             labels = ground_truth_labels[i].astype(np.float) # The labels for this batch item
 
             # Check for degenerate ground truth bounding boxes before attempting any computations.
+            # 断言保证
             if np.any(labels[:,[xmax]] - labels[:,[xmin]] <= 0) or np.any(labels[:,[ymax]] - labels[:,[ymin]] <= 0):
                 raise DegenerateBoxError("SSDInputEncoder detected degenerate ground truth bounding boxes for batch item {} with bounding boxes {}, ".format(i, labels) +
                                          "i.e. bounding boxes where xmax <= xmin and/or ymax <= ymin. Degenerate ground truth " +
                                          "bounding boxes will lead to NaN errors during the training.")
 
             # Maybe normalize the box coordinates.
+            # 归一化坐标位置，labels(n_objects, 5)
             if self.normalize_coords:
                 labels[:,[ymin,ymax]] /= self.img_height # Normalize ymin and ymax relative to the image height
                 labels[:,[xmin,xmax]] /= self.img_width # Normalize xmin and xmax relative to the image width
 
             # Maybe convert the box coordinate format.
+            # 进行坐标转换
             if self.coords == 'centroids':
                 labels = convert_coordinates(labels, start_index=xmin, conversion='corners2centroids', border_pixels=self.border_pixels)
             elif self.coords == 'minmax':
                 labels = convert_coordinates(labels, start_index=xmin, conversion='corners2minmax')
-
+            # 得到label的one_hot表示
+            # (n_objects, 21)
             classes_one_hot = class_vectors[labels[:, class_id].astype(np.int)] # The one-hot class IDs for the ground truth boxes of this batch item
+            # concat回label，(n_objects, 21+4)
             labels_one_hot = np.concatenate([classes_one_hot, labels[:, [xmin,ymin,xmax,ymax]]], axis=-1) # The one-hot version of the labels for this batch item
 
             # Compute the IoU similarities between all anchor boxes and all ground truth boxes for this batch item.
             # This is a matrix of shape `(num_ground_truth_boxes, num_anchor_boxes)`.
+            # 和所有的先验框计算iou，n_objects是labels的个数
+            # 相当于是每个label和8732个先验框的iou
+            # (n_objects, 8732)
             similarities = iou(labels[:,[xmin,ymin,xmax,ymax]], y_encoded[i,:,-12:-8], coords=self.coords, mode='outer_product', border_pixels=self.border_pixels)
 
             # First: Do bipartite matching, i.e. match each ground truth box to the one anchor box with the highest IoU.
             #        This ensures that each ground truth box will have at least one good match.
-
+            # 贪心二分匹配
+            # 找出所有label对应的先验框
             # For each ground truth box, get the anchor box to match with it.
             bipartite_matches = match_bipartite_greedy(weight_matrix=similarities)
 
             # Write the ground truth data to the matched anchor boxes.
+            # 把相应的先验框位置的classes和坐标填上
             y_encoded[i, bipartite_matches, :-8] = labels_one_hot
 
             # Set the columns of the matched anchor boxes to zero to indicate that they were matched.
+            # 把匹配完的iou矩阵中的相应先验框设为0
             similarities[:, bipartite_matches] = 0
 
             # Second: Maybe do 'multi' matching, where each remaining anchor box will be matched to its most similar
             #         ground truth box with an IoU of at least `pos_iou_threshold`, or not matched if there is no
             #         such ground truth box.
-
+            # 在匹配完后最佳的匹配对象后，对剩下的先验框只要iou大于threhold的也进行匹配
             if self.matching_type == 'multi':
 
                 # Get all matches that satisfy the IoU threshold.
+                # 得到所有iou大于阈值的先验框的匹配的label索引和先验框索引
                 matches = match_multi(weight_matrix=similarities, threshold=self.pos_iou_threshold)
 
                 # Write the ground truth data to the matched anchor boxes.
+                # 把相应位置的先验框设为label的矩阵值
                 y_encoded[i, matches[1], :-8] = labels_one_hot[matches[0]]
 
                 # Set the columns of the matched anchor boxes to zero to indicate that they were matched.
+                # 把匹配完的iou矩阵值设为0
                 similarities[:, matches[1]] = 0
 
             # Third: Now after the matching is done, all negative (background) anchor boxes that have
             #        an IoU of `neg_iou_limit` or more with any ground truth box will be set to netral,
             #        i.e. they will no longer be background boxes. These anchors are "too close" to a
             #        ground truth box to be valid background boxes.
-
+            # 找到所有iou矩阵中先验框的最大iou，(8732,)
             max_background_similarities = np.amax(similarities, axis=0)
+            # 如果iou大于neg_iou_limit则把相应的y_encoded设为0
+            # 这主要是为了去除反例如果有过高的iou则会对正例引起的混淆
+            # 不过这里neg_iou_limit和iou_threshold都设为0.5，也就是这步其实没有做
             neutral_boxes = np.nonzero(max_background_similarities >= self.neg_iou_limit)[0]
             y_encoded[i, neutral_boxes, self.background_id] = 0
 
         ##################################################################################
         # Convert box coordinates to anchor box offsets.
         ##################################################################################
-
+        # 在编码完成后按照要求把坐标准转换会相应的坐标方法
         if self.coords == 'centroids':
             y_encoded[:,:,[-12,-11]] -= y_encoded[:,:,[-8,-7]] # cx(gt) - cx(anchor), cy(gt) - cy(anchor)
             y_encoded[:,:,[-12,-11]] /= y_encoded[:,:,[-6,-5]] * y_encoded[:,:,[-4,-3]] # (cx(gt) - cx(anchor)) / w(anchor) / cx_variance, (cy(gt) - cy(anchor)) / h(anchor) / cy_variance
@@ -451,6 +475,8 @@ class SSDInputEncoder:
             y_matched_anchors[:,:,-12:-8] = 0 # Keeping the anchor box coordinates means setting the offsets to zero.
             return y_encoded, y_matched_anchors
         else:
+            # 返回编码后的label
+            # (batch, 8732, 21+4+8)
             return y_encoded
 
     def generate_anchor_boxes_for_layer(self,

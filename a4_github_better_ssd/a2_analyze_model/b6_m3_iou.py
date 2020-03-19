@@ -22,11 +22,13 @@ def intersection_area_(boxes1, boxes2, coords='corners', mode='outer_product', b
     '''
     The same as 'intersection_area()' but for internal use, i.e. without all the safety checks.
     '''
-
+    # boxes都为2维矩阵，(n, 4)
+    # 得到boxes的个数
     m = boxes1.shape[0] # The number of boxes in `boxes1`
     n = boxes2.shape[0] # The number of boxes in `boxes2`
 
     # Set the correct coordinate indices for the respective formats.
+    # 得到维度
     if coords == 'corners':
         xmin = 0
         ymin = 1
@@ -38,6 +40,7 @@ def intersection_area_(boxes1, boxes2, coords='corners', mode='outer_product', b
         ymin = 2
         ymax = 3
 
+    # 设定边缘像素的模式，这里使用的是half
     if border_pixels == 'half':
         d = 0
     elif border_pixels == 'include':
@@ -46,22 +49,32 @@ def intersection_area_(boxes1, boxes2, coords='corners', mode='outer_product', b
         d = -1 # If border pixels are not supposed to belong to the bounding boxes, we have to subtract one pixel from any difference `xmax - xmin` or `ymax - ymin`.
 
     # Compute the intersection areas.
-
+    # 选择返回方式，这里使用的outer_product
     if mode == 'outer_product':
-
+        # 这种模式会返回(m,n)的矩阵结果
+        # 交集的计算方法为 (min(xmax)-max(xmin))*(min(ymax)-max(ymin))
         # For all possible box combinations, get the greater xmin and ymin values.
         # This is a tensor of shape (m,n,2).
+        # 这里得到min xy
+        # 对boxes1先挑出xmin,ymin，(m,2)，然后expand，(m,1,2)，然后把中间的维度叠n个，(m,n,2)
+        # 对boxes2先挑出xmin,ymin，(n,2)，然后expand，(1,n,2)，然后把开头的维度叠m个，(m,n,2)
+        # 最后取boxes1,boxes2相应的最大值，(m,n,2)
         min_xy = np.maximum(np.tile(np.expand_dims(boxes1[:,[xmin,ymin]], axis=1), reps=(1, n, 1)),
                             np.tile(np.expand_dims(boxes2[:,[xmin,ymin]], axis=0), reps=(m, 1, 1)))
 
         # For all possible box combinations, get the smaller xmax and ymax values.
         # This is a tensor of shape (m,n,2).
+        # 这里得到max xy
+        # 对boxes1先挑出xmax,ymax，(m,2)，然后expand，(m,1,2)，然后把中间的维度叠n个，(m,n,2)
+        # 对boxes2先挑出xmax,ymax，(n,2)，然后expand，(1,n,2)，然后把开头的维度叠m个，(m,n,2)
+        # 最后取boxes1,boxes2相应的最小值，(m,n,2)
         max_xy = np.minimum(np.tile(np.expand_dims(boxes1[:,[xmax,ymax]], axis=1), reps=(1, n, 1)),
                             np.tile(np.expand_dims(boxes2[:,[xmax,ymax]], axis=0), reps=(m, 1, 1)))
 
         # Compute the side lengths of the intersection rectangles.
+        # 得到xmax-xmin，ymax-ymin，如果是负数则设为0
         side_lengths = np.maximum(0, max_xy - min_xy + d)
-
+        # 得到x*y
         return side_lengths[:,:,0] * side_lengths[:,:,1]
 
     elif mode == 'element-wise':
@@ -77,6 +90,7 @@ def intersection_area_(boxes1, boxes2, coords='corners', mode='outer_product', b
 
 def iou(boxes1, boxes2, coords='centroids', mode='outer_product', border_pixels='half'):
     '''
+    计算iou
     Computes the intersection-over-union similarity (also known as Jaccard similarity)
     of two sets of axis-aligned 2D rectangular boxes.
 
@@ -116,6 +130,7 @@ def iou(boxes1, boxes2, coords='centroids', mode='outer_product', border_pixels=
     '''
 
     # Make sure the boxes have the right shapes.
+    # 断言保证
     if boxes1.ndim > 2: raise ValueError("boxes1 must have rank either 1 or 2, but has rank {}.".format(boxes1.ndim))
     if boxes2.ndim > 2: raise ValueError("boxes2 must have rank either 1 or 2, but has rank {}.".format(boxes2.ndim))
 
@@ -126,6 +141,7 @@ def iou(boxes1, boxes2, coords='centroids', mode='outer_product', border_pixels=
     if not mode in {'outer_product', 'element-wise'}: raise ValueError("`mode` must be one of 'outer_product' and 'element-wise', but got '{}'.".format(mode))
 
     # Convert the coordinates if necessary.
+    # 转换坐标为corner模式也就是xmin,ymin,xmax,ymax
     if coords == 'centroids':
         boxes1 = convert_coordinates(boxes1, start_index=0, conversion='centroids2corners')
         boxes2 = convert_coordinates(boxes2, start_index=0, conversion='centroids2corners')
@@ -134,17 +150,18 @@ def iou(boxes1, boxes2, coords='centroids', mode='outer_product', border_pixels=
         raise ValueError("Unexpected value for `coords`. Supported values are 'minmax', 'corners' and 'centroids'.")
 
     # Compute the IoU.
-
+    # 开始计算iou
     # Compute the interesection areas.
-
+    # 先计算交集部分，(m,n)
     intersection_areas = intersection_area_(boxes1, boxes2, coords=coords, mode=mode)
-
+    # 得到boxes的个数
     m = boxes1.shape[0] # The number of boxes in `boxes1`
     n = boxes2.shape[0] # The number of boxes in `boxes2`
 
     # Compute the union areas.
-
+    # 计算并集部分
     # Set the correct coordinate indices for the respective formats.
+    # 先得到坐标的索引
     if coords == 'corners':
         xmin = 0
         ymin = 1
@@ -155,16 +172,19 @@ def iou(boxes1, boxes2, coords='centroids', mode='outer_product', border_pixels=
         xmax = 1
         ymin = 2
         ymax = 3
-
+    # 得到边缘像素点的模式，这里使用half
     if border_pixels == 'half':
         d = 0
     elif border_pixels == 'include':
         d = 1 # If border pixels are supposed to belong to the bounding boxes, we have to add one pixel to any difference `xmax - xmin` or `ymax - ymin`.
     elif border_pixels == 'exclude':
         d = -1 # If border pixels are not supposed to belong to the bounding boxes, we have to subtract one pixel from any difference `xmax - xmin` or `ymax - ymin`.
-
+    # 设置计算的返回格式，这里使用outer_product
     if mode == 'outer_product':
-
+        # 这里会得到(m,n)的结果
+        # areas计算方法为(xmax-xmin)*(ymax-ymin)
+        # 对boxes1先计算(xmax-xmin)*(ymax-ymin)，(m,)，然后expand，(m,1)，然后把中间的维度叠n个，(m,n)
+        # 对boxes2先计算(xmax-xmin)*(ymax-ymin)，(n,)，然后expand，(1,n)，然后把开头的维度叠m个，(m,n)
         boxes1_areas = np.tile(np.expand_dims((boxes1[:,xmax] - boxes1[:,xmin] + d) * (boxes1[:,ymax] - boxes1[:,ymin] + d), axis=1), reps=(1,n))
         boxes2_areas = np.tile(np.expand_dims((boxes2[:,xmax] - boxes2[:,xmin] + d) * (boxes2[:,ymax] - boxes2[:,ymin] + d), axis=0), reps=(m,1))
 
@@ -173,6 +193,8 @@ def iou(boxes1, boxes2, coords='centroids', mode='outer_product', border_pixels=
         boxes1_areas = (boxes1[:,xmax] - boxes1[:,xmin] + d) * (boxes1[:,ymax] - boxes1[:,ymin] + d)
         boxes2_areas = (boxes2[:,xmax] - boxes2[:,xmin] + d) * (boxes2[:,ymax] - boxes2[:,ymin] + d)
 
+    # 得到并集部分，(m,n)
     union_areas = boxes1_areas + boxes2_areas - intersection_areas
 
+    # 返回iou，(m,n)
     return intersection_areas / union_areas
