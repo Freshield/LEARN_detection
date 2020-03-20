@@ -387,6 +387,7 @@ class SSDInputEncoder:
 
             # Maybe convert the box coordinate format.
             # 进行坐标转换
+            # 这里坐标是centroids
             if self.coords == 'centroids':
                 labels = convert_coordinates(labels, start_index=xmin, conversion='corners2centroids', border_pixels=self.border_pixels)
             elif self.coords == 'minmax':
@@ -452,7 +453,20 @@ class SSDInputEncoder:
         ##################################################################################
         # Convert box coordinates to anchor box offsets.
         ##################################################################################
-        # 在编码完成后按照要求把坐标准转换会相应的坐标方法
+        # 在这里根据公式计算相应的编码的offset值，也就是真正模型要预测的值
+        # 这里的值为centroids
+        # y_encoded(batch, 8732, 21+4+8), 分类+label的坐标+先验框坐标+variance
+        # 4+4+4是(cx, cy, w, h)(gt), (cx, cy, w, h)(anchor), variance0, variance1, variance2, variance3
+        # lx也就是预测的中心点x的偏移等于(cx(gt)-ct(anchor))/w(anchor),
+        # 而实际上加入variance后lx=(cx(gt)-ct(anchor))/w(anchor)/variance0，这里variance0取值为0.1
+        # 可以看出这相当于乘10，也就是把偏差放大了10倍，这样最大的好处就是增加了梯度
+        # ly=(cy(gt)-cy(anchor))/h(anchor)/variance1
+        # lw=(log(w(gt)/w(anchor))/variance2)这里之所以使用log的原因是因为
+        # 当反过来解码时，w(gt)=exp(lw*variance2)*w(anchor)，这样lw也就是预测值
+        # 无论等于多少都是非负的
+        # lh=(log(h(gt)/h(anchor))/variance3)
+        print(y_encoded.shape)
+        exit()
         if self.coords == 'centroids':
             y_encoded[:,:,[-12,-11]] -= y_encoded[:,:,[-8,-7]] # cx(gt) - cx(anchor), cy(gt) - cy(anchor)
             y_encoded[:,:,[-12,-11]] /= y_encoded[:,:,[-6,-5]] * y_encoded[:,:,[-4,-3]] # (cx(gt) - cx(anchor)) / w(anchor) / cx_variance, (cy(gt) - cy(anchor)) / h(anchor) / cy_variance

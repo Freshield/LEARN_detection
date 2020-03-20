@@ -14,6 +14,7 @@
 @                                    Freshield @
 @==============================================@
 """
+import os
 from math import ceil
 import tensorflow as tf
 import keras.backend as K
@@ -67,6 +68,7 @@ normalize_coords = True
 
 K.clear_session() # Clear previous models from memory.
 
+# os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
 config = tf.ConfigProto(allow_soft_placement=True)
 # 开始不会给tensorflow全部gpu资源 而是按需增加
@@ -168,7 +170,8 @@ val_dataset_size   = val_dataset.get_dataset_size()
 
 print("Number of images in the training dataset:\t{:>6}".format(train_dataset_size))
 print("Number of images in the validation dataset:\t{:>6}".format(val_dataset_size))
-
+val_generator.__next__()
+exit()
 # Define a learning rate schedule.
 
 def lr_schedule(epoch):
