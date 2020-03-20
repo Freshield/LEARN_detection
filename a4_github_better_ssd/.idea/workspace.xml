@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b8_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b8_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/object_detection_2d_misc_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b10_apply_inverse_transforms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b9_decoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b9_decoder.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +17,7 @@
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b1_ssd_300_model.coverage" NAME="b1_ssd_300_model Coverage Results" MODIFIED="1581316972340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$test.coverage" NAME="test Coverage Results" MODIFIED="1584604599684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model/test" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b6_m4_input_encoder.coverage" NAME="b6_m4_input_encoder Coverage Results" MODIFIED="1584520967449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
+    <SUITE FILE_PATH="coverage/a4_github_better_ssd$t3_test_numpy.coverage" NAME="t3_test_numpy Coverage Results" MODIFIED="1584698009866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model/test" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$t1_try_tqdm.coverage" NAME="t1_try_tqdm Coverage Results" MODIFIED="1581252720817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model/test" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$t2_test_numpy.coverage" NAME="t2_test_numpy Coverage Results" MODIFIED="1584515098076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model/test" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b6_m5_matching_utils.coverage" NAME="b6_m5_matching_utils Coverage Results" MODIFIED="1584600752322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
@@ -28,7 +27,7 @@
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b1_m3_l2norm_layer.coverage" NAME="b1_m3_l2norm_layer Coverage Results" MODIFIED="1580895682618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b7_SSDLoss.coverage" NAME="b7_SSDLoss Coverage Results" MODIFIED="1584608238237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b6_data_generator.coverage" NAME="b6_data_generator Coverage Results" MODIFIED="1584601728685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
-    <SUITE FILE_PATH="coverage/a4_github_better_ssd$b9_predict.coverage" NAME="b9_predict Coverage Results" MODIFIED="1584684492678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
+    <SUITE FILE_PATH="coverage/a4_github_better_ssd$b9_predict.coverage" NAME="b9_predict Coverage Results" MODIFIED="1584697863496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$keras_ssd_loss.coverage" NAME="keras_ssd_loss Coverage Results" MODIFIED="1581128722268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/example/keras_loss_function" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b3_ssd300_priorbox.coverage" NAME="b3_ssd300_priorbox Coverage Results" MODIFIED="1584520958972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$a4_github_better_ssd.coverage" NAME="a4_github_better_ssd Coverage Results" MODIFIED="1579505639121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -50,11 +49,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b9_decoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="258" column="48" selection-start-line="258" selection-start-column="48" selection-end-line="258" selection-end-column="48" />
+              <folding>
+                <element signature="e#502#520#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/test/t3_test_numpy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="473">
+              <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="742" column="16" selection-start-line="742" selection-start-column="4" selection-end-line="742" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b_predict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="144" column="31" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
+            <state relative-caret-position="165">
+              <caret line="153" column="35" selection-start-line="153" selection-start-column="35" selection-end-line="153" selection-end-column="35" />
               <folding>
                 <element signature="e#502#511#0" expanded="true" />
               </folding>
@@ -65,39 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b10_apply_inverse_transforms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1155" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/example/ssd300_training.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2860">
-              <caret line="172" column="24" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
-              <folding>
-                <element signature="e#500#509#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="463" column="58" selection-start-line="463" selection-start-column="58" selection-end-line="463" selection-end-column="58" />
-              <folding>
-                <element signature="e#511#529#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-715">
+              <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -105,52 +103,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_m2_conver_coor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1015">
-              <caret line="27" column="24" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="24" />
+            <state relative-caret-position="-1257">
+              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/example/ssd_encoder_decoder/ssd_input_encoder.py">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1428">
-              <caret line="609" column="13" selection-start-line="609" selection-start-column="13" selection-end-line="609" selection-end-column="13" />
+            <state relative-caret-position="318">
+              <caret line="458" column="102" lean-forward="true" selection-start-line="457" selection-start-column="42" selection-end-line="458" selection-end-column="102" />
               <folding>
-                <element signature="e#657#688#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b9_decoder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="177" column="22" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="22" />
-              <folding>
-                <element signature="e#502#520#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b7_SSDLoss.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1344">
-              <caret line="262" column="43" selection-start-line="262" selection-start-column="43" selection-end-line="262" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1001">
-              <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
-              <folding>
-                <element signature="e#501#519#0" expanded="true" />
+                <element signature="e#511#529#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -205,7 +170,6 @@
         <option value="$PROJECT_DIR$/a2_analyze_model/test/t2_test_numpy.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b3_ssd300_priorbox.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b3_m1_anchorboxes.py" />
-        <option value="$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b7_train.py" />
@@ -218,9 +182,11 @@
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_m1_data_augment.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b9_predict.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b_predict.py" />
-        <option value="$PROJECT_DIR$/a2_analyze_model/b9_decoder.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b8_train.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/test/t3_test_numpy.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b9_decoder.py" />
       </list>
     </option>
   </component>
@@ -249,6 +215,12 @@
               <item name="a4_github_better_ssd" type="b2602c69:ProjectViewProjectNode" />
               <item name="a4_github_better_ssd" type="462c0819:PsiDirectoryNode" />
               <item name="a2_analyze_model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="a4_github_better_ssd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="a4_github_better_ssd" type="462c0819:PsiDirectoryNode" />
+              <item name="a2_analyze_model" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -286,7 +258,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.b7_train">
+  <component name="RunManager" selected="Python.t3_test_numpy">
     <configuration name="a4_github_better_ssd" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="a4_github_better_ssd" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -303,28 +275,6 @@
       <option name="additionalOptions" value="" />
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
-      <method v="2" />
-    </configuration>
-    <configuration name="b6_data_generator" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="a4_github_better_ssd" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="b7_SSDLoss" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -393,6 +343,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="t3_test_numpy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="a4_github_better_ssd" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/test/t3_test_numpy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="a4_github_better_ssd" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -417,11 +389,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.b7_train" />
+        <item itemvalue="Python.t3_test_numpy" />
         <item itemvalue="Python.b9_predict" />
+        <item itemvalue="Python.b7_train" />
         <item itemvalue="Python.b7_SSDLoss" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.b6_data_generator" />
       </list>
     </recent_temporary>
   </component>
@@ -448,12 +420,12 @@
       <workItem from="1582000866159" duration="78000" />
       <workItem from="1584511030285" duration="11300000" />
       <workItem from="1584583566453" duration="17260000" />
-      <workItem from="1584669324924" duration="8557000" />
+      <workItem from="1584669324924" duration="14386000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91743000" />
+    <option name="totallyTimeSpent" value="97572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="402" width="1855" height="1084" extended-state="6" />
@@ -513,21 +485,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/keras/layers/merge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-624">
-          <caret line="339" column="8" selection-start-line="339" selection-start-column="8" selection-end-line="339" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/example/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_parse_xml.py" />
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/test/t1_try_tqdm.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -840,38 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b10_apply_inverse_transforms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1155" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b_predict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="144" column="31" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
-          <folding>
-            <element signature="e#502#511#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_m2_conver_coor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1015">
-          <caret line="27" column="24" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1001">
-          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
-          <folding>
-            <element signature="e#501#519#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b7_SSDLoss.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1344">
@@ -879,19 +804,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b9_decoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="177" column="22" selection-start-line="177" selection-start-column="4" selection-end-line="177" selection-end-column="22" />
-          <folding>
-            <element signature="e#502#520#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2860">
+        <state relative-caret-position="2464">
           <caret line="172" column="24" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
           <folding>
             <element signature="e#500#509#0" expanded="true" />
@@ -901,10 +816,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="463" column="58" selection-start-line="463" selection-start-column="58" selection-end-line="463" selection-end-column="58" />
+        <state relative-caret-position="318">
+          <caret line="458" column="102" lean-forward="true" selection-start-line="457" selection-start-column="42" selection-end-line="458" selection-end-column="102" />
           <folding>
             <element signature="e#511#529#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_m2_conver_coor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1257">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="194" column="100" selection-start-line="194" selection-start-column="100" selection-end-line="194" selection-end-column="100" />
+          <folding>
+            <element signature="e#501#519#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b10_apply_inverse_transforms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-715">
+          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="742" column="16" selection-start-line="742" selection-start-column="4" selection-end-line="742" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b_predict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="153" column="35" selection-start-line="153" selection-start-column="35" selection-end-line="153" selection-end-column="35" />
+          <folding>
+            <element signature="e#502#511#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/test/t3_test_numpy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b9_decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="258" column="48" selection-start-line="258" selection-start-column="48" selection-end-line="258" selection-end-column="48" />
+          <folding>
+            <element signature="e#502#520#0" expanded="true" />
           </folding>
         </state>
       </provider>

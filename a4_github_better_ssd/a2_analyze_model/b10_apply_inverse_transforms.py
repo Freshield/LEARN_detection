@@ -21,6 +21,7 @@ import numpy as np
 
 def apply_inverse_transforms(y_pred_decoded, inverse_transforms):
     '''
+    反预处理
     Takes a list or Numpy array of decoded predictions and applies a given list of
     transforms to them. The list of inverse transforms would usually contain the
     inverter functions that some of the image transformations that come with this
@@ -45,16 +46,21 @@ def apply_inverse_transforms(y_pred_decoded, inverse_transforms):
     Returns:
         The transformed predictions, which have the same structure as `y_pred_decoded`.
     '''
-
+    # 如果是个list
     if isinstance(y_pred_decoded, list):
 
         y_pred_decoded_inv = []
-
+        # 遍历每个预测的结果，(6,)
         for i in range(len(y_pred_decoded)):
+            # 先复制
             y_pred_decoded_inv.append(np.copy(y_pred_decoded[i]))
             if y_pred_decoded_inv[i].size > 0: # If there are any predictions for this batch item.
                 for inverter in inverse_transforms[i]:
                     if not (inverter is None):
+                        # 在预测部分只有resize的反resize
+                        # 这里就是计算resize回去的位置
+                        # labels[:, [ymin+1, ymax+1]] = np.round(labels[:, [ymin+1, ymax+1]] * (img_height / self.out_height), decimals=0)
+                        # labels[:, [xmin+1, xmax+1]] = np.round(labels[:, [xmin+1, xmax+1]] * (img_width / self.out_width), decimals=0)
                         y_pred_decoded_inv[i] = inverter(y_pred_decoded_inv[i])
 
     elif isinstance(y_pred_decoded, np.ndarray):

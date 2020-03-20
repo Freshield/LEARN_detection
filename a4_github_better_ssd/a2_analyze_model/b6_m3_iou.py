@@ -189,7 +189,8 @@ def iou(boxes1, boxes2, coords='centroids', mode='outer_product', border_pixels=
         boxes2_areas = np.tile(np.expand_dims((boxes2[:,xmax] - boxes2[:,xmin] + d) * (boxes2[:,ymax] - boxes2[:,ymin] + d), axis=0), reps=(m,1))
 
     elif mode == 'element-wise':
-
+        # 如果是element wise模式
+        # 因为其中一个肯定为1，所以可以广播，最终返回为m,n中不为1的那个值
         boxes1_areas = (boxes1[:,xmax] - boxes1[:,xmin] + d) * (boxes1[:,ymax] - boxes1[:,ymin] + d)
         boxes2_areas = (boxes2[:,xmax] - boxes2[:,xmin] + d) * (boxes2[:,ymax] - boxes2[:,ymin] + d)
 

@@ -71,19 +71,29 @@ def greedy_nms(y_pred_decoded, iou_threshold=0.45, coords='corners', border_pixe
 
 def _greedy_nms(predictions, iou_threshold=0.45, coords='corners', border_pixels='half'):
     '''
+    贪婪非极大值抑制
     The same greedy non-maximum suppression algorithm as above, but slightly modified for use as an internal
     function for per-class NMS in `decode_detections()`.
     '''
+    # 预测的值复制，(n_objects,5),classes,xmin,ymin,xmax,ymax
     boxes_left = np.copy(predictions)
     maxima = [] # This is where we store the boxes that make it through the non-maximum suppression
+    # 直到没有objects
     while boxes_left.shape[0] > 0: # While there are still boxes left to compare...
+        # 得到分类的预测值最大的索引
         maximum_index = np.argmax(boxes_left[:,0]) # ...get the index of the next box with the highest confidence...
+        # 得到最大的框
         maximum_box = np.copy(boxes_left[maximum_index]) # ...copy that box and...
         maxima.append(maximum_box) # ...append it to `maxima` because we'll definitely keep it
+        # 从原始矩阵中删除
         boxes_left = np.delete(boxes_left, maximum_index, axis=0) # Now remove the maximum box from `boxes_left`
+        # 如果没有框了，则推出
         if boxes_left.shape[0] == 0: break # If there are no boxes left after this step, break. Otherwise...
+        # 计算iou，这里得到的是iou的值(n_objects,)
         similarities = iou(boxes_left[:,1:], maximum_box[1:], coords=coords, mode='element-wise', border_pixels=border_pixels) # ...compare (IoU) the other left over boxes to the maximum box...
+        # 只保留iou小于iou_threshold的部分
         boxes_left = boxes_left[similarities <= iou_threshold] # ...so that we can remove the ones that overlap too much with the maximum box
+    # 返回maxima的矩阵，(保留的n_objects,5)
     return np.array(maxima)
 
 def _greedy_nms2(predictions, iou_threshold=0.45, coords='corners', border_pixels='half'):
@@ -176,12 +186,21 @@ def decode_detections(y_pred,
     # 1: Convert the box coordinates from the predicted anchor box offsets to predicted absolute coordinates
     # 复制去除先验框的部分
     y_pred_decoded_raw = np.copy(y_pred[:,:,:-8]) # Slice out the classes and the four offsets, throw away the anchor coordinates and variances, resulting in a tensor of shape `[batch, n_boxes, n_classes + 4 coordinates]`
-
+    # 这里进行反计算
+    # 这里值为centroids
     if input_coords == 'centroids':
+        # 反转换会预测框
+        # y_pred (batch,8732,21+4+8)分类+label的坐标+先验框坐标+variance
+        # 4+4+4是(lx, ly, lw, lh)(pred), (cx, cy, w, h)(anchor), variance0, variance1, variance2, variance3
+        # w(pred)=exp(lw*variance2)*w(anchor)
+        # h(pred)=exp(lh*variance3)*h(anchor)
+        # cx(pred)=w(anchor)*lx*variance0+cx(anchor)
+        # cy(pred)=h(anchor)*ly*variance1+cy(anchor)
         y_pred_decoded_raw[:,:,[-2,-1]] = np.exp(y_pred_decoded_raw[:,:,[-2,-1]] * y_pred[:,:,[-2,-1]]) # exp(ln(w(pred)/w(anchor)) / w_variance * w_variance) == w(pred) / w(anchor), exp(ln(h(pred)/h(anchor)) / h_variance * h_variance) == h(pred) / h(anchor)
         y_pred_decoded_raw[:,:,[-2,-1]] *= y_pred[:,:,[-6,-5]] # (w(pred) / w(anchor)) * w(anchor) == w(pred), (h(pred) / h(anchor)) * h(anchor) == h(pred)
         y_pred_decoded_raw[:,:,[-4,-3]] *= y_pred[:,:,[-4,-3]] * y_pred[:,:,[-6,-5]] # (delta_cx(pred) / w(anchor) / cx_variance) * cx_variance * w(anchor) == delta_cx(pred), (delta_cy(pred) / h(anchor) / cy_variance) * cy_variance * h(anchor) == delta_cy(pred)
         y_pred_decoded_raw[:,:,[-4,-3]] += y_pred[:,:,[-8,-7]] # delta_cx(pred) + cx(anchor) == cx(pred), delta_cy(pred) + cy(anchor) == cy(pred)
+        # 最后这里把ypred转换为xmin,ymin,xmax,ymax
         y_pred_decoded_raw = convert_coordinates(y_pred_decoded_raw, start_index=-4, conversion='centroids2corners')
     elif input_coords == 'minmax':
         y_pred_decoded_raw[:,:,-4:] *= y_pred[:,:,-4:] # delta(pred) / size(anchor) / variance * variance == delta(pred) / size(anchor) for all four coordinates, where 'size' refers to w or h, respectively
@@ -198,31 +217,49 @@ def decode_detections(y_pred,
         raise ValueError("Unexpected value for `input_coords`. Supported input coordinate formats are 'minmax', 'corners' and 'centroids'.")
 
     # 2: If the model predicts normalized box coordinates and they are supposed to be converted back to absolute coordinates, do that
-
+    # 如果模型使用了归一化，这里反归一化
+    # cx=cx*width, w=w*width
+    # cy=cy*height, h=h*height
     if normalize_coords:
         y_pred_decoded_raw[:,:,[-4,-2]] *= img_width # Convert xmin, xmax back to absolute coordinates
         y_pred_decoded_raw[:,:,[-3,-1]] *= img_height # Convert ymin, ymax back to absolute coordinates
 
     # 3: Apply confidence thresholding and non-maximum suppression per class
-
+    # 得到类别的数量，21
     n_classes = y_pred_decoded_raw.shape[-1] - 4 # The number of classes is the length of the last axis minus the four box coordinates
 
     y_pred_decoded = [] # Store the final predictions in this list
+    # 遍历batch
     for batch_item in y_pred_decoded_raw: # `batch_item` has shape `[n_boxes, n_classes + 4 coords]`
         pred = [] # Store the final predictions for this batch item here
+        # 遍历去除背景的分类编号，这里相当于是对不同的分类分别nms
         for class_id in range(1, n_classes): # For each class except the background class (which has class ID 0)...
+            # 找出所有先验框这个的编号的矩阵，(8732,5)
             single_class = batch_item[:,[class_id, -4, -3, -2, -1]] # ...keep only the confidences for that class, making this an array of shape `[n_boxes, 5]` and...
+            # 找出所有分类值大于阈值的部分，这里是0.5
             threshold_met = single_class[single_class[:,0] > confidence_thresh] # ...keep only those boxes with a confidence above the set threshold.
+            # 如果有大于阈值的部分
             if threshold_met.shape[0] > 0: # If any boxes made the threshold...
+                # 进行nms，得到保留的objects，(n_objects,5)
                 maxima = _greedy_nms(threshold_met, iou_threshold=iou_threshold, coords='corners', border_pixels=border_pixels) # ...perform NMS on them.
+                # 扩充一维来保留分类id
                 maxima_output = np.zeros((maxima.shape[0], maxima.shape[1] + 1)) # Expand the last dimension by one element to have room for the class ID. This is now an arrray of shape `[n_boxes, 6]`
                 maxima_output[:,0] = class_id # Write the class ID to the first column...
+                # 把其他补上，变为(n_objects,6)，分类号，分类预测值，xmin,ymin,xmax,ymax
                 maxima_output[:,1:] = maxima # ...and write the maxima to the other columns...
                 pred.append(maxima_output) # ...and append the maxima for this class to the list of maxima for this batch item.
         # Once we're through with all classes, keep only the `top_k` maxima with the highest scores
+        # 如果有找到预测到的框
         if pred: # If there are any predictions left after confidence-thresholding...
+            # 转换为矩阵(n_objects,6)
             pred = np.concatenate(pred, axis=0)
+            # 如果得到的预测框大于top_k的值
             if top_k != 'all' and pred.shape[0] > top_k: # If we have more than `top_k` results left at this point, otherwise there is nothing to filter,...
+                # np.argpartition是根据pred的分类值来进行排序，选择第n_objects-top_k的值作为标的
+                # 把他放在自己排序后的位置，左边都是比它小的值，右边都是比它大的值
+                # 返回所有值的原始索引值
+                # [pred.shape[0]-top_k:]则是选择top_k的最大值的索引
+                # 然后pred得到相应的值返回
                 top_k_indices = np.argpartition(pred[:,1], kth=pred.shape[0]-top_k, axis=0)[pred.shape[0]-top_k:] # ...get the indices of the `top_k` highest-score maxima...
                 pred = pred[top_k_indices] # ...and keep only those entries of `pred`...
         else:
