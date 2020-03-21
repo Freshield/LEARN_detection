@@ -161,22 +161,22 @@ def ssd300(image_size,
         # 是否对原图进行信道调换
         swap_channels (list, optional): Either `False` or a list of integers representing the desired order in which the input
             image channels should be swapped.
-        # TODO
+        # 分类的值的阈值
         confidence_thresh (float, optional): A float in [0,1), the minimum classification confidence in a specific
             positive class in order to be considered for the non-maximum suppression stage for the respective class.
             A lower value will result in a larger part of the selection process being done by the non-maximum suppression
             stage, while a larger value will result in a larger part of the selection process happening in the confidence
             thresholding stage.
-        # TODO
+        # iou的阈值
         iou_threshold (float, optional): A float in [0,1]. All boxes that have a Jaccard similarity of greater than `iou_threshold`
             with a locally maximal box will be removed from the set of predictions for a given class, where 'maximal' refers
             to the box's confidence score.
-        # TODO
+        # 保存最多的k个框
         top_k (int, optional): The number of highest scoring predictions to be kept for each batch item after the
             non-maximum suppression stage.
-        # TODO
+        # nms后输出的最多框数
         nms_max_output_size (int, optional): The maximal number of predictions that will be left over after the NMS stage.
-        # TODO
+        # 是否一同返回网络的大小
         return_predictor_sizes (bool, optional): If `True`, this function not only returns the model, but also
             a list containing the spatial dimensions of the predictor layers. This isn't strictly necessary since
             you can always get their sizes easily via the Keras API, but it's convenient and less error-prone
