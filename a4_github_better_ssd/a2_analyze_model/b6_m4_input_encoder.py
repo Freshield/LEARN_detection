@@ -296,7 +296,7 @@ class SSDInputEncoder:
                                                                                    this_steps=self.steps[i],
                                                                                    this_offsets=self.offsets[i],
                                                                                    diagnostics=True)
-            # 归一化后的boxes，(38,38,4,4)
+            # 归一化后的boxes
             self.boxes_list.append(boxes)
             # 长宽的列表
             self.wh_list_diag.append(wh)
@@ -304,7 +304,7 @@ class SSDInputEncoder:
             self.steps_diag.append(step)
             # offset的tuple
             self.offsets_diag.append(offset)
-            # x,y的中心点，未归一化的
+            # x,y的中心点
             self.centers_diag.append(center)
 
     def __call__(self, ground_truth_labels, diagnostics=False):

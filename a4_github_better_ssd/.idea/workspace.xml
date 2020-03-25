@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f4a1c035-9604-43ae-80d6-254f2fedc6bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +27,8 @@
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b2_m1_ssd_300_backbone.coverage" NAME="b2_m1_ssd_300_backbone Coverage Results" MODIFIED="1580891763814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b1_m3_l2norm_layer.coverage" NAME="b1_m3_l2norm_layer Coverage Results" MODIFIED="1580895682618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b7_SSDLoss.coverage" NAME="b7_SSDLoss Coverage Results" MODIFIED="1584608238237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
-    <SUITE FILE_PATH="coverage/a4_github_better_ssd$b6_data_generator.coverage" NAME="b6_data_generator Coverage Results" MODIFIED="1584601728685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b9_predict.coverage" NAME="b9_predict Coverage Results" MODIFIED="1584698790068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
+    <SUITE FILE_PATH="coverage/a4_github_better_ssd$b6_data_generator.coverage" NAME="b6_data_generator Coverage Results" MODIFIED="1585130401854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$keras_ssd_loss.coverage" NAME="keras_ssd_loss Coverage Results" MODIFIED="1581128722268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data/example/keras_loss_function" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$b3_ssd300_priorbox.coverage" NAME="b3_ssd300_priorbox Coverage Results" MODIFIED="1584520958972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/a2_analyze_model" />
     <SUITE FILE_PATH="coverage/a4_github_better_ssd$a4_github_better_ssd.coverage" NAME="a4_github_better_ssd Coverage Results" MODIFIED="1579505639121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -50,12 +51,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1222">
-              <caret line="278" column="33" selection-start-line="278" selection-start-column="33" selection-end-line="278" selection-end-column="33" />
+            <state relative-caret-position="253">
+              <caret line="1046" column="18" selection-start-line="1046" selection-start-column="18" selection-end-line="1046" selection-end-column="18" />
               <folding>
-                <element signature="e#507#525#0" expanded="true" />
+                <element signature="e#509#527#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,7 +65,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1012">
+            <state relative-caret-position="-414">
               <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
               <folding>
                 <element signature="e#500#509#0" expanded="true" />
@@ -74,24 +75,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_ssd300_priorbox.py">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
+            <state relative-caret-position="297">
+              <caret line="412" column="41" selection-start-line="412" selection-start-column="41" selection-end-line="412" selection-end-column="41" />
               <folding>
-                <element signature="e#510#528#0" expanded="true" />
+                <element signature="e#511#529#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_m1_anchorboxes.py">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5611">
-              <caret line="61" column="33" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
+            <state relative-caret-position="217">
+              <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1983">
+              <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
               <folding>
-                <element signature="e#509#527#0" expanded="true" />
+                <element signature="e#501#519#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -148,7 +158,6 @@
         <option value="$PROJECT_DIR$/a2_analyze_model/b3_ssd300_priorbox.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b3_m1_anchorboxes.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py" />
-        <option value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b7_train.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/test/test.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b7_SSDLoss.py" />
@@ -158,21 +167,22 @@
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_m1_data_augment.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b9_predict.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b8_train.py" />
-        <option value="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/test/t3_test_numpy.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b9_decoder.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b10_apply_inverse_transforms.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b_predict.py" />
         <option value="$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py" />
+        <option value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="134" />
-    <option name="y" value="563" />
-    <option name="width" value="1015" />
-    <option name="height" value="1017" />
+    <option name="x" value="64" />
+    <option name="y" value="395" />
+    <option name="width" value="1857" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -203,7 +213,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Linkingmed_HT/Codes_HT/Linkingmed_small/L84_AIContour_Lite" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -230,7 +240,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.b9_predict">
+  <component name="RunManager" selected="Python.b6_data_generator">
     <configuration name="a4_github_better_ssd" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="a4_github_better_ssd" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -247,6 +257,28 @@
       <option name="additionalOptions" value="" />
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
+      <method v="2" />
+    </configuration>
+    <configuration name="b6_data_generator" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="a4_github_better_ssd" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="b7_SSDLoss" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -337,35 +369,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="a4_github_better_ssd" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/a2_analyze_model/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a2_analyze_model/test/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.b6_data_generator" />
         <item itemvalue="Python.b9_predict" />
         <item itemvalue="Python.t3_test_numpy" />
         <item itemvalue="Python.b7_train" />
         <item itemvalue="Python.b7_SSDLoss" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -394,22 +404,25 @@
       <workItem from="1584583566453" duration="17260000" />
       <workItem from="1584669324924" duration="15835000" />
       <workItem from="1584956823240" duration="1745000" />
-      <workItem from="1584870919472" duration="1761000" />
+      <workItem from="1584870919472" duration="1780000" />
+      <workItem from="1585099493680" duration="813000" />
+      <workItem from="1585125278694" duration="6444000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102527000" />
+    <option name="totallyTimeSpent" value="109803000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="402" width="1855" height="1084" extended-state="6" />
+    <frame x="64" y="395" width="1857" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31156614" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19977863" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32845187" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35564855" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35564855" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.30543932" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -418,7 +431,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.21861924" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.2248954" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32928178" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -436,22 +449,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1097</line>
+          <line>1095</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1123</line>
+          <line>1121</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1132</line>
+          <line>1130</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py</url>
-          <line>1133</line>
+          <line>1131</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
@@ -510,20 +523,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b4_ssd300_reshaper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1716">
-          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b5_m1_get_predictor_size.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/tensorflow/python/keras/engine/training.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -568,13 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-556">
-          <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1538662942/math.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -611,25 +603,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_data_augment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/example/models/keras_ssd512.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m2_box_filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6930">
-          <caret line="316" selection-start-line="316" selection-end-line="316" />
-          <folding>
-            <element signature="e#508#526#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/example/training_summaries/ssd300_pascal_07+12_loss_history.png">
       <provider selected="true" editor-type-id="images" />
@@ -670,16 +645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-399">
           <caret line="87" column="6" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="913" selection-start-line="913" selection-end-line="913" />
-          <folding>
-            <element signature="e#509#527#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -751,16 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4246">
-          <caret line="194" column="100" selection-start-line="194" selection-start-column="100" selection-end-line="194" selection-end-column="100" />
-          <folding>
-            <element signature="e#501#519#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/object_detection_2d_data_generator.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -768,16 +723,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9988">
-          <caret line="458" column="102" selection-start-line="457" selection-start-column="42" selection-end-line="458" selection-end-column="102" />
-          <folding>
-            <element signature="e#511#529#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -815,19 +760,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_m1_anchorboxes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1012">
-          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
+        <state relative-caret-position="-362">
+          <caret line="304" column="44" selection-start-line="304" selection-start-column="44" selection-end-line="304" selection-end-column="44" />
           <folding>
-            <element signature="e#500#509#0" expanded="true" />
+            <element signature="e#509#527#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_ssd300_priorbox.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
+        <state relative-caret-position="-216">
           <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
           <folding>
             <element signature="e#510#528#0" expanded="true" />
@@ -835,23 +780,91 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b4_ssd300_reshaper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1479">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b5_ssd300_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1222">
-          <caret line="278" column="33" selection-start-line="278" selection-start-column="33" selection-end-line="278" selection-end-column="33" />
+        <state relative-caret-position="-986">
+          <caret line="285" column="52" selection-start-line="285" selection-start-column="52" selection-end-line="285" selection-end-column="52" />
           <folding>
             <element signature="e#507#525#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b3_m1_anchorboxes.py">
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b5_m1_get_predictor_size.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5611">
-          <caret line="61" column="33" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
+        <state relative-caret-position="433">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b8_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-414">
+          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
+          <folding>
+            <element signature="e#500#509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m1_data_augment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1474">
+          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m2_box_filter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="172" column="28" selection-start-line="172" selection-start-column="12" selection-end-line="172" selection-end-column="28" />
+          <folding>
+            <element signature="e#508#526#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="1046" column="18" selection-start-line="1046" selection-start-column="18" selection-end-line="1046" selection-end-column="18" />
           <folding>
             <element signature="e#509#527#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m3_iou.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1983">
+          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
+          <folding>
+            <element signature="e#501#519#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m4_input_encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="412" column="41" selection-start-line="412" selection-start-column="41" selection-end-line="412" selection-end-column="41" />
+          <folding>
+            <element signature="e#511#529#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_m5_matching_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
         </state>
       </provider>
     </entry>

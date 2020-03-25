@@ -888,7 +888,6 @@ class DataGenerator:
             # batch_y的元素类似[[  3, 170, 110, 465, 294]]，为原始的图像位置
 
             for i in range(len(batch_X)):
-
                 if not (self.labels is None):
                     # Convert the labels for this image to an array (in case they aren't already).
                     batch_y[i] = np.array(batch_y[i])
@@ -932,8 +931,7 @@ class DataGenerator:
                 # Check for degenerate boxes in this batch item.
                 #########################################################################################
 
-                # batch_y,[[  4, 284,  99, 357, 130]],仍为原始样式，图像变为300,300
-
+                # batch_y,[[  1 184  61 270 118]],已为转换后的坐标，图像变为300,300
                 if not (self.labels is None):
 
                     xmin = self.labels_format['xmin']
@@ -1038,8 +1036,8 @@ class DataGenerator:
 
 
 if __name__ == '__main__':
-    from data_generator.object_detection_2d_geometric_ops import Resize
-    from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channels
+    from object_detection_2d_geometric_ops import Resize
+    from object_detection_2d_photometric_ops import ConvertTo3Channels
     from b6_m1_data_augment import SSDDataAugmentation
     # 1: Instantiate two `DataGenerator` objects: One for training, one for validation.
 
