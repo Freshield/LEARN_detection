@@ -192,6 +192,9 @@ class AnchorBoxes(Layer):
                 wh_list.append((box_width, box_height))
         # [[30,30],[42,42],[42,21],[21,42]]
         wh_list = np.array(wh_list)
+        print(self.this_scale * size)
+        print(wh_list)
+        print()
 
         # 得到loc的shape
         # 38,38,4*4

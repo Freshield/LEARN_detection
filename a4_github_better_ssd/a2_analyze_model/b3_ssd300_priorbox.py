@@ -79,4 +79,6 @@ if __name__ == '__main__':
 
     conf_tuple, loc_tuple = ssd300_loc_conf(layer_tuple)
 
-    ssd300_priorbox(loc_tuple, (300, 300, 3))
+    rst = ssd300_priorbox(loc_tuple, (300, 300, 3), normalize_coords=False)
+
+    print(rst)
