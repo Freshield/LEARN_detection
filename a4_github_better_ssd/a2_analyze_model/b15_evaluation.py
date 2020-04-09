@@ -2,9 +2,9 @@
 """
 @Author: Freshield
 @Contact: yangyufresh@163.com
-@File: b9_predict.py
-@Time: 2020-03-20 10:46
-@Last_update: 2020-03-20 10:46
+@File: b15_evaluation.py
+@Time: 2020-04-09 18:06
+@Last_update: 2020-04-09 18:06
 @Desc: None
 @==============================================@
 @      _____             _   _     _   _       @
@@ -14,6 +14,9 @@
 @                                    Freshield @
 @==============================================@
 """
+import numpy as np
+from keras.preprocessing import image
+from imageio import imread
 import os
 import numpy as np
 from math import ceil
@@ -67,7 +70,6 @@ variances = [0.1, 0.1, 0.2,
              0.2]  # The variances by which the encoded target coordinates are divided as in the original implementation
 normalize_coords = True
 
-
 # 1: Build the Keras model.
 
 K.clear_session() # Clear previous models from memory.
@@ -98,7 +100,7 @@ model = ssd300(image_size=(img_height, img_width, img_channels),
 # 2: Load some weights into the model.
 
 # TODO: Set the path to the weights you want to load.
-weights_path = '../data/weights/example_trained/ssd300_pascal_07+12_epoch-53_loss-4.4248_val_loss-4.3018.h5'
+weights_path = '../data/weights/VGG_VOC0712Plus_SSD_300x300_ft_iter_160000.h5'
 
 model.load_weights(weights_path, by_name=True)
 
@@ -127,83 +129,3 @@ predict_generator = val_dataset.generate(batch_size=1,
                                                   'original_images',
                                                   'original_labels'},
                                          keep_images_without_gt=False)
-
-batch_images, batch_filenames, batch_inverse_transforms, batch_original_images, batch_original_labels = next(predict_generator)
-i = 0 # Which batch item to look at
-
-
-print("Image:", batch_images.shape)
-print()
-print("Ground truth boxes:\n")
-print(np.array(batch_original_labels[i]))
-
-y_pred = model.predict(batch_images)
-
-# 4: Decode the raw predictions in `y_pred`.
-# 得到decode之后的值，(n_objects,6)，分类号+预测的分类值+xmin,ymin,xmax,ymax
-y_pred_decoded = decode_detections(y_pred,
-                                   confidence_thresh=0.5,
-                                   iou_threshold=0.4,
-                                   top_k=200,
-                                   normalize_coords=normalize_coords,
-                                   img_height=img_height,
-                                   img_width=img_width)
-
-# 5: Convert the predictions for the original image.
-# 使用反预处理，这里主要就是一个反resize
-# 这里就是计算resize回去的位置
-# labels[:, [ymin+1, ymax+1]] = np.round(labels[:, [ymin+1, ymax+1]] * (img_height / self.out_height), decimals=0)
-# labels[:, [xmin+1, xmax+1]] = np.round(labels[:, [xmin+1, xmax+1]] * (img_width / self.out_width), decimals=0)
-y_pred_decoded_inv = apply_inverse_transforms(y_pred_decoded, batch_inverse_transforms)
-
-
-np.set_printoptions(precision=2, suppress=True, linewidth=90)
-print("Predicted boxes:\n")
-print('   class   conf xmin   ymin   xmax   ymax')
-print(y_pred_decoded_inv[i])
-
-# 5: Draw the predicted boxes onto the image
-# 观看预测的结果
-# Set the colors for the bounding boxes
-# 设置不同的类别不同的颜色
-colors = plt.cm.hsv(np.linspace(0, 1, n_classes+1)).tolist()
-# 设置背景类
-classes = ['background',
-           'aeroplane', 'bicycle', 'bird', 'boat',
-           'bottle', 'bus', 'car', 'cat',
-           'chair', 'cow', 'diningtable', 'dog',
-           'horse', 'motorbike', 'person', 'pottedplant',
-           'sheep', 'sofa', 'train', 'tvmonitor']
-
-plt.figure(figsize=(20,12))
-plt.imshow(batch_original_images[i])
-
-current_axis = plt.gca()
-# 遍历label的框
-# for box in batch_original_labels[i]:
-#     xmin = box[1]
-#     ymin = box[2]
-#     xmax = box[3]
-#     ymax = box[4]
-#     label = '{}'.format(classes[int(box[0])])
-#     # 画检测框
-#     current_axis.add_patch(plt.Rectangle((xmin, ymin), xmax-xmin, ymax-ymin, color='green', fill=False, linewidth=2))
-#     # 写label的名称
-#     current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor':'green', 'alpha':1.0})
-
-# 遍历预测的框
-for box in y_pred_decoded_inv[i]:
-    xmin = box[2]
-    ymin = box[3]
-    xmax = box[4]
-    ymax = box[5]
-    # 得到相应类别的颜色
-    color = colors[int(box[0])]
-    label = '{}: {:.2f}'.format(classes[int(box[0])], box[1])
-    # 画检验框
-    current_axis.add_patch(plt.Rectangle((xmin, ymin), xmax-xmin, ymax-ymin, color=color, fill=False, linewidth=2))
-    # 写label的名称
-    current_axis.text(xmin, ymin, label, size='x-large', color='white', bbox={'facecolor':color, 'alpha':1.0})
-
-plt.show()
-plt.close()
