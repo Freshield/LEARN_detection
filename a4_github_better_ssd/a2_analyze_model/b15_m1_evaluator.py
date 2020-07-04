@@ -29,8 +29,10 @@ from b10_apply_inverse_transforms import apply_inverse_transforms
 
 from b6_m3_iou import iou
 
+
 class Evaluator:
     '''
+    评价器，voc2010前和voc2010后的评价指标都可以计算
     Computes the mean average precision of the given Keras SSD model on the given dataset.
 
     Can compute the Pascal-VOC-style average precision in both the pre-2010 (k-point sampling)
@@ -51,16 +53,16 @@ class Evaluator:
                  gt_format={'class_id': 0, 'xmin': 1, 'ymin': 2, 'xmax': 3, 'ymax': 4}):
         '''
         Arguments:
-            model (Keras model): A Keras SSD model object.
-            n_classes (int): The number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO.
-            data_generator (DataGenerator): A `DataGenerator` object with the evaluation dataset.
-            model_mode (str, optional): The mode in which the model was created, i.e. 'training', 'inference' or 'inference_fast'.
+            model (Keras model):SSD的模型 A Keras SSD model object.
+            n_classes (int):分类的类别 The number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO.
+            data_generator (DataGenerator): 数据的生成器 A `DataGenerator` object with the evaluation dataset.
+            model_mode (str, optional): 模型的模式，The mode in which the model was created, i.e. 'training', 'inference' or 'inference_fast'.
                 This is needed in order to know whether the model output is already decoded or still needs to be decoded. Refer to
                 the model documentation for the meaning of the individual modes.
-            pred_format (dict, optional): A dictionary that defines which index in the last axis of the model's decoded predictions
+            pred_format (dict, optional): 预测的channel号 A dictionary that defines which index in the last axis of the model's decoded predictions
                 contains which bounding box coordinate. The dictionary must map the keywords 'class_id', 'conf' (for the confidence),
                 'xmin', 'ymin', 'xmax', and 'ymax' to their respective indices within last axis.
-            gt_format (list, optional): A dictionary that defines which index of a ground truth bounding box contains which of the five
+            gt_format (list, optional): label的channel号， A dictionary that defines which index of a ground truth bounding box contains which of the five
                 items class ID, xmin, ymin, xmax, ymax. The expected strings are 'xmin', 'ymin', 'xmax', 'ymax', 'class_id'.
         '''
 
@@ -76,6 +78,7 @@ class Evaluator:
 
         # The following lists all contain per-class data, i.e. all list have the length `n_classes + 1`,
         # where one element is for the background class, i.e. that element is just a dummy entry.
+        # list包含每个类别的结果
         self.prediction_results = None
         self.num_gt_per_class = None
         self.true_positives = None
@@ -109,6 +112,7 @@ class Evaluator:
                  decoding_pred_coords='centroids',
                  decoding_normalize_coords=True):
         '''
+        计算map的部分
         Computes the mean average precision of the given Keras SSD model on the given dataset.
 
         Optionally also returns the averages precisions, precisions, and recalls.

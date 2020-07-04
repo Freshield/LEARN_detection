@@ -266,18 +266,25 @@ if __name__ == '__main__':
     # ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
     tf.enable_eager_execution()
     import numpy as np
-    y_true = np.zeros((5,33))
-    y_true[0,1] = 1
-    y_true[1,2] = 1
-    y_true[2,3] = 2
-    y_true[3,4] = 5
-    y_true = y_true.reshape((-1))
-    y_true = tf.constant(y_true)
-    value, indices = tf.nn.top_k(y_true, k=3, sorted=False)
-    print(indices)
-    negatives_keep = tf.scatter_nd(indices=tf.expand_dims(indices, axis=1),
-                                   updates=tf.ones_like(indices, dtype=tf.int32),
-                                   shape=tf.shape(y_true))
+    # y_true = np.zeros((5,33))
+    # y_true[0,1] = 1
+    # y_true[1,2] = 1
+    # y_true[2,3] = 2
+    # y_true[3,4] = 5
+    # y_true = y_true.reshape((-1))
+    # y_true = tf.constant(y_true)
+    # value, indices = tf.nn.top_k(y_true, k=3, sorted=False)
+    # print(indices)
+    # negatives_keep = tf.scatter_nd(indices=tf.expand_dims(indices, axis=1),
+    #                                updates=tf.ones_like(indices, dtype=tf.int32),
+    #                                shape=tf.shape(y_true))
+    #
+    # print(negatives_keep)
 
-    print(negatives_keep)
+    y_true = np.zeros((5,33))
+    for i in range(5):
+        y_true[i, i] = 1
+    y_true = tf.constant(y_true)
+    positives = tf.to_float(tf.reduce_max(y_true[:, 1:-12], axis=-1))
+    print(positives)
 

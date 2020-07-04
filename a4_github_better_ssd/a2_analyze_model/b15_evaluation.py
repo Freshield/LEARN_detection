@@ -34,6 +34,7 @@ from b6_m4_input_encoder import SSDInputEncoder
 import matplotlib.pyplot as plt
 from b9_decoder import decode_detections
 from b10_apply_inverse_transforms import apply_inverse_transforms
+from b15_m1_evaluator import Evaluator
 
 # 1: Instantiate two `DataGenerator` objects: One for training, one for validation.
 
@@ -129,3 +130,27 @@ predict_generator = val_dataset.generate(batch_size=1,
                                                   'original_images',
                                                   'original_labels'},
                                          keep_images_without_gt=False)
+
+evaluator = Evaluator(model=model,
+                      n_classes=n_classes,
+                      data_generator=val_dataset,
+                      model_mode='training')
+
+results = evaluator(img_height=img_height,
+                    img_width=img_width,
+                    batch_size=8,
+                    data_generator_mode='resize',
+                    round_confidences=False,
+                    matching_iou_threshold=0.5,
+                    border_pixels='include',
+                    sorting_algorithm='quicksort',
+                    average_precision_mode='sample',
+                    num_recall_points=11,
+                    ignore_neutral_boxes=True,
+                    return_precisions=True,
+                    return_recalls=True,
+                    return_average_precisions=True,
+                    verbose=True)
+
+mean_average_precision, average_precisions, precisions, recalls = results
+print(results)
