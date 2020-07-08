@@ -153,4 +153,7 @@ results = evaluator(img_height=img_height,
                     verbose=True)
 
 mean_average_precision, average_precisions, precisions, recalls = results
-print(results)
+
+print(average_precisions)
+print()
+print(mean_average_precision)

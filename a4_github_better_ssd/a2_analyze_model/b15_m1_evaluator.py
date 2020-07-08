@@ -211,7 +211,7 @@ class Evaluator:
         #############################################################################################
         # Match predictions to ground truth boxes for all classes.
         #############################################################################################
-        # 对预测的结果和label进行匹配
+        # 对预测的结果和label进行匹配的信息，得到所有的tp,fp,fn的值
         self.match_predictions(ignore_neutral_boxes=ignore_neutral_boxes,
                                matching_iou_threshold=matching_iou_threshold,
                                border_pixels=border_pixels,
@@ -222,13 +222,13 @@ class Evaluator:
         #############################################################################################
         # Compute the cumulative precision and recall for all classes.
         #############################################################################################
-
+        # 计算查准率和查全率，这里得到的是累加的precisons和recalls
         self.compute_precision_recall(verbose=verbose, ret=False)
 
         #############################################################################################
         # Compute the average precision for this class.
         #############################################################################################
-
+        # 计算各个类别的AP，也就是PR曲线下的面积
         self.compute_average_precisions(mode=average_precision_mode,
                                         num_recall_points=num_recall_points,
                                         verbose=verbose,
@@ -237,7 +237,7 @@ class Evaluator:
         #############################################################################################
         # Compute the mean average precision.
         #############################################################################################
-
+        # 计算各个类别的平均AP，也就是mAP
         mean_average_precision = self.compute_mean_average_precision(ret=True)
 
         #############################################################################################
@@ -685,6 +685,7 @@ class Evaluator:
                 tr = range(len(predictions.shape))
 
             # Keep track of which ground truth boxes were already matched to a detection.
+            # 保存已经当前分类类别匹配到的label字典
             gt_matched = {}
 
             # Iterate over all predictions.
@@ -692,6 +693,7 @@ class Evaluator:
             for i in tr:
                 # 得到当前的预测结果
                 prediction = predictions_sorted[i]
+                # image_id是图像的id
                 image_id = prediction['image_id']
                 # 得到当前的bbox
                 pred_box = np.asarray(list(prediction[['xmin', 'ymin', 'xmax', 'ymax']])) # Convert the structured array element to a regular array.
@@ -712,7 +714,7 @@ class Evaluator:
                 gt = np.asarray(gt)
                 # 得到当前类别的label的mask
                 class_mask = gt[:,class_id_gt] == class_id
-                # 得到当前类别的label
+                # 得到当前类别的全部label
                 gt = gt[class_mask]
                 # 如果要检测难例的话得到难例数据
                 if ignore_neutral_boxes and eval_neutral_available:
@@ -732,51 +734,65 @@ class Evaluator:
                                coords='corners',
                                mode='element-wise',
                                border_pixels=border_pixels)
-                print(overlaps.shape)
-                exit()
 
                 # For each detection, match the ground truth box with the highest overlap.
                 # It's possible that the same ground truth box will be matched to multiple
                 # detections.
+                # 得到iou最大的匹配的label
                 gt_match_index = np.argmax(overlaps)
                 gt_match_overlap = overlaps[gt_match_index]
 
+                # 如果最大的iou的值依然小于匹配的iou阈值则当前的框为fp，也就是什么label都没有匹配上
                 if gt_match_overlap < matching_iou_threshold:
                     # False positive, IoU threshold violated:
                     # Those predictions whose matched overlap is below the threshold become
                     # false positives.
                     false_pos[i] = 1
+                # 如果有匹配上的label框
                 else:
+                    # 如果不要匹配难例
                     if not (ignore_neutral_boxes and eval_neutral_available) or (eval_neutral[gt_match_index] == False):
                         # If this is not a ground truth that is supposed to be evaluation-neutral
                         # (i.e. should be skipped for the evaluation) or if we don't even have the
                         # concept of neutral boxes.
+                        # 如果当前图像的id不在gt_matched已匹配字典中
                         if not (image_id in gt_matched):
                             # True positive:
                             # If the matched ground truth box for this prediction hasn't been matched to a
                             # different prediction already, we have a true positive.
+                            # 当前预测结果则匹配到了，记为tp
                             true_pos[i] = 1
+                            # 生成label匹配的矩阵，并把当前的label框记为True也就是匹配到
                             gt_matched[image_id] = np.zeros(shape=(gt.shape[0]), dtype=np.bool)
                             gt_matched[image_id][gt_match_index] = True
+                        # 如果当前图像id在，但是当前的匹配的索引还未被匹配到
                         elif not gt_matched[image_id][gt_match_index]:
                             # True positive:
                             # If the matched ground truth box for this prediction hasn't been matched to a
                             # different prediction already, we have a true positive.
+                            # 当前预测结果记为tp
                             true_pos[i] = 1
+                            # 当前匹配到的label更改为True
                             gt_matched[image_id][gt_match_index] = True
+                        # 如果当前的图像id和label框都已经被匹配过，则当前的为fp
                         else:
                             # False positive, duplicate detection:
                             # If the matched ground truth box for this prediction has already been matched
                             # to a different prediction previously, it is a duplicate detection for an
                             # already detected object, which counts as a false positive.
+                            # 也就是说当前为多个预测框匹配到了一个label框，也就记为fp，也就是虽然匹配到了，但是重复了
+                            # 和小于iou阈值一样，这种情况记为fp
                             false_pos[i] = 1
 
+            # 总体的tp，fp列表添加当前类别的结果
             true_positives.append(true_pos)
             false_positives.append(false_pos)
 
+            # 得到ctp，cfp的累加值
             cumulative_true_pos = np.cumsum(true_pos) # Cumulative sums of the true positives
             cumulative_false_pos = np.cumsum(false_pos) # Cumulative sums of the false positives
 
+            # 添加到总体的ctp，cfp列表中
             cumulative_true_positives.append(cumulative_true_pos)
             cumulative_false_positives.append(cumulative_false_pos)
 
@@ -790,8 +806,9 @@ class Evaluator:
 
     def compute_precision_recall(self, verbose=True, ret=False):
         '''
+        计算查准率和查全率
         Computes the precisions and recalls for all classes.
-
+        # 必须要先运行匹配算法，得到所有的tp,fp,fn的信息
         Note that `match_predictions()` must be called before calling this method.
 
         Arguments:
@@ -801,29 +818,36 @@ class Evaluator:
         Returns:
             None by default. Optionally, two nested lists containing the cumulative precisions and recalls for each class.
         '''
-
+        # 保证ctp,cfp都存在以及label分类类别数是存在的
         if (self.cumulative_true_positives is None) or (self.cumulative_false_positives is None):
             raise ValueError("True and false positives not available. You must run `match_predictions()` before you call this method.")
 
         if (self.num_gt_per_class is None):
             raise ValueError("Number of ground truth boxes per class not available. You must run `get_num_gt_per_class()` before you call this method.")
 
+        # 用来存储查准率和查全率的列表
         cumulative_precisions = [[]]
         cumulative_recalls = [[]]
 
         # Iterate over all classes.
+        # 遍历所有的分类id
         for class_id in range(1, self.n_classes + 1):
 
             if verbose:
                 print("Computing precisions and recalls, class {}/{}".format(class_id, self.n_classes))
 
+            # 得到当前类别的tp和fp
             tp = self.cumulative_true_positives[class_id]
             fp = self.cumulative_false_positives[class_id]
 
-
+            # precision = tp / (tp + fp)
+            # 得到累加的precision，之所以要用累加的是这样的话可以方便得到AP也就是PR曲线的面积
             cumulative_precision = np.where(tp + fp > 0, tp / (tp + fp), 0) # 1D array with shape `(num_predictions,)`
+            # recall = tp / (tp + fn)，tp+fn也就是当前类别所有label的数量
+            # 得到累加的recall，同样，也是为了方便计算AP
             cumulative_recall = tp / self.num_gt_per_class[class_id] # 1D array with shape `(num_predictions,)`
 
+            # 放到相应的总体累加的precisions和recalls中
             cumulative_precisions.append(cumulative_precision)
             cumulative_recalls.append(cumulative_recall)
 
@@ -833,26 +857,27 @@ class Evaluator:
         if ret:
             return cumulative_precisions, cumulative_recalls
 
-    def compute_average_precisions(self, mode='sample', num_recall_points=11, verbose=True, ret=False):
+    def compute_average_precisions(self, mode='integrate', num_recall_points=11, verbose=True, ret=False):
         '''
+        计算各个类别的AP，也就是PR曲线下的面积
         Computes the average precision for each class.
-
+        根据选项支持计算voc2010前的标准以及voc2010后的标准
         Can compute the Pascal-VOC-style average precision in both the pre-2010 (k-point sampling)
         and post-2010 (integration) algorithm versions.
-
+        # 需要计算完并得到累计的precisions和recalls
         Note that `compute_precision_recall()` must be called before calling this method.
 
         Arguments:
-            mode (str, optional): Can be either 'sample' or 'integrate'. In the case of 'sample', the average precision will be computed
+            mode (str, optional):选择使用那种计算方式 Can be either 'sample' or 'integrate'. In the case of 'sample', the average precision will be computed
                 according to the Pascal VOC formula that was used up until VOC 2009, where the precision will be sampled for `num_recall_points`
                 recall values. In the case of 'integrate', the average precision will be computed according to the Pascal VOC formula that
                 was used from VOC 2010 onward, where the average precision will be computed by numerically integrating over the whole
                 preciscion-recall curve instead of sampling individual points from it. 'integrate' mode is basically just the limit case
                 of 'sample' mode as the number of sample points increases. For details, see the references below.
-            num_recall_points (int, optional): Only relevant if mode is 'sample'. The number of points to sample from the precision-recall-curve
+            num_recall_points (int, optional):选择的计算recall的数量 Only relevant if mode is 'sample'. The number of points to sample from the precision-recall-curve
                 to compute the average precisions. In other words, this is the number of equidistant recall values for which the resulting
                 precision will be computed. 11 points is the value used in the official Pascal VOC pre-2010 detection evaluation algorithm.
-            verbose (bool, optional): If `True`, will print out the progress during runtime.
+            verbose (bool, optional):是否打印过程， If `True`, will print out the progress during runtime.
             ret (bool, optional): If `True`, returns the average precisions.
 
         Returns:
@@ -861,25 +886,29 @@ class Evaluator:
         References:
             http://host.robots.ox.ac.uk/pascal/VOC/voc2012/htmldoc/devkit_doc.html#sec:ap
         '''
-
+        # 需要保证累计的precisions和recalls都已经存在
         if (self.cumulative_precisions is None) or (self.cumulative_recalls is None):
             raise ValueError("Precisions and recalls not available. You must run `compute_precision_recall()` before you call this method.")
 
         if not (mode in {'sample', 'integrate'}):
             raise ValueError("`mode` can be either 'sample' or 'integrate', but received '{}'".format(mode))
 
+        # ap的计算列表
         average_precisions = [0.0]
 
         # Iterate over all classes.
+        # 遍历所有的类别
         for class_id in range(1, self.n_classes + 1):
 
             if verbose:
                 print("Computing average precision, class {}/{}".format(class_id, self.n_classes))
 
+            # 得到累计的precisions和recalls
             cumulative_precision = self.cumulative_precisions[class_id]
             cumulative_recall = self.cumulative_recalls[class_id]
             average_precision = 0.0
 
+            # 如果是voc2010前的计算方式(暂时忽略)
             if mode == 'sample':
 
                 for t in np.linspace(start=0, stop=1, num=num_recall_points, endpoint=True):
@@ -894,17 +923,22 @@ class Evaluator:
                     average_precision += precision
 
                 average_precision /= num_recall_points
-
+            # voc2010后的计算标准，目前基本都是使用这种计算方式
             elif mode == 'integrate':
 
                 # We will compute the precision at all unique recall values.
+                # 得到所有recall的唯一值，所有唯一值的索引，所有唯一值的计数
+                # 这里的唯一值相当于是PR曲线图的横坐标
                 unique_recalls, unique_recall_indices, unique_recall_counts = np.unique(cumulative_recall, return_index=True, return_counts=True)
 
                 # Store the maximal precision for each recall value and the absolute difference
                 # between any two unique recal values in the lists below. The products of these
                 # two nummbers constitute the rectangular areas whose sum will be our numerical
                 # integral.
+                # 生成存储precision的同坐标的最大值
                 maximal_precisions = np.zeros_like(unique_recalls)
+                # 生成存储recall的差别的矩阵
+                # 使用这两个就可以得到面积
                 recall_deltas = np.zeros_like(unique_recalls)
 
                 # Iterate over all unique recall values in reverse order. This saves a lot of computation:
@@ -916,19 +950,28 @@ class Evaluator:
                 # maximum instead of computing the maximum over all `l` values.
                 # We skip the very last recall value, since the precision after between the last recall value
                 # recall 1.0 is defined to be zero.
+                # 反向遍历recall的唯一值
+                # 这里反向遍历的原因是因为我们计算precision的时候要得到当前索引之后最大的precision
+                # 所以反向查找的话只需要找当当前区间的最大值和上一个区间的最大值进行比较即可
+                # 类似动态规划的思想来减少计算两
                 for i in range(len(unique_recalls)-2, -1, -1):
+                    # 得到当前区间的开始和结束位置
                     begin = unique_recall_indices[i]
                     end   = unique_recall_indices[i + 1]
                     # When computing the maximal precisions, use the maximum of the previous iteration to
                     # avoid unnecessary repeated computation over the same precision values.
                     # The maximal precisions are the heights of the rectangle areas of our integral under
                     # the precision-recall curve.
+                    # 得到当前区间的最大值，并和上一个最大值进行比较，得到最大的值
                     maximal_precisions[i] = np.maximum(np.amax(cumulative_precision[begin:end]), maximal_precisions[i + 1])
+                    # 得到两个recall之间的间隔
                     # The differences between two adjacent recall values are the widths of our rectangle areas.
                     recall_deltas[i] = unique_recalls[i + 1] - unique_recalls[i]
 
+                # 使用recall的间隔乘以precision的值，再相加，得到pr曲线的面积，也就是ap
                 average_precision = np.sum(maximal_precisions * recall_deltas)
 
+            # 添加到总的ap上
             average_precisions.append(average_precision)
 
         self.average_precisions = average_precisions
@@ -938,8 +981,9 @@ class Evaluator:
 
     def compute_mean_average_precision(self, ret=True):
         '''
+        计算最终的mAP数值
         Computes the mean average precision over all classes.
-
+        # 要保证已经计算完各个类别的AP
         Note that `compute_average_precisions()` must be called before calling this method.
 
         Arguments:
@@ -948,10 +992,11 @@ class Evaluator:
         Returns:
             A float, the mean average precision, by default. Optionally, None.
         '''
-
+        # 保证已经计算完AP数值
         if self.average_precisions is None:
             raise ValueError("Average precisions not available. You must run `compute_average_precisions()` before you call this method.")
 
+        # 把除了背景类以外的类别的AP值进行平均
         mean_average_precision = np.average(self.average_precisions[1:]) # The first element is for the background class, so skip it.
         self.mean_average_precision = mean_average_precision
 
