@@ -953,7 +953,7 @@ class Evaluator:
                 # 反向遍历recall的唯一值
                 # 这里反向遍历的原因是因为我们计算precision的时候要得到当前索引之后最大的precision
                 # 所以反向查找的话只需要找当当前区间的最大值和上一个区间的最大值进行比较即可
-                # 类似动态规划的思想来减少计算两
+                # 类似动态规划的思想来减少计算量
                 for i in range(len(unique_recalls)-2, -1, -1):
                     # 得到当前区间的开始和结束位置
                     begin = unique_recall_indices[i]
