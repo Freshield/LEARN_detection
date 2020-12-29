@@ -61,17 +61,21 @@ class DataGenerator:
                  labels_output_format=('class_id', 'xmin', 'ymin', 'xmax', 'ymax'),
                  verbose=True):
         '''
+        # 初始化部分
         Initializes the data generator. You can either load a dataset directly here in the constructor,
         e.g. an HDF5 dataset, or you can use one of the parser methods to read in a dataset.
 
         Arguments:
+            # 是否把所有数据都存储到内存中
             load_images_into_memory (bool, optional): If `True`, the entire dataset will be loaded into memory.
                 This enables noticeably faster data generation than loading batches of images into memory ad hoc.
                 Be sure that you have enough memory before you activate this option.
+            # 不使用解析方法，而直接使用解析后生成的hdf5文件
             hdf5_dataset_path (str, optional): The full file path of an HDF5 file that contains a dataset in the
                 format that the `create_hdf5_dataset()` method produces. If you load such an HDF5 dataset, you
                 don't need to use any of the parser methods anymore, the HDF5 dataset already contains all relevant
                 data.
+            # TODO
             filenames (string or list, optional): `None` or either a Python list/tuple or a string representing
                 a filepath. If a list/tuple is passed, it must contain the file names (full paths) of the
                 images to be used. Note that the list/tuple must contain the paths to the images,
@@ -933,3 +937,86 @@ class DataGenerator:
             The number of images in the dataset.
         '''
         return self.dataset_size
+
+
+if __name__ == '__main__':
+    # 1: Instantiate two `DataGenerator` objects: One for training, one for validation.
+
+    # Optional: If you have enough memory, consider loading the images into memory for the reasons explained above.
+
+    train_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=None)
+    val_dataset = DataGenerator(load_images_into_memory=False, hdf5_dataset_path=None)
+
+    # 2: Parse the image and label lists for the training and validation datasets. This can take a while.
+
+    # TODO: Set the paths to the datasets here.
+
+    # The directories that contain the images.
+    VOC_2007_images_dir = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2007/JPEGImages/'
+    VOC_2012_images_dir = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2012/JPEGImages/'
+
+    # The directories that contain the annotations.
+    VOC_2007_annotations_dir = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2007/Annotations/'
+    VOC_2012_annotations_dir = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2012/Annotations/'
+
+    # The paths to the image sets.
+    VOC_2007_train_image_set_filename = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2007/ImageSets/Main/train.txt'
+    VOC_2012_train_image_set_filename = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2012/ImageSets/Main/train.txt'
+    VOC_2007_val_image_set_filename = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2007/ImageSets/Main/val.txt'
+    VOC_2012_val_image_set_filename = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2012/ImageSets/Main/val.txt'
+    VOC_2007_trainval_image_set_filename = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2007/ImageSets/Main/trainval.txt'
+    VOC_2012_trainval_image_set_filename = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2012/ImageSets/Main/trainval.txt'
+    VOC_2007_test_image_set_filename = '/media/freshield/SSD_1T/Data/a13_detection/VOCdevkit/VOC2007/ImageSets/Main/test.txt'
+
+    # The XML parser needs to now what object class names to look for and in which order to map them to integers.
+    classes = ['background',
+               'aeroplane', 'bicycle', 'bird', 'boat',
+               'bottle', 'bus', 'car', 'cat',
+               'chair', 'cow', 'diningtable', 'dog',
+               'horse', 'motorbike', 'person', 'pottedplant',
+               'sheep', 'sofa', 'train', 'tvmonitor']
+
+    train_dataset.parse_xml(images_dirs=[VOC_2007_images_dir,
+                                         VOC_2012_images_dir],
+                            image_set_filenames=[VOC_2007_trainval_image_set_filename,
+                                                 VOC_2012_trainval_image_set_filename],
+                            annotations_dirs=[VOC_2007_annotations_dir,
+                                              VOC_2012_annotations_dir],
+                            classes=classes,
+                            include_classes='all',
+                            exclude_truncated=False,
+                            exclude_difficult=False,
+                            ret=False)
+
+    val_dataset.parse_xml(images_dirs=[VOC_2007_images_dir],
+                          image_set_filenames=[VOC_2007_test_image_set_filename],
+                          annotations_dirs=[VOC_2007_annotations_dir],
+                          classes=classes,
+                          include_classes='all',
+                          exclude_truncated=False,
+                          exclude_difficult=True,
+                          ret=False)
+
+    # Optional: Convert the dataset into an HDF5 dataset. This will require more disk space, but will
+    # speed up the training. Doing this is not relevant in case you activated the `load_images_into_memory`
+    # option in the constructor, because in that cas the images are in memory already anyway. If you don't
+    # want to create HDF5 datasets, comment out the subsequent two function calls.
+
+    # train_dataset.create_hdf5_dataset(file_path='data/image_data/dataset_pascal_voc_07+12_trainval.h5',
+    #                                   resize=False,
+    #                                   variable_image_size=True,
+    #                                   verbose=True)
+
+    # val_dataset.create_hdf5_dataset(file_path='data/image_data/dataset_pascal_voc_07_test.h5',
+    #                                 resize=False,
+    #                                 variable_image_size=True,
+    #                                 verbose=True)
+    train_dataset.hdf5_dataset = h5py.File('data/image_data/dataset_pascal_voc_07+12_trainval.h5', 'r')
+    train_dataset.hdf5_dataset_path = 'data/image_data/dataset_pascal_voc_07+12_trainval.h5'
+    train_dataset.dataset_size = len(train_dataset.hdf5_dataset['images'])
+    train_dataset.dataset_indices = np.arange(train_dataset.dataset_size, dtype=np.int32)
+
+    val_dataset.hdf5_dataset = h5py.File('data/image_data/dataset_pascal_voc_07_test.h5', 'r')
+    val_dataset.hdf5_dataset_path = 'data/image_data/dataset_pascal_voc_07_test.h5'
+    val_dataset.dataset_size = len(val_dataset.hdf5_dataset['images'])
+    val_dataset.dataset_indices = np.arange(val_dataset.dataset_size, dtype=np.int32)
