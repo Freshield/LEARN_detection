@@ -33,20 +33,7 @@ import pickle
 from ssd_encoder_decoder.ssd_input_encoder import SSDInputEncoder
 from data_generator.object_detection_2d_image_boxes_validation_utils import BoxFilter
 
-class DegenerateBatchError(Exception):
-    '''
-    An exception class to be raised if a generated batch ends up being degenerate,
-    e.g. if a generated batch is empty.
-    '''
-    pass
-
-class DatasetError(Exception):
-    '''
-    An exception class to be raised if a anything is wrong with the dataset,
-    in particular if you try to generate batches when no dataset was loaded.
-    '''
-    pass
-
+# 生成器类
 class DataGenerator:
     '''
     A generator to generate batches of samples and corresponding labels indefinitely.
@@ -248,138 +235,6 @@ class DataGenerator:
             for i in tr:
                 self.eval_neutral.append(eval_neutral[i])
 
-    def parse_csv(self,
-                  images_dir,
-                  labels_filename,
-                  input_format,
-                  include_classes='all',
-                  random_sample=False,
-                  ret=False,
-                  verbose=True):
-        '''
-        Arguments:
-            images_dir (str): The path to the directory that contains the images.
-            labels_filename (str): The filepath to a CSV file that contains one ground truth bounding box per line
-                and each line contains the following six items: image file name, class ID, xmin, xmax, ymin, ymax.
-                The six items do not have to be in a specific order, but they must be the first six columns of
-                each line. The order of these items in the CSV file must be specified in `input_format`.
-                The class ID is an integer greater than zero. Class ID 0 is reserved for the background class.
-                `xmin` and `xmax` are the left-most and right-most absolute horizontal coordinates of the box,
-                `ymin` and `ymax` are the top-most and bottom-most absolute vertical coordinates of the box.
-                The image name is expected to be just the name of the image file without the directory path
-                at which the image is located.
-            input_format (list): A list of six strings representing the order of the six items
-                image file name, class ID, xmin, xmax, ymin, ymax in the input CSV file. The expected strings
-                are 'image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id'.
-            include_classes (list, optional): Either 'all' or a list of integers containing the class IDs that
-                are to be included in the dataset. If 'all', all ground truth boxes will be included in the dataset.
-            random_sample (float, optional): Either `False` or a float in `[0,1]`. If this is `False`, the
-                full dataset will be used by the generator. If this is a float in `[0,1]`, a randomly sampled
-                fraction of the dataset will be used, where `random_sample` is the fraction of the dataset
-                to be used. For example, if `random_sample = 0.2`, 20 precent of the dataset will be randomly selected,
-                the rest will be ommitted. The fraction refers to the number of images, not to the number
-                of boxes, i.e. each image that will be added to the dataset will always be added with all
-                of its boxes.
-            ret (bool, optional): Whether or not to return the outputs of the parser.
-            verbose (bool, optional): If `True`, prints out the progress for operations that may take a bit longer.
-
-        Returns:
-            None by default, optionally lists for whichever are available of images, image filenames, labels, and image IDs.
-        '''
-
-        # Set class members.
-        self.images_dir = images_dir
-        self.labels_filename = labels_filename
-        self.input_format = input_format
-        self.include_classes = include_classes
-
-        # Before we begin, make sure that we have a labels_filename and an input_format
-        if self.labels_filename is None or self.input_format is None:
-            raise ValueError("`labels_filename` and/or `input_format` have not been set yet. You need to pass them as arguments.")
-
-        # Erase data that might have been parsed before
-        self.filenames = []
-        self.image_ids = []
-        self.labels = []
-
-        # First, just read in the CSV file lines and sort them.
-
-        data = []
-
-        with open(self.labels_filename, newline='') as csvfile:
-            csvread = csv.reader(csvfile, delimiter=',')
-            next(csvread) # Skip the header row.
-            for row in csvread: # For every line (i.e for every bounding box) in the CSV file...
-                if self.include_classes == 'all' or int(row[self.input_format.index('class_id')].strip()) in self.include_classes: # If the class_id is among the classes that are to be included in the dataset...
-                    box = [] # Store the box class and coordinates here
-                    box.append(row[self.input_format.index('image_name')].strip()) # Select the image name column in the input format and append its content to `box`
-                    for element in self.labels_output_format: # For each element in the output format (where the elements are the class ID and the four box coordinates)...
-                        box.append(int(row[self.input_format.index(element)].strip())) # ...select the respective column in the input format and append it to `box`.
-                    data.append(box)
-
-        data = sorted(data) # The data needs to be sorted, otherwise the next step won't give the correct result
-
-        # Now that we've made sure that the data is sorted by file names,
-        # we can compile the actual samples and labels lists
-
-        current_file = data[0][0] # The current image for which we're collecting the ground truth boxes
-        current_image_id = data[0][0].split('.')[0] # The image ID will be the portion of the image name before the first dot.
-        current_labels = [] # The list where we collect all ground truth boxes for a given image
-        add_to_dataset = False
-        for i, box in enumerate(data):
-
-            if box[0] == current_file: # If this box (i.e. this line of the CSV file) belongs to the current image file
-                current_labels.append(box[1:])
-                if i == len(data)-1: # If this is the last line of the CSV file
-                    if random_sample: # In case we're not using the full dataset, but a random sample of it.
-                        p = np.random.uniform(0,1)
-                        if p >= (1-random_sample):
-                            self.labels.append(np.stack(current_labels, axis=0))
-                            self.filenames.append(os.path.join(self.images_dir, current_file))
-                            self.image_ids.append(current_image_id)
-                    else:
-                        self.labels.append(np.stack(current_labels, axis=0))
-                        self.filenames.append(os.path.join(self.images_dir, current_file))
-                        self.image_ids.append(current_image_id)
-            else: # If this box belongs to a new image file
-                if random_sample: # In case we're not using the full dataset, but a random sample of it.
-                    p = np.random.uniform(0,1)
-                    if p >= (1-random_sample):
-                        self.labels.append(np.stack(current_labels, axis=0))
-                        self.filenames.append(os.path.join(self.images_dir, current_file))
-                        self.image_ids.append(current_image_id)
-                else:
-                    self.labels.append(np.stack(current_labels, axis=0))
-                    self.filenames.append(os.path.join(self.images_dir, current_file))
-                    self.image_ids.append(current_image_id)
-                current_labels = [] # Reset the labels list because this is a new file.
-                current_file = box[0]
-                current_image_id = box[0].split('.')[0]
-                current_labels.append(box[1:])
-                if i == len(data)-1: # If this is the last line of the CSV file
-                    if random_sample: # In case we're not using the full dataset, but a random sample of it.
-                        p = np.random.uniform(0,1)
-                        if p >= (1-random_sample):
-                            self.labels.append(np.stack(current_labels, axis=0))
-                            self.filenames.append(os.path.join(self.images_dir, current_file))
-                            self.image_ids.append(current_image_id)
-                    else:
-                        self.labels.append(np.stack(current_labels, axis=0))
-                        self.filenames.append(os.path.join(self.images_dir, current_file))
-                        self.image_ids.append(current_image_id)
-
-        self.dataset_size = len(self.filenames)
-        self.dataset_indices = np.arange(self.dataset_size, dtype=np.int32)
-        if self.load_images_into_memory:
-            self.images = []
-            if verbose: it = tqdm(self.filenames, desc='Loading images into memory', file=sys.stdout)
-            else: it = self.filenames
-            for filename in it:
-                with Image.open(filename) as image:
-                    self.images.append(np.array(image, dtype=np.uint8))
-
-        if ret: # In case we want to return these
-            return self.images, self.filenames, self.labels, self.image_ids
 
     def parse_xml(self,
                   images_dirs,
@@ -523,130 +378,6 @@ class DataGenerator:
         if ret:
             return self.images, self.filenames, self.labels, self.image_ids, self.eval_neutral
 
-    def parse_json(self,
-                   images_dirs,
-                   annotations_filenames,
-                   ground_truth_available=False,
-                   include_classes='all',
-                   ret=False,
-                   verbose=True):
-        '''
-        This is an JSON parser for the MS COCO datasets. It might be applicable to other datasets with minor changes to
-        the code, but in its current form it expects the JSON format of the MS COCO datasets.
-
-        Arguments:
-            images_dirs (list, optional): A list of strings, where each string is the path of a directory that
-                contains images that are to be part of the dataset. This allows you to aggregate multiple datasets
-                into one (e.g. one directory that contains the images for MS COCO Train 2014, another one for MS COCO
-                Val 2014, another one for MS COCO Train 2017 etc.).
-            annotations_filenames (list): A list of strings, where each string is the path of the JSON file
-                that contains the annotations for the images in the respective image directories given, i.e. one
-                JSON file per image directory that contains the annotations for all images in that directory.
-                The content of the JSON files must be in MS COCO object detection format. Note that these annotations
-                files do not necessarily need to contain ground truth information. MS COCO also provides annotations
-                files without ground truth information for the test datasets, called `image_info_[...].json`.
-            ground_truth_available (bool, optional): Set `True` if the annotations files contain ground truth information.
-            include_classes (list, optional): Either 'all' or a list of integers containing the class IDs that
-                are to be included in the dataset. If 'all', all ground truth boxes will be included in the dataset.
-            ret (bool, optional): Whether or not to return the outputs of the parser.
-            verbose (bool, optional): If `True`, prints out the progress for operations that may take a bit longer.
-
-        Returns:
-            None by default, optionally lists for whichever are available of images, image filenames, labels and image IDs.
-        '''
-        self.images_dirs = images_dirs
-        self.annotations_filenames = annotations_filenames
-        self.include_classes = include_classes
-        # Erase data that might have been parsed before.
-        self.filenames = []
-        self.image_ids = []
-        self.labels = []
-        if not ground_truth_available:
-            self.labels = None
-
-        # Build the dictionaries that map between class names and class IDs.
-        with open(annotations_filenames[0], 'r') as f:
-            annotations = json.load(f)
-        # Unfortunately the 80 MS COCO class IDs are not all consecutive. They go
-        # from 1 to 90 and some numbers are skipped. Since the IDs that we feed
-        # into a neural network must be consecutive, we'll save both the original
-        # (non-consecutive) IDs as well as transformed maps.
-        # We'll save both the map between the original
-        self.cats_to_names = {} # The map between class names (values) and their original IDs (keys)
-        self.classes_to_names = [] # A list of the class names with their indices representing the transformed IDs
-        self.classes_to_names.append('background') # Need to add the background class first so that the indexing is right.
-        self.cats_to_classes = {} # A dictionary that maps between the original (keys) and the transformed IDs (values)
-        self.classes_to_cats = {} # A dictionary that maps between the transformed (keys) and the original IDs (values)
-        for i, cat in enumerate(annotations['categories']):
-            self.cats_to_names[cat['id']] = cat['name']
-            self.classes_to_names.append(cat['name'])
-            self.cats_to_classes[cat['id']] = i + 1
-            self.classes_to_cats[i + 1] = cat['id']
-
-        # Iterate over all datasets.
-        for images_dir, annotations_filename in zip(self.images_dirs, self.annotations_filenames):
-            # Load the JSON file.
-            with open(annotations_filename, 'r') as f:
-                annotations = json.load(f)
-
-            if ground_truth_available:
-                # Create the annotations map, a dictionary whose keys are the image IDs
-                # and whose values are the annotations for the respective image ID.
-                image_ids_to_annotations = defaultdict(list)
-                for annotation in annotations['annotations']:
-                    image_ids_to_annotations[annotation['image_id']].append(annotation)
-
-            if verbose: it = tqdm(annotations['images'], desc="Processing '{}'".format(os.path.basename(annotations_filename)), file=sys.stdout)
-            else: it = annotations['images']
-
-            # Loop over all images in this dataset.
-            for img in it:
-
-                self.filenames.append(os.path.join(images_dir, img['file_name']))
-                self.image_ids.append(img['id'])
-
-                if ground_truth_available:
-                    # Get all annotations for this image.
-                    annotations = image_ids_to_annotations[img['id']]
-                    boxes = []
-                    for annotation in annotations:
-                        cat_id = annotation['category_id']
-                        # Check if this class is supposed to be included in the dataset.
-                        if (not self.include_classes == 'all') and (not cat_id in self.include_classes): continue
-                        # Transform the original class ID to fit in the sequence of consecutive IDs.
-                        class_id = self.cats_to_classes[cat_id]
-                        xmin = annotation['bbox'][0]
-                        ymin = annotation['bbox'][1]
-                        width = annotation['bbox'][2]
-                        height = annotation['bbox'][3]
-                        # Compute `xmax` and `ymax`.
-                        xmax = xmin + width
-                        ymax = ymin + height
-                        item_dict = {'image_name': img['file_name'],
-                                     'image_id': img['id'],
-                                     'class_id': class_id,
-                                     'xmin': xmin,
-                                     'ymin': ymin,
-                                     'xmax': xmax,
-                                     'ymax': ymax}
-                        box = []
-                        for item in self.labels_output_format:
-                            box.append(item_dict[item])
-                        boxes.append(box)
-                    self.labels.append(boxes)
-
-        self.dataset_size = len(self.filenames)
-        self.dataset_indices = np.arange(self.dataset_size, dtype=np.int32)
-        if self.load_images_into_memory:
-            self.images = []
-            if verbose: it = tqdm(self.filenames, desc='Loading images into memory', file=sys.stdout)
-            else: it = self.filenames
-            for filename in it:
-                with Image.open(filename) as image:
-                    self.images.append(np.array(image, dtype=np.uint8))
-
-        if ret:
-            return self.images, self.filenames, self.labels, self.image_ids
 
     def create_hdf5_dataset(self,
                             file_path='dataset.h5',
@@ -891,7 +622,7 @@ class DataGenerator:
         '''
 
         if self.dataset_size == 0:
-            raise DatasetError("Cannot generate batches because you did not load a dataset.")
+            raise ValueError("Cannot generate batches because you did not load a dataset.")
 
         #############################################################################################
         # Warn if any of the set returns aren't possible.
@@ -1118,7 +849,7 @@ class DataGenerator:
             #          number of channels.
             batch_X = np.array(batch_X)
             if (batch_X.size == 0):
-                raise DegenerateBatchError("You produced an empty batch. This might be because the images in the batch vary " +
+                raise ValueError("You produced an empty batch. This might be because the images in the batch vary " +
                                            "in their size and/or number of channels. Note that after all transformations " +
                                            "(if any were given) have been applied to all images in the batch, all images " +
                                            "must be homogenous in size along all axes.")

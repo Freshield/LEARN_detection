@@ -34,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/a1_try_example.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
-              <caret line="126" column="40" lean-forward="true" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="40" />
+              <caret line="126" column="40" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="40" />
               <folding>
                 <element signature="e#506#515#0" expanded="true" />
               </folding>
@@ -66,14 +66,18 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/example/keras_loss_function/keras_ssd_loss.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2274">
-              <caret line="200" lean-forward="true" selection-start-line="200" selection-end-line="200" />
+              <caret line="200" selection-start-line="200" selection-end-line="200" />
               <folding>
                 <element signature="e#661#692#0" expanded="true" />
               </folding>
@@ -380,17 +384,17 @@
       <workItem from="1580889180704" duration="8011000" />
       <workItem from="1580966783411" duration="5908000" />
       <workItem from="1581058634800" duration="9450000" />
-      <workItem from="1581128348927" duration="2229000" />
+      <workItem from="1581128348927" duration="2576000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33532000" />
+    <option name="totallyTimeSpent" value="33879000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="88" y="-2" width="1833" height="1083" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13227813" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13227813" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" weight="0.32928178" />
@@ -405,7 +409,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.12899669" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.34696132" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -589,7 +593,7 @@
     <entry file="file://$PROJECT_DIR$/data/example/keras_loss_function/keras_ssd_loss.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2274">
-          <caret line="200" lean-forward="true" selection-start-line="200" selection-end-line="200" />
+          <caret line="200" selection-start-line="200" selection-end-line="200" />
           <folding>
             <element signature="e#661#692#0" expanded="true" />
           </folding>
@@ -599,7 +603,7 @@
     <entry file="file://$PROJECT_DIR$/a1_try_example.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="126" column="40" lean-forward="true" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="40" />
+          <caret line="126" column="40" selection-start-line="126" selection-start-column="40" selection-end-line="126" selection-end-column="40" />
           <folding>
             <element signature="e#506#515#0" expanded="true" />
           </folding>
@@ -633,7 +637,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/a2_analyze_model/b6_data_generator.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
